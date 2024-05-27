@@ -2,8 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PasienController;
+use App\Http\Controllers\TarifController;
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\RegistrationController;
+// use App\Http\Controllers\RegistrationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,6 +25,7 @@ Route::get('about', function () {
 });
 
 Route::resource('pasien', PasienController::class);
+Route::resource('tarif', TarifController::class);
 
 Route::get('admin/home', [AdminController::class, 'index'])->name('admin.home');
 Route::get('admin/daftar', [AdminController::class, 'daftar'])->name('admin.daftar');
