@@ -74,8 +74,8 @@
     <div class="container-fluid py-5">
         <div class="container">
             <div class="text-center mx-auto mb-5" style="max-width: 500px;">
-                <h5 class="d-inline-block text-primary text-uppercase border-bottom border-5">Services</h5>
-                <h1 class="display-4">Excellent Medical Services</h1>
+                <h5 class="d-inline-block text-primary text-uppercase border-bottom border-5">Layanan</h5>
+                <h1 class="display-4">Layanan Medik Terbaik Kami</h1>
             </div>
             <div class="row g-5">
                 <div class="col-lg-4 col-md-6">

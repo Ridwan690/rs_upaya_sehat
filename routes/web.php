@@ -23,6 +23,12 @@ Route::get('/', function () {
 Route::get('about', function () {
     return view('about');
 });
+Route::get('layanan', function () {
+    return view('layanan');
+});
+Route::get('kamar', function () {
+    return view('kamar');
+});
 
 Route::resource('pasien', PasienController::class);
 Route::resource('tarif', TarifController::class);
