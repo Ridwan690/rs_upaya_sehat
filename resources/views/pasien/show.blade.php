@@ -1,75 +1,75 @@
-@extends('layouts.master')
+@extends('layouts.admin')
 
-@section('content')
-    <div class="row justify-content-center mt-3">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">
-                    <div class="float-start">
+@section('main')
+    <div class="flex justify-center mt-3">
+        <div class="w-8/12">
+            <div class="bg-white shadow-md rounded-lg">
+                <div class="flex items-center justify-between px-4 py-2">
+                    <div class="text-lg font-bold">
                         Detail Pasien
                     </div>
-                    <div class="float-end">
-                        <a href="{{ route('pasien.index') }}" class="btn btn-primary btn-sm">&larr; Back</a>
+                    <div>
+                        <a href="{{ route('pasien.index') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-sm">&larr; Back</a>
                     </div>
                 </div>
-                <div class="card-body">
-                    <div class="row">
-                        <label for="code" class="col-md-4 col-form-label text-md-end text-start"><strong>Nama:</strong></label>
-                        <div class="col-md-6" style="line-height: 35px;">
+                <div class="px-4 py-2">
+                    <div class="flex items-center mb-2">
+                        <label for="code" class="w-1/3 text-right pr-4"><strong>Nama:</strong></label>
+                        <div class="w-2/3">
                             {{ $pasien->nama }}
                         </div>
                     </div>
-                    <div class="row">
-                        <label for="name" class="col-md-4 col-form-label text-md-end text-start"><strong>Tempat Lahir:</strong></label>
-                        <div class="col-md-6" style="line-height: 35px;">
+                    <div class="flex items-center mb-2">
+                        <label for="name" class="w-1/3 text-right pr-4"><strong>Tempat Lahir:</strong></label>
+                        <div class="w-2/3">
                             {{ $pasien->tempat_lahir }}
                         </div>
                     </div>
-                    <div class="row">
-                        <label for="name" class="col-md-4 col-form-label text-md-end text-start"><strong>Tanggal Lahir:</strong></label>
-                        <div class="col-md-6" style="line-height: 35px;">
+                    <div class="flex items-center mb-2">
+                        <label for="name" class="w-1/3 text-right pr-4"><strong>Tanggal Lahir:</strong></label>
+                        <div class="w-2/3">
                             {{ $pasien->tanggal_lahir }}
                         </div>
                     </div>
-                    <div class="row">
-                        <label for="name" class="col-md-4 col-form-label text-md-end text-start"><strong>Jenis Kelamin:</strong></label>
-                        <div class="col-md-6" style="line-height: 35px;">
+                    <div class="flex items-center mb-2">
+                        <label for="name" class="w-1/3 text-right pr-4"><strong>Jenis Kelamin:</strong></label>
+                        <div class="w-2/3">
                             {{ $pasien->jenis_kelamin }}
                         </div>
                     </div>
-                    <div class="row">
-                        <label for="name" class="col-md-4 col-form-label text-md-end text-start"><strong>Alamat:</strong></label>
-                        <div class="col-md-6" style="line-height: 35px;">
+                    <div class="flex items-center mb-2">
+                        <label for="name" class="w-1/3 text-right pr-4"><strong>Alamat:</strong></label>
+                        <div class="w-2/3">
                             {{ $pasien->alamat }}
                         </div>
                     </div>
-                    <div class="row">
-                        <label for="name" class="col-md-4 col-form-label text-md-end text-start"><strong>Pendidikan:</strong></label>
-                        <div class="col-md-6" style="line-height: 35px;">
+                    <div class="flex items-center mb-2">
+                        <label for="name" class="w-1/3 text-right pr-4"><strong>Pendidikan:</strong></label>
+                        <div class="w-2/3">
                             {{ $pasien->pendidikan }}
                         </div>
                     </div>
-                    <div class="row">
-                        <label for="name" class="col-md-4 col-form-label text-md-end text-start"><strong>Agama:</strong></label>
-                        <div class="col-md-6" style="line-height: 35px;">
+                    <div class="flex items-center mb-2">
+                        <label for="name" class="w-1/3 text-right pr-4"><strong>Agama:</strong></label>
+                        <div class="w-2/3">
                             {{ $pasien->agama }}
                         </div>
                     </div>
-                    <div class="row">
-                        <label for="name" class="col-md-4 col-form-label text-md-end text-start"><strong>Pekerjaan:</strong></label>
-                        <div class="col-md-6" style="line-height: 35px;">
+                    <div class="flex items-center mb-2">
+                        <label for="name" class="w-1/3 text-right pr-4"><strong>Pekerjaan:</strong></label>
+                        <div class="w-2/3">
                             {{ $pasien->pekerjaan }}
                         </div>
                     </div>
-                    <div class="row">
-                        <label for="name" class="col-md-4 col-form-label text-md-end text-start"><strong>Status:</strong></label>
-                        <div class="col-md-6" style="line-height: 35px;">
+                    <div class="flex items-center mb-2">
+                        <label for="name" class="w-1/3 text-right pr-4"><strong>Status:</strong></label>
+                        <div class="w-2/3">
                             {{ $pasien->status }}
                         </div>
                     </div>
-                    <div class="row">
-                        <label for="name" class="col-md-4 col-form-label text-md-end text-start"><strong>No Telepon:</strong></label>
-                        <div class="col-md-6" style="line-height: 35px;">
+                    <div class="flex items-center mb-2">
+                        <label for="name" class="w-1/3 text-right pr-4"><strong>No Telepon:</strong></label>
+                        <div class="w-2/3">
                             {{ $pasien->no_telepon }}
                         </div>
                     </div>
@@ -77,5 +77,4 @@
             </div>
         </div> 
     </div>
- 
 @endsection

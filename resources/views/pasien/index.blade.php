@@ -1,63 +1,63 @@
-@extends('layouts.master')
+@extends('layouts.admin')
 
-@section('content')
-    <div class="row justify-content-center mt-3">
-        <div class="col-md-12">
+@section('main')
+    <div class="flex justify-center">
+        <div class="w-full">
             @if ($message = Session::get('success'))
-                <div class="alert alert-success" role="alert">
+                <div class="bg-green-500 text-white p-3 mb-3">
                     {{ $message }}
                 </div>
             @endif
 
-            <div class="card">
-                <div class="card-header">Pasien List</div>
-                <div class="card-body">
-                    <a href="{{ route('pasien.create') }}" class="btn btn-success btn-sm my-2"><i class="bi bi-plus-circle"></i> Tambah Pasien</a>
-                    <div class="table-responsive">
-                        <table class="table table-striped table-bordered">
+            <div class="bg-white shadow-md">
+                <div class="p-3 bg-gray-200">Pasien List</div>
+                <div class="p-3">
+                    <a href="{{ route('pasien.create') }}" class="bg-green-500 text-white px-3 py-2 rounded-sm mb-2"><i class="bi bi-plus-circle"></i> Tambah Pasien</a>
+                    <div class="overflow-x-auto my-3">
+                        <table class="table-auto w-full border-2 border-gray">
                             <thead>
                                 <tr>
-                                    <th scope="col">S#</th>
-                                    <th scope="col">Nama</th>
-                                    <th scope="col">Tempat Lahir</th>
-                                    <th scope="col">Tanggal Lahir</th>
-                                    <th scope="col">Jenis Kelamin</th>
-                                    <th scope="col">Alamat</th>
-                                    <th scope="col">Pendidikan</th>
-                                    <th scope="col">Agama</th>
-                                    <th scope="col">Pekerjaan</th>
-                                    <th scope="col">Status</th>
-                                    <th scope="col">No Telepon</th>
-                                    <th scope="col">Action</th>
+                                    <th class="px-4 py-2 border-2 border-gray">S#</th>
+                                    <th class="px-4 py-2 border-2 border-gray">Nama</th>
+                                    {{-- <th class="px-4 py-2 border-2 border-gray">Tempat Lahir</th> --}}
+                                    <th class="px-4 py-2 border-2 border-gray">Tanggal Lahir</th>
+                                    <th class="px-4 py-2 border-2 border-gray">Jenis Kelamin</th>
+                                    <th class="px-4 py-2 border-2 border-gray">Alamat</th>
+                                    {{-- <th class="px-4 py-2 border-2 border-gray">Pendidikan</th> --}}
+                                    {{-- <th class="px-4 py-2 border-2 border-gray">Agama</th> --}}
+                                    {{-- <th class="px-4 py-2 border-2 border-gray">Pekerjaan</th> --}}
+                                    {{-- <th class="px-4 py-2 border-2 border-gray">Status</th> --}}
+                                    <th class="px-4 py-2 border-2 border-gray">No Telepon</th>
+                                    <th class="px-4 py-2 border-2 border-gray">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @forelse ($pasien as $patient)
                                 <tr>
-                                    <th scope="row">{{ $loop->iteration }}</th>
-                                    <td>{{ $patient->nama }}</td>
-                                    <td>{{ $patient->tempat_lahir }}</td>
-                                    <td>{{ $patient->tanggal_lahir }}</td>
-                                    <td>{{ $patient->jenis_kelamin }}</td>
-                                    <td>{{ $patient->alamat }}</td>
-                                    <td>{{ $patient->pendidikan }}</td>
-                                    <td>{{ $patient->agama }}</td>
-                                    <td>{{ $patient->pekerjaan }}</td>
-                                    <td>{{ $patient->status }}</td>
-                                    <td>{{ $patient->no_telepon }}</td>
-                                    <td>
+                                    <th class="px-4 py-2 border-2 border-gray">{{ $loop->iteration }}</th>
+                                    <td class="px-4 py-2 border-2 border-gray">{{ $patient->nama }}</td>
+                                    {{-- <td class="px-4 py-2 border-2 border-gray">{{ $patient->tempat_lahir }}</td> --}}
+                                    <td class="px-4 py-2 border-2 border-gray">{{ $patient->tanggal_lahir }}</td>
+                                    <td class="px-4 py-2 border-2 border-gray">{{ $patient->jenis_kelamin }}</td>
+                                    <td class="px-4 py-2 border-2 border-gray">{{ $patient->alamat }}</td>
+                                    {{-- <td class="px-4 py-2 border-2 border-gray">{{ $patient->pendidikan }}</td> --}}
+                                    {{-- <td class="px-4 py-2 border-2 border-gray">{{ $patient->agama }}</td> --}}
+                                    {{-- <td class="px-4 py-2 border-2 border-gray">{{ $patient->pekerjaan }}</td> --}}
+                                    {{-- <td class="px-4 py-2 border-2 border-gray">{{ $patient->status }}</td> --}}
+                                    <td class="px-4 py-2 border-2 border-gray">{{ $patient->no_telepon }}</td>
+                                    <td class="px-4 py-2 border-2 border-gray">
                                         <form action="{{ route('pasien.destroy', $patient->id) }}" method="post">
                                             @csrf
                                             @method('DELETE')
-                                            <a href="{{ route('pasien.show', $patient->id) }}" class="btn btn-warning btn-sm mx-1 my-1"><i class="bi bi-eye"></i> Show</a>
-                                            <a href="{{ route('pasien.edit', $patient->id) }}" class="btn btn-primary btn-sm mx-1 my-1"><i class="bi bi-pencil-square"></i> Edit</a> 
-                                            <button type="submit" class="btn btn-danger btn-sm mx-1 my-1" onclick="return confirm('Do you want to delete this pasien?');"><i class="bi bi-trash"></i> Delete</button>
+                                            <a href="{{ route('pasien.show', $patient->id) }}" class="bg-yellow-500 text-white px-2 py-1 rounded-sm mx-1 my-2"><i class="bi bi-eye"></i></a>
+                                            <a href="{{ route('pasien.edit', $patient->id) }}" class="bg-blue-500 text-white px-2 py-1 rounded-sm mx-1 my-2"><i class="bi bi-pencil-square"></i></a> 
+                                            <button type="submit" class="bg-red-500 text-white px-2 py-1 rounded-sm mx-1 my-2" onclick="return confirm('Do you want to delete this pasien?');"><i class="bi bi-trash"></i></button>
                                         </form>
                                     </td>
                                 </tr>
                                 @empty
                                     <td colspan="12">
-                                        <span class="text-danger">
+                                        <span class="text-red-500">
                                             <strong>No Pasien Found!</strong>
                                         </span>
                                     </td>
