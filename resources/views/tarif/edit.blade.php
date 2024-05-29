@@ -24,21 +24,21 @@
                     <form action="{{ route('tarif.update', $tarif->id) }}" method="post">
                         @csrf
                         @method("PUT")
-                        <div class="mb-4 flex">
+                        <div class="mb-4 ">
                             <label for="nama_layanan" class="block text-sm font-bold text-gray-700 mb-2 mr-2">Nama Layanan</label>
                             <input type="text" class="form-input @error('code') border-red-500 @enderror rounded-md border-2 border-gray w-75" id="nama_layanan" name="nama_layanan" value="{{ $tarif->nama_layanan }}">
                             @if ($errors->has('nama_layanan'))
                                 <span class="text-red-500">{{ $errors->first('nama_layanan') }}</span>
                             @endif
                         </div>
-                        <div class="mb-4 flex">
+                        <div class="mb-4 ">
                             <label for="jenis_layanan" class="block text-sm font-bold text-gray-700 mb-2 mr-2">Jenis Layanan</label>
                             <input type="text" class="form-input @error('jenis_layanan') border-red-500 @enderror rounded-md border-2 border-gray w-75" id="jenis_layanan" name="jenis_layanan" value="{{ $tarif->jenis_layanan }}">
                             @if ($errors->has('jenis_layanan'))
                                 <span class="text-red-500">{{ $errors->first('jenis_layanan') }}</span>
                             @endif
                         </div>
-                        <div class="mb-4 flex">
+                        <div class="mb-4 ">
                             <label for="biaya" class="block text-sm font-bold text-gray-700 mb-2 mr-2">Biaya</label>
                             {{-- <span class="inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-300 bg-gray-50 text-gray-500">
                                 Rp

@@ -15,28 +15,28 @@
                 <div class="mb-4">
                     <form action="{{ route('pasien.store') }}" method="post">
                         @csrf
-                        <div class="mb-4 flex">
+                        <div class="mb-4">
                             <label for="nama" class="block text-sm font-bold text-gray-700 mb-2 mr-2">Nama</label>
                             <input type="text" class="form-input @error('nama') border-red-500 @enderror rounded-md border-2 border-gray 2 w-75" id="nama" name="nama" value="{{ old('nama') }}">
                             @if ($errors->has('nama'))
                                 <span class="text-red-500">{{ $errors->first('nama') }}</span>
                             @endif
                         </div>
-                        <div class="mb-4 flex">
+                        <div class="mb-4">
                             <label for="tempat_lahir" class="block text-sm font-bold text-gray-700 mb-2 mr-2">Tempat Lahir</label>
                             <input type="text" class="form-input @error('tempat_lahir') border-red-500 @enderror rounded-md border-2 border-gray w-75" id="tempat_lahir" name="tempat_lahir" value="{{ old('tempat_lahir') }}">
                             @if ($errors->has('tempat_lahir'))
                                 <span class="text-red-500">{{ $errors->first('tempat_lahir') }}</span>
                             @endif
                         </div>
-                        <div class="mb-4 flex">
+                        <div class="mb-4">
                             <label for="tanggal_lahir" class="block text-sm font-bold text-gray-700 mb-2 mr-2">Tanggal Lahir</label>
                             <input type="date" class="form-input @error('tanggal_lahir') border-red-500 @enderror rounded-md border-2 border-gray w-75" id="tanggal_lahir" name="tanggal_lahir" value="{{ old('tanggal_lahir') }}">
                             @if ($errors->has('tanggal_lahir'))
                                 <span class="text-red-500">{{ $errors->first('tanggal_lahir') }}</span>
                             @endif
                         </div>
-                        <div class="mb-4 flex">
+                        <div class="mb-4">
                             <label for="jenis_kelamin" class="block text-sm font-bold text-gray-700 mb-2 mr-2">Jenis Kelamin</label>
                             <select name="jenis_kelamin" id="jenis_kelamin" class="form-select @error('jenis_kelamin') border-red-500 @enderror rounded-md border-2 border-gray w-75">
                                 <option value="">Pilih Jenis Kelamin</option>
@@ -47,14 +47,14 @@
                                 <span class="text-red-500">{{ $errors->first('jenis_kelamin') }}</span>
                             @endif
                         </div>
-                        <div class="mb-4 flex">
+                        <div class="mb-4">
                             <label for="alamat" class="block text-sm font-bold text-gray-700 mb-2 mr-2">Alamat</label>
                             <textarea name="alamat" id="alamat" class="form-textarea @error('alamat') border-red-500 @enderror rounded-md border-2 border-gray w-75" cols="30" rows="5">{{ old('alamat') }}</textarea>
                             @if ($errors->has('alamat'))
                                 <span class="text-red-500">{{ $errors->first('alamat') }}</span>
                             @endif
                         </div>
-                        <div class="mb-4 flex">
+                        <div class="mb-4">
                             <label for="pendidikan" class="block text-sm font-bold text-gray-700 mb-2 mr-2">Pendidikan</label>
                             <select name="pendidikan" id="pendidikan" class="form-select @error('pendidikan') border-red-500 @enderror rounded-md border-2 border-gray w-75">
                                 <option value="">-- Pilih Pendidikan --</option>
@@ -70,7 +70,7 @@
                                 <span class="text-red-500">{{ $errors->first('pendidikan') }}</span>
                             @endif
                         </div>
-                        <div class="mb-4 flex">
+                        <div class="mb-4">
                             <label for="agama" class="block text-sm font-bold text-gray-700 mb-2 mr-2">Agama</label>
                             <select name="agama" id="agama" class="form-select @error('agama') border-red-500 @enderror rounded-md border-2 border-gray w-75">
                                 <option value="">-- Pilih Agama --</option>
@@ -85,7 +85,7 @@
                                 <span class="text-red-500">{{ $errors->first('agama') }}</span>
                             @endif
                         </div>
-                        <div class="mb-4 flex">
+                        <div class="mb-4">
                             <label for="pekerjaan" class="block text-sm font-bold text-gray-700 mb-2 mr-2">Pekerjaan</label>
                             <select name="pekerjaan" id="pekerjaan" class="form-select @error('pekerjaan') border-red-500 @enderror rounded-md border-2 border-gray w-75">
                                 <option value="">-- Pilih Pekerjaan --</option>
@@ -106,7 +106,7 @@
                                 <span class="text-red-500">{{ $errors->first('pekerjaan') }}</span>
                             @endif
                         </div>
-                        <div class="mb-4 flex">
+                        <div class="mb-4">
                             <label for="status" class="block text-sm font-bold text-gray-700 mb-2 mr-2">Status</label>
                             <select name="status" id="status" class="form-select @error('status') border-red-500 @enderror rounded-md border-2 border-gray w-75">
                                 <option value="">-- Pilih Status --</option>
@@ -118,7 +118,7 @@
                                 <span class="text-red-500">{{ $errors->first('status') }}</span>
                             @endif
                         </div>
-                        <div class="mb-4 flex">
+                        <div class="mb-4">
                             <label for="no_telepon" class="block text-sm font-bold text-gray-700 mb-2 mr-2">No Telepon</label>
                             <input type="tel" class="form-input @error('no_telepon') border-red-500 @enderror rounded-md border-2 border-gray w-75" id="no_telepon" name="no_telepon" value="{{ old('no_telepon') }}">
                             @if ($errors->has('no_telepon'))

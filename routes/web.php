@@ -29,6 +29,9 @@ Route::get('layanan', function () {
 Route::get('kamar', function () {
     return view('kamar');
 });
+Route::get('contact', function () {
+    return view('contact');
+});
 
 Route::resource('pasien', PasienController::class);
 Route::resource('tarif', TarifController::class);

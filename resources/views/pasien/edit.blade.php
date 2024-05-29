@@ -47,7 +47,7 @@
                         </div>
                         <div class="mb-4">
                             <label for="jenis_kelamin" class="block text-sm font-medium text-gray-700">Jenis Kelamin</label>
-                            <select class="form-select @error('jenis_kelamin') border-red-500 @enderror" id="jenis_kelamin" name="jenis_kelamin">
+                            <select class="form-select @error('jenis_kelamin') border-red-500 @enderror rounded-md border-2 border-gray w-75" id="jenis_kelamin" name="jenis_kelamin">
                                 <option value="L" {{ $pasien->jenis_kelamin == 'L' ? 'selected' : '' }}>Laki-laki</option>
                                 <option value="P" {{ $pasien->jenis_kelamin == 'P' ? 'selected' : '' }}>Perempuan</option>
                             </select>
@@ -57,14 +57,14 @@
                         </div>
                         <div class="mb-4">
                             <label for="alamat" class="block text-sm font-medium text-gray-700">Alamat</label>
-                            <textarea class="form-textarea @error('alamat') border-red-500 @enderror" id="alamat" name="alamat">{{ $pasien->alamat }}</textarea>
+                            <textarea class="form-textarea @error('alamat') border-red-500 @enderror rounded-md border-2 border-gray w-75" id="alamat" name="alamat">{{ $pasien->alamat }}</textarea>
                             @if ($errors->has('alamat'))
                                 <span class="text-red-500">{{ $errors->first('alamat') }}</span>
                             @endif
                         </div>
                         <div class="mb-4">
                             <label for="pendidikan" class="block text-sm font-medium text-gray-700">Pendidikan</label>
-                            <select class="form-select @error('pendidikan') border-red-500 @enderror" id="pendidikan" name="pendidikan">
+                            <select class="form-select @error('pendidikan') border-red-500 @enderror rounded-md border-2 border-gray w-75" id="pendidikan" name="pendidikan">
                                 <option value="SD/MI Sederajat" {{ $pasien->pendidikan == 'SD/MI Sederajat' ? 'selected' : '' }}>SD/MI Sederajat</option>
                                 <option value="SMP/SLTP Sederajat" {{ $pasien->pendidikan == 'SMP/SLTP Sederajat' ? 'selected' : '' }}>SMP/SLTP Sederajat</option>
                                 <option value="SMA/SMK Sederajat" {{ $pasien->pendidikan == 'SMA/SMK Sederajat' ? 'selected' : '' }}>SMA/SMK Sederajat</option>
@@ -79,7 +79,7 @@
                         </div>
                         <div class="mb-4">
                             <label for="agama" class="block text-sm font-medium text-gray-700">Agama</label>
-                            <select class="form-select @error('agama') border-red-500 @enderror" id="agama" name="agama">
+                            <select class="form-select @error('agama') border-red-500 @enderror rounded-md border-2 border-gray w-75" id="agama" name="agama">
                                 <option value="Islam" {{ $pasien->agama == 'Islam' ? 'selected' : '' }}>Islam</option>
                                 <option value="Kristen" {{ $pasien->agama == 'Kristen' ? 'selected' : '' }}>Kristen</option>
                                 <option value="Katolik" {{ $pasien->agama == 'Katolik' ? 'selected' : '' }}>Katolik</option>
@@ -93,7 +93,7 @@
                         </div>
                         <div class="mb-4">
                             <label for="pekerjaan" class="block text-sm font-medium text-gray-700">Pekerjaan</label>
-                            <select class="form-select @error('pekerjaan') border-red-500 @enderror" id="pekerjaan" name="pekerjaan">
+                            <select class="form-select @error('pekerjaan') border-red-500 @enderror rounded-md border-2 border-gray w-75" id="pekerjaan" name="pekerjaan">
                                 <option value="PNS" {{ $pasien->pekerjaan == 'PNS' ? 'selected' : '' }}>PNS</option>
                                 <option value="TNI" {{ $pasien->pekerjaan == 'TNI' ? 'selected' : '' }}>TNI</option>
                                 <option value="POLRI" {{ $pasien->pekerjaan == 'POLRI' ? 'selected' : '' }}>POLRI</option>
@@ -113,7 +113,7 @@
                         </div>
                         <div class="mb-4">
                             <label for="status" class="block text-sm font-medium text-gray-700">Status</label>
-                            <select class="form-select @error('status') border-red-500 @enderror" id="status" name="status">
+                            <select class="form-select @error('status') border-red-500 @enderror rounded-md border-2 border-gray w-75" id="status" name="status">
                                 <option value="Belum Menikah" {{ $pasien->status == 'Belum Menikah' ? 'selected' : '' }}>Belum Menikah</option>
                                 <option value="Menikah" {{ $pasien->status == 'Menikah' ? 'selected' : '' }}>Menikah</option>
                                 <option value="Cerai" {{ $pasien->status == 'Cerai' ? 'selected' : '' }}>Cerai</option>
@@ -124,7 +124,7 @@
                         </div>
                         <div class="mb-4">
                             <label for="no_telepon" class="block text-sm font-medium text-gray-700">No Telepon</label>
-                            <input type="text" class="form-input @error('no_telepon') border-red-500 @enderror" id="no_telepon" name="no_telepon" value="{{ $pasien->no_telepon }}">
+                            <input type="text" class="form-input @error('no_telepon') border-red-500 @enderror rounded-md border-2 border-gray w-75" id="no_telepon" name="no_telepon" value="{{ $pasien->no_telepon }}">
                             @if ($errors->has('no_telepon'))
                                 <span class="text-red-500">{{ $errors->first('no_telepon') }}</span>
                             @endif

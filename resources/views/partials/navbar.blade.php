@@ -25,7 +25,7 @@
                             <a href="search.html" class="dropdown-item">Search</a>
                         </div>
                     </div>
-                    <a href="contact.html" class="nav-item nav-link">Contact</a>
+                    <a href="/contact" class="nav-item nav-link">Contact</a>
                     <button class="btn btn-primary ms-3" data-bs-toggle="modal" data-bs-target="#signInModal">Sign In</button>
                 </div>
             </div>

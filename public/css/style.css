@@ -245,3 +245,6 @@
     width: 150px;
     height: 150px;
 }
+.custom-pad-bottom{
+    padding-bottom: 3rem;
+}

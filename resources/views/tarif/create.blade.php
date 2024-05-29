@@ -17,21 +17,21 @@
                 <div class="mb-4">
                     <form action="{{ route('tarif.store') }}" method="post">
                         @csrf
-                        <div class="mb-4 flex">
+                        <div class="mb-4 ">
                             <label for="nama_layanan" class="block text-gray-700 text-sm font-bold mb-2 mr-2">Nama Layanan</label>
                             <input type="text" class="form-input @error('nama_layanan') border-red-500 @enderror rounded-md border-2 border-gray 2 w-75" id="nama_layanan" name="nama_layanan" value="{{ old('nama_layanan') }}">
                             @error('nama_layanan')
                                 <span class="text-red-500 text-xs mt-2">{{ $message }}</span>
                             @enderror
                         </div>
-                        <div class="mb-4 flex">
+                        <div class="mb-4 ">
                             <label for="jenis_layanan" class="block text-gray-700 text-sm font-bold mb-2 mr-2">Jenis Layanan</label>
                             <input type="text" class="form-input @error('jenis_layanan') border-red-500 @enderror rounded-md border-2 border-gray w-75" id="jenis_layanan" name="jenis_layanan" value="{{ old('jenis_layanan') }}">
                             @error('jenis_layanan')
                                 <span class="text-red-500 text-xs mt-2">{{ $message }}</span>
                             @enderror
                         </div>
-                        <div class="mb-4 flex">
+                        <div class="mb-4 ">
                             <label for="biaya" class="block text-gray-700 text-sm font-bold mb-2 mr-2">Biaya</label>
                             {{-- <span class="inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-300 bg-gray-50 text-gray-500 text-sm">
                                 Rp
