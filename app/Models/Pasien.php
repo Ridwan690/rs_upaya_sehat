@@ -11,7 +11,6 @@ class Pasien extends Model
 
     protected $table = 'pasien';
     protected $fillable = [
-        'no_rm',
         'nik',
         'nama',
         'tempat_lahir',
@@ -24,4 +23,9 @@ class Pasien extends Model
         'status',
         'no_telepon'
     ];
+    public function rekammedik()
+    {
+        return $this->hasOne(RekamMedik::class);
+    }
+
 }

@@ -11,7 +11,7 @@
                     <div class="mb-3 row">
                         <label for="no_rm" class="col-sm-3 col-form-label"><strong>Nomor Rekam Medis:</strong></label>
                         <div class="col-sm-9">
-                            {{ $pasien->no_rm }}
+                            {{ $pasien->rekammedik->no_rekam_medik }}
                         </div>
                     </div>
                     <div class="mb-3 row">

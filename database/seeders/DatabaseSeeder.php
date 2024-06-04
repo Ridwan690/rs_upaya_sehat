@@ -20,11 +20,12 @@ class DatabaseSeeder extends Seeder
         // ]);
 
         // Panggil semua seeder yang diperlukan
-        // $this->call([
-        //     TarifSeeder::class,
-        //     ObatSeeder::class,
-        //     DokterSeeder::class,
-        //     PerawatSeeder::class,
-        // ]);
+        $this->call([
+            TarifSeeder::class,
+            DokterSeeder::class,
+            PerawatSeeder::class,
+            // ObatSeeder::class,
+            PoliSeeder::class,
+        ]);
     }
 }

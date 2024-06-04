@@ -15,4 +15,8 @@ class Perawat extends Model
         'nama',
         'jabatan',
     ];
+    public function kunjungan()
+    {
+        return $this->hasMany(Kunjungan::class);
+    }
 }

@@ -19,13 +19,6 @@
                         @csrf
                         @method("PUT")
                         <div class="mb-3">
-                            <label for="no_rm" class="form-label">Nomor Rekam Medis</label>
-                            <input type="text" class="form-control @error('no_rm') is-invalid @enderror" id="no_rm" name="no_rm" value="{{ $pasien->no_rm }}">
-                            @error('no_rm')
-                                <span class="invalid-feedback">{{ $message }}</span>
-                            @enderror
-                        </div>
-                        <div class="mb-3">
                             <label for="nik" class="form-label">NIK</label>
                             <input type="text" class="form-control @error('nik') is-invalid @enderror" id="nik" name="nik" value="{{ $pasien->nik }}">
                             @error('nik')

@@ -3,6 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Pasien;
+use App\Models\RekamMedik;
+use App\Models\Kunjungan;
+use App\Models\Dokter;
+use App\Models\Perawat;
+use App\Models\Poli;
 use Illuminate\Http\Request;
 
 class PasienController extends Controller
@@ -21,7 +26,10 @@ class PasienController extends Controller
      */
     public function create()
     {
-        return view('pasien.create');
+        $polis = Poli::all();
+        $dokters = Dokter::all();
+        $perawats = Perawat::all();
+        return view('pasien.create', compact('dokters', 'perawats', 'polis'));
     }
 
     /**
@@ -31,7 +39,7 @@ class PasienController extends Controller
     {
         $request->validate([
             'nama' => 'required',
-            'nik' => 'required|numeric|digits:16',
+            'nik' => 'required|numeric|digits:16|unique:pasien,nik',
             'tempat_lahir' => 'required',
             'tanggal_lahir' => 'required',
             'jenis_kelamin' => 'required',
@@ -41,18 +49,42 @@ class PasienController extends Controller
             'pekerjaan' => 'required',
             'status' => 'required',
             'no_telepon' => 'required|numeric|digits_between:10,13',
+            'dokter_id' => 'required|exists:dokter,id',
+            'perawat_id' => 'required|exists:perawat,id',
+            'poli' => 'required',
+        ], [
+            'nik.unique' => 'NIK telah terdaftar!', // Pesan kustom untuk aturan unique
         ]);
 
-        // Generate unique nomor rekam medis secara otomatis
-        $no_rm = mt_rand(10000000, 99999999); // Generate nomor acak 8 digit
-        while(Pasien::where('no_rm', $no_rm)->exists()) {
-            $no_rm = mt_rand(10000000, 99999999); // Regenerate nomor jika sudah ada
-        }
+        // Buat pasien baru
+        $pasien = Pasien::create($request->only('nik',
+        'nama',
+        'tempat_lahir',
+        'tanggal_lahir',
+        'jenis_kelamin',
+        'alamat',
+        'pendidikan',
+        'agama',
+        'pekerjaan',
+        'status',
+        'no_telepon'));
 
-        // Tambahkan nomor rekam medis ke dalam request data
-        $request->merge(['no_rm' => $no_rm]);
+        // Buat nomor rekam medik jika belum ada
+        $rekamMedik = RekamMedik::firstOrCreate(
+            ['pasien_id' => $pasien->id],
+            ['no_rekam_medik' => 'RM-' . str_pad($pasien->id, 6, '0', STR_PAD_LEFT)]
+        );
 
-        Pasien::create($request->all());
+        // Buat kunjungan baru
+        Kunjungan::create([
+            'rekam_medik_id' => $rekamMedik->id,
+            'dokter_id' => $request->dokter_id,
+            'perawat_id' => $request->perawat_id,
+            'tanggal' => $request->tanggal,
+            'poli' => $request->poli,
+            'diagnosa' => $request->diagnosa,
+            'tindakan' => $request->tindakan,
+        ]);
 
         return redirect()->route('pasien.index')
             ->with('success', 'Pasien berhasil ditambahkan');
@@ -81,7 +113,6 @@ class PasienController extends Controller
     {
         $request->validate([
             'nama' => 'required',
-            'no_rm' => 'required|numeric|digits:8',
             'nik' => 'required|numeric|digits:16',
             'tempat_lahir' => 'required',
             'tanggal_lahir' => 'required',

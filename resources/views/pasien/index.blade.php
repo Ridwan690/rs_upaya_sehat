@@ -10,7 +10,7 @@
             @endif
 
             <div class="card shadow-sm">
-                <div class="card-header bg-dark">
+                <div class="card-header">
                     <h5 class="mb-0">Pasien List</h5>
                 </div>
                 <div class="card-body">
@@ -38,7 +38,7 @@
                                 @forelse ($pasien as $patient)
                                 <tr>
                                     <th scope="row">{{ $loop->iteration }}</th>
-                                    <td>{{ $patient->no_rm }}</td>
+                                    <td>{{ $patient->rekammedik->no_rekam_medik }}</td>
                                     <td>{{ $patient->nik }}</td>
                                     <td>{{ $patient->nama }}</td>
                                     <td>{{ $patient->tanggal_lahir }}</td>

@@ -129,6 +129,42 @@
                                 <span class="invalid-feedback">{{ $message }}</span>
                             @enderror
                         </div>
+                        <div class="form-group mb-4">
+                            <label for="poli" class="form-label">Poli</label>
+                            <select name="poli" id="poli" class="form-select @error('poli') is-invalid @enderror">
+                                <option value="">Pilih Poli</option>
+                                    @foreach($polis as $poli)
+                                        <option value="{{ $poli->id }}">{{ $poli->nama_poli }}</option>
+                                    @endforeach
+                            </select>
+                            @error('poli')
+                                <span class="invalid-feedback">{{ $message }}</span>
+                            @enderror
+                        </div>
+                        <div class="form-group mb-4">
+                            <label for="dokter_id" class="form-label">Dokter</label>
+                            <select name="dokter_id" id="dokter_id" class="form-select @error('dokter_id') is-invalid @enderror">
+                                <option value="">Pilih Dokter</option>
+                                    @foreach($dokters as $dokter)
+                                        <option value="{{ $dokter->id }}">{{ $dokter->nama }}</option>
+                                    @endforeach
+                            </select>
+                            @error('dokter')
+                                <span class="invalid-feedback">{{ $message }}</span>
+                            @enderror
+                        </div>
+                        <div class="form-group mb-4">
+                            <label for="perawat_id" class="form-label">Perawat</label>
+                            <select name="perawat_id" id="perawat_id" class="form-select @error('perawat_id') is-invalid @enderror">
+                                <option value="">Pilih Perawat</option>
+                                    @foreach($perawats as $perawat)
+                                        <option value="{{ $perawat->id }}">{{ $perawat->nama }}</option>
+                                    @endforeach
+                            </select>
+                            @error('perawat')
+                                <span class="invalid-feedback">{{ $message }}</span>
+                            @enderror
+                        </div>
                         <div class="form-group mb-3">
                             <button type="submit" class="btn btn-success w-100">Add Pasien</button>
                         </div>
