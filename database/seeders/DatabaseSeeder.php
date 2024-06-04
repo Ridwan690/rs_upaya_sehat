@@ -18,5 +18,13 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
+
+        // Panggil semua seeder yang diperlukan
+        // $this->call([
+        //     TarifSeeder::class,
+        //     ObatSeeder::class,
+        //     DokterSeeder::class,
+        //     PerawatSeeder::class,
+        // ]);
     }
 }

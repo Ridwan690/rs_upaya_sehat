@@ -20,11 +20,17 @@
                             <thead>
                                 <tr>
                                     <th scope="col">S#</th>
+                                    <th scope="col">Nomor Rekam Medis</th>
+                                    <th scope="col">NIK</th>
                                     <th scope="col">Nama</th>
                                     <th scope="col">Tanggal Lahir</th>
                                     <th scope="col">Jenis Kelamin</th>
-                                    <th scope="col">Alamat</th>
-                                    <th scope="col">No Telepon</th>
+                                    {{-- <th scope="col">Alamat</th> --}}
+                                    {{-- <th scope="col">Pendidikan</th> --}}
+                                    {{-- <th scope="col">Agama</th> --}}
+                                    {{-- <th scope="col">Pekerjaan</th> --}}
+                                    {{-- <th scope="col">Status</th> --}}
+                                    {{-- <th scope="col">No Telepon</th> --}}
                                     <th scope="col">Action</th>
                                 </tr>
                             </thead>
@@ -32,11 +38,17 @@
                                 @forelse ($pasien as $patient)
                                 <tr>
                                     <th scope="row">{{ $loop->iteration }}</th>
+                                    <td>{{ $patient->no_rm }}</td>
+                                    <td>{{ $patient->nik }}</td>
                                     <td>{{ $patient->nama }}</td>
                                     <td>{{ $patient->tanggal_lahir }}</td>
                                     <td>{{ $patient->jenis_kelamin }}</td>
-                                    <td>{{ $patient->alamat }}</td>
-                                    <td>{{ $patient->no_telepon }}</td>
+                                    {{-- <td>{{ $patient->alamat }}</td> --}}
+                                    {{-- <td>{{ $patient->pendidikan }}</td> --}}
+                                    {{-- <td>{{ $patient->agama }}</td> --}}
+                                    {{-- <td>{{ $patient->pekerjaan }}</td> --}}
+                                    {{-- <td>{{ $patient->status }}</td> --}}
+                                    {{-- <td>{{ $patient->no_telepon }}</td> --}}
                                     <td>
                                         <form action="{{ route('pasien.destroy', $patient->id) }}" method="post">
                                             @csrf
@@ -49,7 +61,7 @@
                                 </tr>
                                 @empty
                                     <tr>
-                                        <td colspan="7" class="text-center text-danger">
+                                        <td colspan="9" class="text-center text-danger">
                                             <strong>No Pasien Found!</strong>
                                         </td>
                                     </tr>
@@ -61,37 +73,37 @@
                 </div>
             </div>
             <nav aria-label="Page navigation example" class="d-flex justify-content-center mt-3">
-    <ul class="pagination">
-        <!-- Tombol "Previous" -->
-        @if ($pasien->onFirstPage())
-            <li class="page-item disabled">
-                <span class="page-link">Previous</span>
-            </li>
-        @else
-            <li class="page-item">
-                <a class="page-link" href="{{ $pasien->previousPageUrl() }}" rel="prev">Previous</a>
-            </li>
-        @endif
+                <ul class="pagination">
+                    <!-- Tombol "Previous" -->
+                    @if ($pasien->onFirstPage())
+                        <li class="page-item disabled">
+                            <span class="page-link">Previous</span>
+                        </li>
+                    @else
+                        <li class="page-item">
+                            <a class="page-link" href="{{ $pasien->previousPageUrl() }}" rel="prev">Previous</a>
+                        </li>
+                    @endif
 
-        <!-- Tampilkan navigasi nomor untuk halaman-halaman spesifik -->
-        @foreach ($pasien->getUrlRange(1, $pasien->lastPage()) as $page => $url)
-            <li class="page-item {{ $page == $pasien->currentPage() ? 'active' : '' }}">
-                <a class="page-link" href="{{ $url }}">{{ $page }}</a>
-            </li>
-        @endforeach
+                    <!-- Tampilkan navigasi nomor untuk halaman-halaman spesifik -->
+                    @foreach ($pasien->getUrlRange(1, $pasien->lastPage()) as $page => $url)
+                        <li class="page-item {{ $page == $pasien->currentPage() ? 'active' : '' }}">
+                            <a class="page-link" href="{{ $url }}">{{ $page }}</a>
+                        </li>
+                    @endforeach
 
-        <!-- Tombol "Next" -->
-        @if ($pasien->hasMorePages())
-            <li class="page-item">
-                <a class="page-link" href="{{ $pasien->nextPageUrl() }}" rel="next">Next</a>
-            </li>
-        @else
-            <li class="page-item disabled">
-                <span class="page-link">Next</span>
-            </li>
-        @endif
-    </ul>
-</nav>
+                    <!-- Tombol "Next" -->
+                    @if ($pasien->hasMorePages())
+                        <li class="page-item">
+                            <a class="page-link" href="{{ $pasien->nextPageUrl() }}" rel="next">Next</a>
+                        </li>
+                    @else
+                        <li class="page-item disabled">
+                            <span class="page-link">Next</span>
+                        </li>
+                    @endif
+                </ul>
+            </nav>
 
         </div>
     </div>

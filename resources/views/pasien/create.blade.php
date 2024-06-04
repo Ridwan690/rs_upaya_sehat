@@ -12,6 +12,13 @@
                     <form action="{{ route('pasien.store') }}" method="post">
                         @csrf
                         <div class="form-group mb-4">
+                            <label for="nik" class="form-label">NIK</label>
+                            <input type="tel" class="form-control @error('nik') is-invalid @enderror" id="nik" name="nik" value="{{ old('nik') }}">
+                            @error('nik')
+                                <span class="invalid-feedback">{{ $message }}</span>
+                            @enderror
+                        </div>
+                        <div class="form-group mb-4">
                             <label for="nama" class="form-label">Nama</label>
                             <input type="text" class="form-control @error('nama') is-invalid @enderror" id="nama" name="nama" value="{{ old('nama') }}">
                             @error('nama')
@@ -54,11 +61,12 @@
                             <label for="pendidikan" class="form-label">Pendidikan</label>
                             <select name="pendidikan" id="pendidikan" class="form-select @error('pendidikan') is-invalid @enderror">
                                 <option value="">-- Pilih Pendidikan --</option>
-                                <option value="SD" {{ old('pendidikan') == 'SD/MI Sederajat' ? 'selected' : '' }}>SD/MI Sederajat</option>
-                                <option value="SMP" {{ old('pendidikan') == 'SMP/SLTP Sederajat' ? 'selected' : '' }}>SMP/SLTP Sederajat</option>
-                                <option value="SMA" {{ old('pendidikan') == 'SMA/SMK Sederajat' ? 'selected' : '' }}>SMA/SMK Sederajat</option>
+                                <option value="Tidak/Belum Sekolah" {{ old('pendidikan') == 'Tidak/Belum Sekolah' ? 'selected' : '' }}>Tidak/Belum Sekolah</option>
+                                <option value="SD/MI Sederajat" {{ old('pendidikan') == 'SD/MI Sederajat' ? 'selected' : '' }}>SD/MI Sederajat</option>
+                                <option value="SMP/SLTP Sederajat" {{ old('pendidikan') == 'SMP/SLTP Sederajat' ? 'selected' : '' }}>SMP/SLTP Sederajat</option>
+                                <option value="SMA/SMK Sederajat" {{ old('pendidikan') == 'SMA/SMK Sederajat' ? 'selected' : '' }}>SMA/SMK Sederajat</option>
                                 <option value="D3" {{ old('pendidikan') == 'D3' ? 'selected' : '' }}>D3</option>
-                                <option value="S1" {{ old('pendidikan') == 'S1/D4' ? 'selected' : '' }}>S1/D4</option>
+                                <option value="S1/D4" {{ old('pendidikan') == 'S1/D4' ? 'selected' : '' }}>S1/D4</option>
                                 <option value="S2" {{ old('pendidikan') == 'S2' ? 'selected' : '' }}>S2</option>
                                 <option value="S3" {{ old('pendidikan') == 'S3' ? 'selected' : '' }}>S3</option>
                             </select>
