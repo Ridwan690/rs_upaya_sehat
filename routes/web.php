@@ -33,6 +33,13 @@ Route::get('kamar', function () {
 Route::get('contact', function () {
     return view('contact');
 });
+Route::get('rawat-inap', function () {
+    return view('rawat-inap');
+});
+Route::get('rawat-jalan', function () {
+    return view('rawat-jalan');
+});
+
 
 Route::get('/cobarelasi', function(){
     $dokter = \App\Models\Dokter::all();
