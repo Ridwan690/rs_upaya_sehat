@@ -30,7 +30,7 @@
                                 <a href="#" class="dropdown-item">Profile</a>
                                 <a href="#" class="dropdown-item">Setting</a>
                                 <a class="dropdown-item" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
-                                <form action="#" id="logout-form" method="post">@csrf</form>
+                                <form action="{{ route('logout') }}" id="logout-form" method="post">@csrf</form>
                             </div>
                         </li>
                     </ul>

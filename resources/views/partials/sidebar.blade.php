@@ -9,7 +9,7 @@
                         Admin Elements
                     </li>
                     <li class="sidebar-item">
-                        <a href="/admin/home" class="sidebar-link">
+                        <a href="/admin/dashboard" class="sidebar-link">
                             <i class="fa-solid fa-list pe-2"></i>
                             Dashboard
                         </a>
@@ -20,6 +20,15 @@
                             Kelola Data
                         </a>
                         <ul id="pages" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+                            {{-- @php
+                            $user = Auth::user();
+                            $allowedRoles = ['superadmin', 'manajemen', 'perawat_pendaftaran'];
+                            @endphp
+                            @if(Auth::check() && in_array($user->role, $allowedRoles))
+                            <li class="sidebar-item">
+                                <a href="/pasien" class="sidebar-link">Pasien</a>
+                            </li>
+                            @endif --}}
                             <li class="sidebar-item">
                                 <a href="/pasien" class="sidebar-link">Pasien</a>
                             </li>

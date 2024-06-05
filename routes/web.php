@@ -3,9 +3,10 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PasienController;
 use App\Http\Controllers\TarifController;
-use App\Http\Controllers\AdminController;
-use App\Http\Controllers\RekamMedikController;
+// use App\Http\Controllers\AdminController;
 // use App\Http\Controllers\RegistrationController;
+use App\Http\Controllers\RekamMedikController;
+use App\Http\Controllers\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,6 +19,7 @@ use App\Http\Controllers\RekamMedikController;
 |
 */
 
+// Landing Page
 Route::get('/', function () {
     return view('index');
 });
@@ -47,14 +49,44 @@ Route::get('/cobarelasi', function(){
     return view('rekam.index', compact('dokter'));
 });
 
-Route::resource('pasien', PasienController::class);
-Route::resource('tarif', TarifController::class);
+// Route::resource('pasien', PasienController::class);
+// Route::resource('tarif', TarifController::class);
 
-Route::get('rekam-medik', [RekamMedikController::class, 'index'])->name('rekam.index');
-Route::put('rekam-medik/edit', [RekamMedikController::class, 'edit'])->name('rekam.edit');
-Route::get('rekam-medik/show/{id}', [RekamMedikController::class, 'show'])->name('rekam.show');
+// Route::get('rekam-medik', [RekamMedikController::class, 'index'])->name('rekam.index');
+// Route::put('rekam-medik/edit', [RekamMedikController::class, 'edit'])->name('rekam.edit');
+// Route::get('rekam-medik/show/{id}', [RekamMedikController::class, 'show'])->name('rekam.show');
 
-Route::get('admin/home', [AdminController::class, 'index'])->name('admin.home');
-Route::get('admin/daftar', [AdminController::class, 'daftar'])->name('admin.daftar');
+// Route::get('admin/home', [AdminController::class, 'index'])->name('admin.home'); // diganti dengan route di atas
+// Route::get('admin/daftar', [AdminController::class, 'daftar'])->name('admin.daftar'); // tidak terpakai
 
+// Auth routes
+Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register');
+Route::post('/register', [AuthController::class, 'register']);
 
+Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
+Route::post('/login', [AuthController::class, 'login']);
+
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+// Define routes with auth middleware
+Route::middleware(['auth'])->group(function () {
+    Route::get('admin/dashboard', function () {
+        return view('admin.dashboard');
+    })->name('dashboard');
+    
+    // Define routes with role middleware
+    Route::middleware(['role:superadmin,manajemen,perawat_pendaftaran'])->group(function () {
+        // Routes for superadmin
+        Route::resource('pasien', PasienController::class);
+        Route::get('rekam-medik', [RekamMedikController::class, 'index'])->name('rekam.index');
+        Route::put('rekam-medik/edit', [RekamMedikController::class, 'edit'])->name('rekam.edit');
+        Route::get('rekam-medik/show/{id}', [RekamMedikController::class, 'show'])->name('rekam.show');
+    });
+
+    Route::middleware(['role:superadmin,manajemen'])->group(function () {
+        // Routes for manajemen
+        Route::resource('tarif', TarifController::class);
+    });
+
+    // Define more routes based on roles
+});

@@ -26,6 +26,7 @@ class DatabaseSeeder extends Seeder
             PerawatSeeder::class,
             // ObatSeeder::class,
             PoliSeeder::class,
+            SuperAdminSeeder::class,
         ]);
     }
 }
