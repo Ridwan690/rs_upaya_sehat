@@ -30,6 +30,25 @@
                     <h5>Detail Kunjungan</h5>
                     @foreach ($rekamMedik->kunjungan as $kunjungan)
                         <p class="form-control-plaintext">{{ $kunjungan->tanggal }}</p>
+                        {{-- <div class="mb-3 row">
+                            <label for="nik" class="col-sm-3 col-form-label"><strong>Tanggal:</strong></label>
+                            <div class="col-sm-9">
+                                <p class="form-control-plaintext">{{ $kunjungan->tanggal }}</p>
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label for="nik" class="col-sm-3 col-form-label"><strong>Diagnosa:</strong></label>
+                            <div class="col-sm-9">
+                                <p class="form-control-plaintext">{{ $kunjungan->diagnosa }}</p>
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label for="nik" class="col-sm-3 col-form-label"><strong>Tindakan:</strong></label>
+                            <div class="col-sm-9">
+                                <p class="form-control-plaintext">{{ $kunjungan->tindakan }}</p>
+                            </div>
+                        </div>
+                        <hr> --}}
                     @endforeach
                 </div>
                 <div class="card-footer d-flex justify-content-end">

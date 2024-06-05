@@ -36,12 +36,18 @@
                                 <a href="/tarif" class="sidebar-link">Tarif</a>
                             </li>
                             <li class="sidebar-item">
+                                <a href="/rekam-medik" class="sidebar-link">Rekam Medik</a>
+                            </li>
+                            <li class="sidebar-item">
                                 <a href="#" class="sidebar-link">List</a>
                             </li>
                         </ul>
                     </li>
                     <li class="sidebar-item">
                         <a href="/" class="sidebar-link">Home</a>
+                    </li>
+                    <li class="sidebar-item" style="padding-top: 350px">
+                        <a href="/register" class="sidebar-link">Register</a>
                     </li>
                 </ul>
             </div>

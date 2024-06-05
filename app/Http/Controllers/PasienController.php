@@ -80,7 +80,7 @@ class PasienController extends Controller
             'rekam_medik_id' => $rekamMedik->id,
             'dokter_id' => $request->dokter_id,
             'perawat_id' => $request->perawat_id,
-            'tanggal' => $request->tanggal,
+            // 'tanggal' => $request->tanggal,
             'poli' => $request->poli,
             'diagnosa' => $request->diagnosa,
             'tindakan' => $request->tindakan,

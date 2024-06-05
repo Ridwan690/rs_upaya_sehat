@@ -60,8 +60,7 @@ Route::get('/cobarelasi', function(){
 // Route::get('admin/daftar', [AdminController::class, 'daftar'])->name('admin.daftar'); // tidak terpakai
 
 // Auth routes
-Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register');
-Route::post('/register', [AuthController::class, 'register']);
+
 
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
@@ -73,7 +72,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('admin/dashboard', function () {
         return view('admin.dashboard');
     })->name('dashboard');
-    
+
     // Define routes with role middleware
     Route::middleware(['role:superadmin,manajemen,perawat_pendaftaran'])->group(function () {
         // Routes for superadmin
@@ -86,6 +85,8 @@ Route::middleware(['auth'])->group(function () {
     Route::middleware(['role:superadmin,manajemen'])->group(function () {
         // Routes for manajemen
         Route::resource('tarif', TarifController::class);
+        Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register');
+        Route::post('/register', [AuthController::class, 'register']);
     });
 
     // Define more routes based on roles

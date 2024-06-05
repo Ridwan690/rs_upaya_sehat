@@ -34,8 +34,8 @@
                                 </tr>
                                 @empty
                                     <tr>
-                                        <td colspan="9" class="text-center text-danger">
-                                            <strong>No Pasien Found!</strong>
+                                        <td colspan="6" class="text-center text-danger">
+                                            <strong>No Rekam Medik Found!</strong>
                                         </td>
                                     </tr>
                                 @endforelse
