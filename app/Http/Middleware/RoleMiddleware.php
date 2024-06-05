@@ -16,7 +16,8 @@ class RoleMiddleware
 
         $user = Auth::user();
         if (!in_array($user->role, $roles)) {
-            return redirect('dashboard');
+            // return redirect('dashboard');
+            return response()->view('errors.403', [], 403);
         }
 
         return $next($request);
