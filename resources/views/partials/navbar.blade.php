@@ -22,7 +22,7 @@
                         </div>
                     </div>
                     <a href="/contact" class="nav-item nav-link">Contact</a>
-                    <button class="btn btn-primary ms-3" data-bs-toggle="modal" data-bs-target="#signInModal">Sign In</button>
+                    <button class="btn btn-primary ms-3" onclick="window.location='{{ route('login') }}'">Sign In</button>
                 </div>
             </div>
         </nav>
@@ -31,7 +31,7 @@
 <!-- Navbar End -->
 
 <!-- Sign In Modal Start -->
-<div class="modal fade" id="signInModal" tabindex="-1" aria-labelledby="signInModalLabel" aria-hidden="true">
+<!-- <div class="modal fade" id="signInModal" tabindex="-1" aria-labelledby="signInModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
@@ -62,5 +62,5 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->
 <!-- Sign In Modal End -->
