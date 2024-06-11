@@ -14,9 +14,23 @@ class Dokter extends Model
     protected $fillable = [
         'nama',
         'spesialis',
+        'id_poli',
     ];
     public function kunjungan()
     {
-        return $this->hasMany(Kunjungan::class);
+        return $this->hasOne(Kunjungan::class);
     }
+
+    public function antrian()
+    {
+        return $this->hasOne(Antrian::class);
+    }
+    public function poli()
+    {
+        return $this->belongsTo(Poli::class);
+    }
+    // public function jadwal()
+    // {
+    //     return $this->hasMany(Jadwal::class);
+    // }
 }

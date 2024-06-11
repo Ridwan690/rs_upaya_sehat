@@ -15,9 +15,8 @@ return new class extends Migration
             $table->id();
             $table->foreignId('rekam_medik_id')->constrained('rekammedik');
             $table->foreignId('dokter_id')->constrained('dokter');
-            $table->foreignId('perawat_id')->constrained('perawat');
+            $table->foreignId('poli_id')->constrained('poli');
             $table->timestamp('tanggal')->useCurrent();
-            $table->string('poli');
             $table->string('diagnosa')->nullable();
             $table->string('tindakan')->nullable();
             $table->timestamps();

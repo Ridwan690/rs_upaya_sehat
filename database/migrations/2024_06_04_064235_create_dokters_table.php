@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('nama');
             $table->string('spesialis');
+            $table->foreignId('id_poli')->constrained('poli');
             $table->timestamps();
         });
     }

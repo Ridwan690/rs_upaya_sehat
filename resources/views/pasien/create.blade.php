@@ -1,14 +1,24 @@
 @extends('layouts.admin')
 
 @section('content')
-    <div class="d-flex justify-content-center mt-3">
-        <div class="col-md-8">
-            <div class="card shadow-sm">
-                <div class="card-header d-flex justify-content-between align-items-center">
-                    <h5 class="mb-0">Add New Pasien</h5>
-                    <a href="{{ route('pasien.index') }}" class="btn btn-primary">&larr; Back</a>
-                </div>
-                <div class="card-body">
+<div class="d-flex justify-content-center mt-3">
+    <div class="col-md-8">
+        <div class="card shadow-sm">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h5 class="mb-0">Pendaftaran Pasien</h5>
+                <a href="{{ route('pasien.index') }}" class="btn btn-primary">&larr; Back</a>
+            </div>
+            <div class="card-body">
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link active" id="full-form-tab" data-bs-toggle="tab" href="#full-form" role="tab" aria-controls="full-form" aria-selected="true">Pasien Baru</a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link" id="simple-form-tab" data-bs-toggle="tab" href="#simple-form" role="tab" aria-controls="simple-form" aria-selected="false">Pasien Lama</a>
+                    </li>
+                </ul>
+                <div class="tab-content mt-3" id="myTabContent">
+                    <div class="tab-pane fade show active" id="full-form" role="tabpanel" aria-labelledby="full-form-tab">
                     <form action="{{ route('pasien.store') }}" method="post">
                         @csrf
                         <div class="form-group mb-4">
@@ -130,38 +140,25 @@
                             @enderror
                         </div>
                         <div class="form-group mb-4">
-                            <label for="poli" class="form-label">Poli</label>
-                            <select name="poli" id="poli" class="form-select @error('poli') is-invalid @enderror">
+                            <label for="poli_id" class="form-label">Poli</label>
+                            <select name="poli_id" id="poli_id" class="form-select @error('poli_id') is-invalid @enderror">
                                 <option value="">Pilih Poli</option>
-                                    @foreach($polis as $poli)
-                                        <option value="{{ $poli->id }}">{{ $poli->nama_poli }}</option>
-                                    @endforeach
+                                @foreach($polis as $poli)
+                                    <option value="{{ $poli->id }}">{{ $poli->nama_poli }}</option>
+                                @endforeach
                             </select>
                             @error('poli')
                                 <span class="invalid-feedback">{{ $message }}</span>
                             @enderror
                         </div>
+
                         <div class="form-group mb-4">
                             <label for="dokter_id" class="form-label">Dokter</label>
                             <select name="dokter_id" id="dokter_id" class="form-select @error('dokter_id') is-invalid @enderror">
                                 <option value="">Pilih Dokter</option>
-                                    @foreach($dokters as $dokter)
-                                        <option value="{{ $dokter->id }}">{{ $dokter->nama }}</option>
-                                    @endforeach
+                                <!-- Dokter options will be populated here based on selected poli -->
                             </select>
                             @error('dokter')
-                                <span class="invalid-feedback">{{ $message }}</span>
-                            @enderror
-                        </div>
-                        <div class="form-group mb-4">
-                            <label for="perawat_id" class="form-label">Perawat</label>
-                            <select name="perawat_id" id="perawat_id" class="form-select @error('perawat_id') is-invalid @enderror">
-                                <option value="">Pilih Perawat</option>
-                                    @foreach($perawats as $perawat)
-                                        <option value="{{ $perawat->id }}">{{ $perawat->nama }}</option>
-                                    @endforeach
-                            </select>
-                            @error('perawat')
                                 <span class="invalid-feedback">{{ $message }}</span>
                             @enderror
                         </div>
@@ -169,8 +166,62 @@
                             <button type="submit" class="btn btn-success w-100">Add Pasien</button>
                         </div>
                     </form>
+                    </div>
+
+                    <!-- Di sini adalah form untuk pasien lama -->
+                    <div class="tab-pane fade" id="simple-form" role="tabpanel" aria-labelledby="simple-form-tab">
+                        <form action="{{ route('daftarUlang') }}" method="post">
+                            @csrf
+                            <!-- Form Sederhana -->
+                             <div class="form-group mb-4">
+                                <label for="pasien_id" class="form-label">NIK</label>
+                                    <select class="js-example-basic-single form-select @error('pasien_id') is-invalid @enderror" style="width: 100%" name="pasien_id">
+                                        <option value="">Masukkan NIK</option>
+                                        @foreach($pasiens as $pasien)
+                                            <option value="{{ $pasien->id }}">{{ $pasien->nik }} - {{ $pasien->nama }}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('pasien')
+                                    <span class="invalid-feedback">{{ $message }}</span>
+                                @enderror
+                             </div>
+                            <!-- <div class="form-group mb-4">
+                                <label for="nik_simple" class="form-label">NIK</label>
+                                <input type="tel" class="form-control @error('nik') is-invalid @enderror" id="nik_simple" name="nik" value="{{ old('nik') }}">
+                                @error('nik')
+                                    <span class="invalid-feedback">{{ $message }}</span>
+                                @enderror
+                            </div> -->
+                            <div class="form-group mb-4">
+                                <label for="poli_id_simple" class="form-label">Poli</label>
+                                <select name="poli_id_simple" id="poli_id_simple" class="form-select @error('poli_id') is-invalid @enderror">
+                                    <option value="">Pilih Poli</option>
+                                    @foreach($polis as $poli)
+                                        <option value="{{ $poli->id }}">{{ $poli->nama_poli }}</option>
+                                    @endforeach
+                                </select>
+                                @error('poli')
+                                    <span class="invalid-feedback">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            <div class="form-group mb-4">
+                                <label for="dokter_id_simple" class="form-label">Dokter</label>
+                                <select name="dokter_id_simple" id="dokter_id_simple" class="form-select @error('dokter_id') is-invalid @enderror">
+                                    <option value="">Pilih Dokter</option>
+                                    <!-- Dokter options will be populated here based on selected poli -->
+                                </select>
+                                @error('dokter')
+                                    <span class="invalid-feedback">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            <div class="form-group mb-3">
+                                <button type="submit" class="btn btn-success w-100">Add Pasien</button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
-        </div> 
-    </div>
+        </div>
+    </div> 
+</div>
 @endsection

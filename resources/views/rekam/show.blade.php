@@ -26,14 +26,25 @@
                             <p class="form-control-plaintext">{{ $rekamMedik->pasien->nama }}</p>
                         </div>
                     </div>
-                    <br>
+                    <hr>
                     <h5>Detail Kunjungan</h5>
                     @foreach ($rekamMedik->kunjungan as $kunjungan)
-                        <p class="form-control-plaintext">{{ $kunjungan->tanggal }}</p>
-                        {{-- <div class="mb-3 row">
+                        <div class="mb-3 row">
                             <label for="nik" class="col-sm-3 col-form-label"><strong>Tanggal:</strong></label>
                             <div class="col-sm-9">
                                 <p class="form-control-plaintext">{{ $kunjungan->tanggal }}</p>
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label for="nik" class="col-sm-3 col-form-label"><strong>Poli:</strong></label>
+                            <div class="col-sm-9">
+                                <p class="form-control-plaintext">{{ $kunjungan->poli->nama_poli }}</p>
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label for="nik" class="col-sm-3 col-form-label"><strong>Dokter:</strong></label>
+                            <div class="col-sm-9">
+                                <p class="form-control-plaintext">{{ $kunjungan->dokter->nama }}</p>
                             </div>
                         </div>
                         <div class="mb-3 row">
@@ -48,7 +59,8 @@
                                 <p class="form-control-plaintext">{{ $kunjungan->tindakan }}</p>
                             </div>
                         </div>
-                        <hr> --}}
+                        <a href="{{ route('rekam.edit', $kunjungan->id) }}" class="btn btn-primary btn-sm mx-1"><i class="fas fa-pencil-alt"></i></a> 
+                        <hr>
                     @endforeach
                 </div>
                 <div class="card-footer d-flex justify-content-end">

@@ -3,10 +3,13 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PasienController;
 use App\Http\Controllers\TarifController;
-// use App\Http\Controllers\AdminController;
-// use App\Http\Controllers\RegistrationController;
+// use App\Http\Controllers\AdminController; // tidak terpakai
+// use App\Http\Controllers\RegistrationController; // tidak terpakai
 use App\Http\Controllers\RekamMedikController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\DokterController;
+use App\Http\Controllers\JadwalController;
+use App\Http\Controllers\DaftarRawatJalanController;
 
 /*
 |--------------------------------------------------------------------------
@@ -56,7 +59,7 @@ Route::get('/cobarelasi', function(){
 // Route::put('rekam-medik/edit', [RekamMedikController::class, 'edit'])->name('rekam.edit');
 // Route::get('rekam-medik/show/{id}', [RekamMedikController::class, 'show'])->name('rekam.show');
 
-// Route::get('admin/home', [AdminController::class, 'index'])->name('admin.home'); // diganti dengan route di atas
+// Route::get('admin/home', [AdminController::class, 'index'])->name('admin.home'); // tidak terpakai
 // Route::get('admin/daftar', [AdminController::class, 'daftar'])->name('admin.daftar'); // tidak terpakai
 
 // Auth routes
@@ -75,18 +78,26 @@ Route::middleware(['auth'])->group(function () {
 
     // Define routes with role middleware
     Route::middleware(['role:superadmin,manajemen,perawat_pendaftaran'])->group(function () {
-        // Routes for superadmin
+        // Routes for superadmin,manajemen,perawat_pendaftaran
         Route::resource('pasien', PasienController::class);
+        Route::post('daftar-ulang', [PasienController::class, 'daftarUlang'])->name('daftarUlang');
         Route::get('rekam-medik', [RekamMedikController::class, 'index'])->name('rekam.index');
-        Route::put('rekam-medik/edit', [RekamMedikController::class, 'edit'])->name('rekam.edit');
+        Route::get('rekam-medik/{id}/edit', [RekamMedikController::class, 'edit'])->name('rekam.edit');
         Route::get('rekam-medik/show/{id}', [RekamMedikController::class, 'show'])->name('rekam.show');
+        Route::put('rekam-medik/{id}', [RekamMedikController::class, 'update'])->name('rekam.update');
+        Route::resource('daftar-rawat-jalan', DaftarRawatJalanController::class);
     });
 
     Route::middleware(['role:superadmin,manajemen'])->group(function () {
-        // Routes for manajemen
+        // Routes for superadmin, manajemen
         Route::resource('tarif', TarifController::class);
+        // Route::resource('dokter', DokterController::class);
         Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register');
         Route::post('/register', [AuthController::class, 'register']);
+        Route::resource('jadwal', JadwalController::class);
+        Route::get('/get-dokter/{poli_id}', [DokterController::class, 'getDokterByPoli'])->name('getDokterByPoli');
+
+
     });
 
     // Define more routes based on roles

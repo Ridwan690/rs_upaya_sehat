@@ -17,16 +17,46 @@ class PoliSeeder extends Seeder
     {
         // Data contoh poli
         $data = [
-            ['nama_poli' => 'Poli Umum'],
-            ['nama_poli' => 'Poli Gigi'],
-            ['nama_poli' => 'Poli Mata'],
-            ['nama_poli' => 'Poli Kandungan'],
-            ['nama_poli' => 'Poli Saraf'],
-            ['nama_poli' => 'Poli Bedah'],
-            ['nama_poli' => 'Poli Anak'],
-            ['nama_poli' => 'Poli THT'],
-            ['nama_poli' => 'Poli Jantung'],
-            ['nama_poli' => 'Poli Paru'],
+            [
+                'kode_poli' => 'PU',
+                'nama_poli' => 'Poli Umum'
+            ],
+            [
+                'kode_poli' => 'PG',
+                'nama_poli' => 'Poli Gigi'
+            ],
+            [
+                'kode_poli' => 'PM',
+                'nama_poli' => 'Poli Mata'
+            ],
+            [
+                'kode_poli' => 'PK',
+                'nama_poli' => 'Poli Kandungan'
+            ],
+            [
+                'kode_poli' => 'PS',
+                'nama_poli' => 'Poli Saraf'
+            ],
+            [
+                'kode_poli' => 'PB',
+                'nama_poli' => 'Poli Bedah'
+            ],
+            [
+                'kode_poli' => 'PA',
+                'nama_poli' => 'Poli Anak'
+            ],
+            [
+                'kode_poli' => 'PTHT',
+                'nama_poli' => 'Poli Telinga, Hidung, dan Tenggorokan'
+            ],
+            [
+                'kode_poli' => 'PJ',
+                'nama_poli' => 'Poli Jantung'
+            ],
+            [
+                'kode_poli' => 'PP',
+                'nama_poli' => 'Poli Paru-paru'
+            ],
         ];
 
         // Memasukkan data ke dalam tabel poli

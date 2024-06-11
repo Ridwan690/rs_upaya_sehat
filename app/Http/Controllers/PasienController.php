@@ -8,6 +8,7 @@ use App\Models\Kunjungan;
 use App\Models\Dokter;
 use App\Models\Perawat;
 use App\Models\Poli;
+use App\Models\Antrian;
 use Illuminate\Http\Request;
 
 class PasienController extends Controller
@@ -26,10 +27,10 @@ class PasienController extends Controller
      */
     public function create()
     {
+        $pasiens = Pasien::all();
         $polis = Poli::all();
         $dokters = Dokter::all();
-        $perawats = Perawat::all();
-        return view('pasien.create', compact('dokters', 'perawats', 'polis'));
+        return view('pasien.create', compact('dokters', 'polis', 'pasiens'));
     }
 
     /**
@@ -49,9 +50,8 @@ class PasienController extends Controller
             'pekerjaan' => 'required',
             'status' => 'required',
             'no_telepon' => 'required|numeric|digits_between:10,13',
-            'dokter_id' => 'required|exists:dokter,id',
-            'perawat_id' => 'required|exists:perawat,id',
-            'poli' => 'required',
+            'dokter_id' => 'required',
+            'poli_id' => 'required',
         ], [
             'nik.unique' => 'NIK telah terdaftar!', // Pesan kustom untuk aturan unique
         ]);
@@ -76,16 +76,31 @@ class PasienController extends Controller
         );
 
         // Buat kunjungan baru
-        Kunjungan::create([
+        $kunjungan = Kunjungan::create([
             'rekam_medik_id' => $rekamMedik->id,
             'dokter_id' => $request->dokter_id,
-            'perawat_id' => $request->perawat_id,
-            // 'tanggal' => $request->tanggal,
-            'poli' => $request->poli,
-            'diagnosa' => $request->diagnosa,
-            'tindakan' => $request->tindakan,
+            'poli_id' => $request->poli_id,
         ]);
+        // Ambil kode_poli berdasarkan poli_id
+        $poli = Poli::find($request->poli_id);
+        $kodePoli = $poli->kode_poli;
 
+        // Generate nomor antrian
+        $nomorAntrian = Antrian::where('id_poli', $request->poli_id)
+            ->whereDate('created_at', now()->toDateString())
+            ->max('nomor_antrian') + 1;
+
+        // Gabungkan kode_poli dengan nomor antrian
+        $nomorAntrianFormatted = $kodePoli . '-' . $nomorAntrian;
+
+        // Buat antrian baru
+        Antrian::create([
+            'id_poli' => $request->poli_id,
+            'id_dokter' => $request->dokter_id,
+            'id_kunjungan' => $kunjungan->id,
+            'nomor_antrian' => $nomorAntrian,
+            'kode_antrian' => $nomorAntrianFormatted,
+        ]);
         return redirect()->route('pasien.index')
             ->with('success', 'Pasien berhasil ditambahkan');
     }
@@ -140,5 +155,54 @@ class PasienController extends Controller
 
         return redirect()->route('pasien.index')
             ->with('success', 'Pasien berhasil dihapus');
+    }
+
+    public function daftarUlang(Request $request)
+    {
+        $request->validate([
+            'pasien_id' => 'required',
+            'dokter_id_simple' => 'required',
+            'poli_id_simple' => 'required',
+        ]);
+
+        // Temukan atau buat rekam medik untuk pasien
+        $pasien = Pasien::find($request->pasien_id);
+        if (!$pasien) {
+            // Tambahkan logika untuk menangani ketika pasien tidak ditemukan
+            // Misalnya, kembalikan respons dengan pesan error
+            return back()->withErrors(['nik' => 'Pasien dengan NIK ini tidak ditemukan.']);
+        }
+
+        // Temukan rekam medik atau buat yang baru jika belum ada
+        $rekamMedik = RekamMedik::where('pasien_id', $pasien->id)->first();
+
+        // Buat kunjungan baru
+        $kunjungan = Kunjungan::create([
+            'rekam_medik_id' => $rekamMedik->id,
+            'dokter_id' => $request->dokter_id_simple,
+            'poli_id' => $request->poli_id_simple,
+        ]);
+
+        $poli = Poli::find($request->poli_id_simple);
+        $kodePoli = $poli->kode_poli;
+
+        // Generate nomor antrian
+        $nomorAntrian = Antrian::where('id_poli', $request->poli_id_simple)
+            ->whereDate('created_at', now()->toDateString())
+            ->max('nomor_antrian') + 1;
+
+        // Gabungkan kode_poli dengan nomor antrian
+        $nomorAntrianFormatted = $kodePoli . '-' . $nomorAntrian;
+
+        // Buat antrian baru
+        Antrian::create([
+            'id_poli' => $request->poli_id_simple,
+            'id_dokter' => $request->dokter_id_simple,
+            'id_kunjungan' => $kunjungan->id,
+            'nomor_antrian' => $nomorAntrian,
+            'kode_antrian' => $nomorAntrianFormatted,
+        ]);
+        return redirect()->route('pasien.index')
+                        ->with('success', 'Pendaftaran berhasil.');
     }
 }

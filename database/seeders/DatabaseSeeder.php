@@ -21,11 +21,11 @@ class DatabaseSeeder extends Seeder
 
         // Panggil semua seeder yang diperlukan
         $this->call([
+            PoliSeeder::class,
             TarifSeeder::class,
             DokterSeeder::class,
             PerawatSeeder::class,
             // ObatSeeder::class,
-            PoliSeeder::class,
             SuperAdminSeeder::class,
         ]);
     }

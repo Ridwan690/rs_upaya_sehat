@@ -14,9 +14,10 @@ class Perawat extends Model
     protected $fillable = [
         'nama',
         'jabatan',
+        'id_poli',
     ];
-    public function kunjungan()
+    public function poli()
     {
-        return $this->hasMany(Kunjungan::class);
+        return $this->belongsTo(Poli::class);
     }
 }

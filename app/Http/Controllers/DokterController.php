@@ -7,6 +7,16 @@ use Illuminate\Http\Request;
 
 class DokterController extends Controller
 {
+
+    public function getDokterByPoli($poli_id)
+    {
+        $dokters = Dokter::where('id_poli', $poli_id)->get();
+        return response()->json($dokters);
+    }
+
+
+
+
     /**
      * Display a listing of the resource.
      */
