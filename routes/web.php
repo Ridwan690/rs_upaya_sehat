@@ -9,7 +9,7 @@ use App\Http\Controllers\RekamMedikController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DokterController;
 use App\Http\Controllers\JadwalController;
-use App\Http\Controllers\DaftarRawatJalanController;
+use App\Http\Controllers\RawatJalanController;
 
 /*
 |--------------------------------------------------------------------------
@@ -85,7 +85,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('rekam-medik/{id}/edit', [RekamMedikController::class, 'edit'])->name('rekam.edit');
         Route::get('rekam-medik/show/{id}', [RekamMedikController::class, 'show'])->name('rekam.show');
         Route::put('rekam-medik/{id}', [RekamMedikController::class, 'update'])->name('rekam.update');
-        Route::resource('daftar-rawat-jalan', DaftarRawatJalanController::class);
+        Route::resource('rawat-jalan', RawatJalanController::class);
     });
 
     Route::middleware(['role:superadmin,manajemen'])->group(function () {

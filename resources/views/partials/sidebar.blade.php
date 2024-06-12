@@ -39,7 +39,7 @@
                                 <a href="/rekam-medik" class="sidebar-link">Rekam Medik</a>
                             </li>
                             <li class="sidebar-item">
-                                <a href="#" class="sidebar-link">List</a>
+                                <a href="/rawat-jalan" class="sidebar-link">Rawat Jalan</a>
                             </li>
                         </ul>
                     </li>

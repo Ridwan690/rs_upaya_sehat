@@ -16,6 +16,7 @@ class Antrian extends Model
         'id_dokter',
         'id_kunjungan',
         'nomor_antrian',
+        'nomor_rawat_jalan',
         'kode_antrian',
     ];
 

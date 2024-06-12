@@ -11,11 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('rawat_jalan', function (Blueprint $table) {
+        Schema::create('kamar', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('id_kunjungan')->constrained('kunjungan');
-            $table->timestamp('tanggal')->useCurrent();
-            $table->integer('kunjungan_count');
+            $table->string('kode_kamar');
+            $table->enum('tipe_kamar', ['VIP', 'Kelas 1', 'Kelas 2', 'Kelas 3'])->default('Kelas 3');
+            $table->decimal('harga', 10, 2);
             $table->timestamps();
         });
     }
@@ -25,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('rawat_jalan');
+        Schema::dropIfExists('kamar');
     }
 };

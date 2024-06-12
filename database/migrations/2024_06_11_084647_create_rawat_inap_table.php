@@ -11,14 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('antrian', function (Blueprint $table) {
+        Schema::create('rawat_inap', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('id_poli')->constrained('poli');
-            $table->foreignId('id_dokter')->constrained('dokter');
             $table->foreignId('id_kunjungan')->constrained('kunjungan');
-            $table->integer('nomor_antrian')->nullable();
-            $table->integer('nomor_rawat_jalan')->nullable();
-            $table->string('kode_antrian');
+            $table->foreignId('id_kamar')->constrained('kamar');
+            $table->date('tanggal_masuk');
+            $table->date('tanggal_keluar');
+            $table->enum('status', ['Ditangani', 'Belum Ditangani'])->default('Belum Ditangani');
+            $table->string('catatan')->nullable();
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('antrian');
+        Schema::dropIfExists('rawat_inap');
     }
 };

@@ -24,7 +24,6 @@ class Kunjungan extends Model
     {
         return $this->belongsTo(RekamMedik::class, 'rekam_medik_id');
     }
-
     public function dokter()
     {
         return $this->belongsTo(Dokter::class);
@@ -36,5 +35,13 @@ class Kunjungan extends Model
     public function antrian()
     {
         return $this->hasOne(Antrian::class);
+    }
+    public function rawatInap()
+    {
+        return $this->hasOne(RawatInap::class);
+    }
+    public function rawatJalan()
+    {
+        return $this->hasOne(RawatJalan::class);
     }
 }
