@@ -10,7 +10,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DokterController;
 use App\Http\Controllers\JadwalController;
 use App\Http\Controllers\RawatJalanController;
-
+use App\Http\Controllers\RawatInapController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -47,9 +47,9 @@ Route::get('rawat-jalan', function () {
 
 
 Route::get('/cobarelasi', function(){
-    $dokter = \App\Models\Dokter::all();
+    $rawatJalan = \App\Models\RawatJalan::all();
 
-    return view('rekam.index', compact('dokter'));
+    return view('antrian.index', compact('rawatJalan'));
 });
 
 // Route::resource('pasien', PasienController::class);
@@ -86,6 +86,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('rekam-medik/show/{id}', [RekamMedikController::class, 'show'])->name('rekam.show');
         Route::put('rekam-medik/{id}', [RekamMedikController::class, 'update'])->name('rekam.update');
         Route::resource('rawat-jalan', RawatJalanController::class);
+        Route::resource('rawat-inap', RawatInapController::class);
     });
 
     Route::middleware(['role:superadmin,manajemen'])->group(function () {

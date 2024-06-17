@@ -17,24 +17,28 @@ class KamarSeeder extends Seeder
         Kamar::create([
             'kode_kamar' => 'KMR001',
             'tipe_kamar' => 'VIP',
+            'kapasitas' => 1,
             'harga' => 500000.00,
         ]);
 
         Kamar::create([
             'kode_kamar' => 'KMR002',
             'tipe_kamar' => 'Kelas 1',
+            'kapasitas' => 2,
             'harga' => 300000.00,
         ]);
 
         Kamar::create([
             'kode_kamar' => 'KMR003',
             'tipe_kamar' => 'Kelas 2',
+            'kapasitas' => 4,
             'harga' => 200000.00,
         ]);
 
         Kamar::create([
             'kode_kamar' => 'KMR004',
             'tipe_kamar' => 'Kelas 3',
+            'kapasitas' => 6,
             'harga' => 100000.00,
         ]);
     }

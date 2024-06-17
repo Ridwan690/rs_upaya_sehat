@@ -11,7 +11,7 @@ class RawatInap extends Model
     protected $table = 'rawat_inap';
 
     protected $fillable = [
-        'id_kunjungan',
+        'id_rekammedik',
         'id_kamar',
         'tanggal_masuk',
         'tanggal_keluar',
@@ -19,12 +19,12 @@ class RawatInap extends Model
         'catatan',
     ];
 
-    public function kunjungan()
+    public function rekammedik()
     {
-        return $this->belongsTo(Kunjungan::class);
+        return $this->belongsTo(RekamMedik::class , 'id_rekammedik');
     }
     public function kamar()
     {
-        return $this->belongsTo(Kamar::class);
+        return $this->belongsTo(Kamar::class , 'id_kamar');
     }
 }

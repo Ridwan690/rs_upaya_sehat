@@ -38,20 +38,20 @@ class RawatJalanController extends Controller
      */
     public function store(Request $request)
     {
+        // Validasi dan simpan data rawat jalan
         $request->validate([
-            'pasien_id' => 'required|exists:pasien,id',
+            'id_rekammedik' => 'required|exists:rekammedik,id',
             'dokter_id' => 'required|exists:dokter,id',
             'poli_id' => 'required|exists:poli,id',
         ]);
-        $rekamMedik = RekamMedik::where('pasien_id', $request->pasien_id)->first();
-
-        $kunjungan = Kunjungan::create([
-            'rekam_medik_id' => $rekamMedik->id,
-            'dokter_id' => $request->dokter_id,
-            'poli_id' => $request->poli_id,
+        $count = RawatJalan::whereHas('antrian', function ($query) use ($request) {
+            $query->where('id_poli', $request->poli_id);
+        })
+        ->count();
+        $rawatJalan = RawatJalan::create([
+            'id_rekammedik' => $request->id_rekammedik,
+            'kunjungan_count' => $count+1,
         ]);
-
-        // Ambil kode_poli berdasarkan poli_id
         $poli = Poli::find($request->poli_id);
         $kodePoli = $poli->kode_poli;
        
@@ -67,17 +67,9 @@ class RawatJalanController extends Controller
         Antrian::create([
             'id_poli' => $request->poli_id,
             'id_dokter' => $request->dokter_id,
-            'id_kunjungan' => $kunjungan->id,
+            'id_rawat_jalan' => $rawatJalan->id,
             'nomor_rawat_jalan' => $nomorAntrian,
             'kode_antrian' => $nomorAntrianFormatted,
-        ]);
-        $count = RawatJalan::whereHas('kunjungan', function($query) use ($rekamMedik) {
-            $query->where('rekam_medik_id', $rekamMedik->id);
-        })->count();
-
-        RawatJalan::create([
-        'id_kunjungan' => $kunjungan->id,
-        'kunjungan_count' => $count + 1,
         ]);
 
         return redirect()->route('rawat-jalan.index')
@@ -89,7 +81,7 @@ class RawatJalanController extends Controller
      */
     public function show(RawatJalan $rawatJalan)
     {
-        //
+        return view('rawat-jalan.show', compact('rawatJalan'));
     }
 
     /**
@@ -97,7 +89,7 @@ class RawatJalanController extends Controller
      */
     public function edit(RawatJalan $rawatJalan)
     {
-        //
+        return view('rawat-jalan.edit', compact('rawatJalan'));
     }
 
     /**
@@ -105,14 +97,24 @@ class RawatJalanController extends Controller
      */
     public function update(Request $request, RawatJalan $rawatJalan)
     {
-        //
+        $request->validate([
+            'catatan' => 'nullable|string',
+        ]);
+
+        $rawatJalan->update([
+            'catatan' => $request->input('catatan'),
+        ]);
+
+        return redirect()->route('rawat-jalan.show', $rawatJalan->id)->with('success', 'Catatan Rawat Jalan berhasil diupdate.');
     }
+
 
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(RawatJalan $rawatJalan)
     {
-        //
+       // Disable aja
     }
+
 }

@@ -18,6 +18,6 @@ class Perawat extends Model
     ];
     public function poli()
     {
-        return $this->belongsTo(Poli::class);
+        return $this->belongsTo(Poli::class, 'id_poli');
     }
 }

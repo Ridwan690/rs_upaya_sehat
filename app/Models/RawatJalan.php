@@ -12,14 +12,24 @@ class RawatJalan extends Model
     protected $table = 'rawat_jalan';
 
     protected $fillable = [
-        'id_kunjungan',
-        'tanggal',
+        'id_rekammedik',
         'kunjungan_count',
-        'rincian_perawatan',
+        'catatan',
     ];
 
-    public function kunjungan()
+    public function rekammedik()
     {
-        return $this->belongsTo(Kunjungan::class, 'id_kunjungan');
+        return $this->belongsTo(RekamMedik::class, 'id_rekammedik');
+    }
+
+    public function antrian()
+    {
+        return $this->hasOne(Antrian::class, 'id_rawat_jalan');
+    }
+    public function obat()
+    {
+        return $this->belongsToMany(Obat::class, 'rawat_jalan_obat')
+                    ->withPivot('jumlah', 'harga_total')
+                    ->withTimestamps();
     }
 }

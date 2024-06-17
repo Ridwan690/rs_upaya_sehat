@@ -14,11 +14,12 @@ class Kamar extends Model
     protected $fillable = [
         'kode_kamar',
         'tipe_kamar',
+        'kapasitas',
         'harga',
     ];
 
     public function rawatInap()
     {
-        return $this->hasOne(RawatInap::class);
+        return $this->hasOne(RawatInap::class, 'id_kamar');
     }
 }

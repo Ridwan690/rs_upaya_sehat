@@ -20,11 +20,11 @@ class Poli extends Model
     // }
     public function dokter()
     {
-        return $this->hasMany(Dokter::class);
+        return $this->hasMany(Dokter::class, 'id_poli');
     }
     public function perawat()
     {
-        return $this->hasMany(Perawat::class);
+        return $this->hasMany(Perawat::class, 'id_poli');
     }
     public function kunjungan()
     {
@@ -32,6 +32,6 @@ class Poli extends Model
     }
     public function antrian()
     {
-        return $this->hasOne(Antrian::class);
+        return $this->hasOne(Antrian::class, 'id_poli');
     }
 }

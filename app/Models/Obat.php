@@ -16,4 +16,11 @@ class Obat extends Model
         'nama_obat',
         'harga'
     ];
+
+    public function rawatJalan()
+    {
+        return $this->belongsToMany(RawatJalan::class, 'rawat_jalan_obat')
+                    ->withPivot('jumlah', 'harga_total')
+                    ->withTimestamps();
+    }
 }

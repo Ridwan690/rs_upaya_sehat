@@ -15,6 +15,7 @@ class Antrian extends Model
         'id_poli',
         'id_dokter',
         'id_kunjungan',
+        'id_rawat_jalan',
         'nomor_antrian',
         'nomor_rawat_jalan',
         'kode_antrian',
@@ -22,14 +23,18 @@ class Antrian extends Model
 
     public function poli()
     {
-        return $this->belongsTo(Poli::class);
+        return $this->belongsTo(Poli::class, 'id_poli');
     }
     public function dokter()
     {
-        return $this->belongsTo(Dokter::class);
+        return $this->belongsTo(Dokter::class, 'id_dokter');
     }
     public function kunjungan()
     {
-        return $this->belongsTo(Kunjungan::class);
+        return $this->belongsTo(Kunjungan::class , 'id_kunjungan');
+    }
+    public function rawatJalan()
+    {
+        return $this->belongsTo(RawatJalan::class , 'id_rawat_jalan');
     }
 }

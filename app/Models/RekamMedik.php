@@ -25,4 +25,14 @@ class RekamMedik extends Model
     {
         return $this->hasMany(Kunjungan::class);
     }
+
+    public function rawatJalan()
+    {
+        return $this->hasMany(RawatJalan::class, 'id_rekammedik');
+    }
+
+    public function rawatInap()
+    {
+        return $this->hasMany(RawatInap::class, 'id_rekammedik');
+    }
 }

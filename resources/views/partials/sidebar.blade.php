@@ -41,6 +41,9 @@
                             <li class="sidebar-item">
                                 <a href="/rawat-jalan" class="sidebar-link">Rawat Jalan</a>
                             </li>
+                            <li class="sidebar-item">
+                                <a href="/rawat-inap" class="sidebar-link">Rawat Inap</a>
+                            </li>
                         </ul>
                     </li>
                     <li class="sidebar-item">

@@ -14,11 +14,11 @@
                     <form action="{{ route('rawat-jalan.store') }}" method="post">
                         @csrf
                         <div class="form-group mb-4">
-                                <label for="pasien_id" class="form-label">NIK</label>
-                                    <select class="js-example-basic-single form-select @error('pasien_id') is-invalid @enderror" style="width: 100%" name="pasien_id">
+                                <label for="id_rekammedik" class="form-label">NIK</label>
+                                    <select class="js-example-basic-single form-select @error('id_rekammedik') is-invalid @enderror" style="width: 100%" name="id_rekammedik">
                                         <option value="">Masukkan NIK</option>
                                         @foreach($pasiens as $pasien)
-                                            <option value="{{ $pasien->id }}">{{ $pasien->nik }} - {{ $pasien->nama }}</option>
+                                            <option value="{{ $pasien->rekammedik->id }}">{{ $pasien->nik }} - {{ $pasien->nama }}</option>
                                         @endforeach
                                     </select>
                                     @error('pasien')

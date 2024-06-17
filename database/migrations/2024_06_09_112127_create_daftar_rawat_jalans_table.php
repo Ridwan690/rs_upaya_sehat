@@ -11,13 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('rawat_inap', function (Blueprint $table) {
+        Schema::create('rawat_jalan', function (Blueprint $table) {
             $table->id();
             $table->foreignId('id_rekammedik')->constrained('rekammedik');
-            $table->foreignId('id_kamar')->constrained('kamar');
-            $table->date('tanggal_masuk');
-            $table->date('tanggal_keluar')->nullable();
-            $table->enum('status', ['Ditangani', 'Belum Ditangani'])->default('Belum Ditangani');
+            $table->integer('kunjungan_count');
             $table->string('catatan')->nullable();
             $table->timestamps();
         });
@@ -28,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('rawat_inap');
+        Schema::dropIfExists('rawat_jalan');
     }
 };

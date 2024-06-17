@@ -8,6 +8,7 @@ use App\Models\Kunjungan;
 use App\Models\Dokter;
 use App\Models\Perawat;
 use App\Models\Poli;
+use App\Models\RawatJalan;
 use Illuminate\Http\Request;
 
 class RekamMedikController extends Controller
@@ -19,8 +20,19 @@ class RekamMedikController extends Controller
 
     public function show($id)
     {
-        $rekamMedik = RekamMedik::with(['pasien', 'kunjungan'])->findOrFail($id);
-        return view('rekam.show', compact('rekamMedik'));
+        // Ambil rekam medik berdasarkan ID dengan relasi pasien dan kunjungan
+        $rekamMedik = RekamMedik::with(['pasien', 'kunjungan'])
+            ->findOrFail($id);
+
+        // Ambil data rawat jalan dengan urutan berdasarkan poli
+        $rawatJalan = RawatJalan::where('id_rekammedik', $id)
+                    ->join('antrian', 'rawat_jalan.id', '=', 'antrian.id_rawat_jalan')
+                    ->join('poli', 'antrian.id_poli', '=', 'poli.id')
+                    ->select('rawat_jalan.*')
+                    ->orderBy('poli.id')
+                    ->get();
+
+        return view('rekam.show', compact('rekamMedik', 'rawatJalan'));
     }
     public function edit($id)
     {
@@ -52,6 +64,6 @@ class RekamMedikController extends Controller
         $kunjungan->save();
 
         // Redirect ke halaman yang sesuai dengan pesan sukses
-        return redirect()->route('rekam.index')->with('success', 'Data kunjungan berhasil diperbarui.');
+        return redirect()->route('rekam.show', $id)->with('success', 'Data kunjungan berhasil diperbarui.');
     }
 }

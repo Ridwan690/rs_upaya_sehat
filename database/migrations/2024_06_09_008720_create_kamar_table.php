@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('kode_kamar');
             $table->enum('tipe_kamar', ['VIP', 'Kelas 1', 'Kelas 2', 'Kelas 3'])->default('Kelas 3');
+            $table->integer('kapasitas');
             $table->decimal('harga', 10, 2);
             $table->timestamps();
         });
