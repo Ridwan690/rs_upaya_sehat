@@ -8,7 +8,7 @@
         <style>
             body {
                 font-family: Arial, sans-serif;
-                margin: 20px;
+                margin: 5px;
             }
             .container {
                 max-width: 800px;
@@ -41,7 +41,7 @@
             }
             .queue-number {
                 text-align: center;
-                padding-top: 10px;
+                padding-top: 5px;
             }
             .footer {
                 margin-top: 30px;
@@ -66,12 +66,12 @@
         <div class="container">
             <div class="header">
                 <div class="hospital-name">Rumah Sakit Upaya Sehat</div>
-                <div class="address">Kabupaten Sorong Papua</div>
-                <div class="contact-info">Telp: 123-456-789 | Email: kontak-kami@rsus.com</div>
+                {{-- <div class="address">Kabupaten Sorong Papua</div>
+                <div class="contact-info">Telp: 123-456-789 | Email: kontak-kami@rsus.com</div> --}}
             </div>
             <div class="separator"></div>
             <div class="queue-number">
-                <h2>Nomor Antrian</h2>
+                <h3>Nomor Antrian</h3>
                 <div style="font-size: 36px; font-weight: bold;">{{ $queue->kode_antrian }}</div>
             </div>
             <div class="footer">

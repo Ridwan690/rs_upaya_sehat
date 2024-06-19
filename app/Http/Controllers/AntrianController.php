@@ -68,7 +68,7 @@ class AntrianController extends Controller
     public function print($id)
     {
         $queue = Antrian::find($id);
-        $pdf = PDF::loadView('antrian.print', compact('queue'));
+        $pdf = PDF::loadView('antrian.print', compact('queue'))->setPaper('B7', 'landscape');
         return $pdf->stream('antrian.pdf');
     }
 }

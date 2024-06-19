@@ -34,7 +34,7 @@
             margin: 20px 0;
         }
         .patient-details {
-            margin-top: 30px;
+            margin-top: 10px;
         }
         .patient-details p {
             margin-bottom: 5px;
@@ -66,14 +66,15 @@
     <div class="container">
         <div class="header">
             <div class="hospital-name">Rumah Sakit Upaya Sehat</div>
-            <div class="address">Kabupaten Sorong Papua barat</div>
-            <div class="contact-info">Telp: 123-456-789 | Email: rsupayasehat@gmail.com</div>
+            {{-- <div class="address">Kabupaten Sorong Papua barat</div>
+            <div class="contact-info">Telp: 123-456-789 | Email: rsupayasehat@gmail.com</div> --}}
         </div>
         <div class="separator"></div>
         <div class="patient-details">
-            <h2>Data Pasien</h2>
+            {{-- <h2>Data Pasien</h2> --}}
             <p><strong>No. Rekam Medik:</strong> {{ $patientCard->no_rekam_medik }}</p>
             <p><strong>Nama:</strong> {{ $patientCard->pasien->nama }}</p>
+            <p><strong>Tanggal Lahir :</strong> {{ $patientCard->pasien->tanggal_lahir}}</p>
 
         </div>
     </div>

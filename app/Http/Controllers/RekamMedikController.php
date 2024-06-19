@@ -71,7 +71,7 @@ class RekamMedikController extends Controller
     public function printPatientCard($id)
     {
         $patientCard = RekamMedik::with('pasien')->findOrFail($id);
-        $pdf = PDF::loadView('rekam.printPatientCard', compact('patientCard'));
+        $pdf = PDF::loadView('rekam.printPatientCard', compact('patientCard'))->setPaper('B7', 'landscape');
         return $pdf->stream();
     }
 }
