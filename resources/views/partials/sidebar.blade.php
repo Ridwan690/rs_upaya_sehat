@@ -44,6 +44,9 @@
                             <li class="sidebar-item">
                                 <a href="/rawat-inap" class="sidebar-link">Rawat Inap</a>
                             </li>
+                            <li class="sidebar-item">
+                                <a href="/antrian" class="sidebar-link">Antrian</a>
+                            </li>
                         </ul>
                     </li>
                     <li class="sidebar-item">

@@ -7,7 +7,7 @@
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
                         <h5 class="mb-0">Detail Rekam Medik</h5>
-                        <a href="" class="btn btn-primary"> Cetak Kartu Pasien</a>
+                        <a href="{{ route('rekam.printPatientCard', $rekamMedik->id) }}" target="_blank" class="btn btn-primary"> Cetak Kartu Pasien</a>
                     </div>
                 </div>
                 <div class="card-body">

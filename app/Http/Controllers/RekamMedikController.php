@@ -10,6 +10,7 @@ use App\Models\Perawat;
 use App\Models\Poli;
 use App\Models\RawatJalan;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class RekamMedikController extends Controller
 {
@@ -65,5 +66,12 @@ class RekamMedikController extends Controller
 
         // Redirect ke halaman yang sesuai dengan pesan sukses
         return redirect()->route('rekam.show', $id)->with('success', 'Data kunjungan berhasil diperbarui.');
+    }
+
+    public function printPatientCard($id)
+    {
+        $patientCard = RekamMedik::with('pasien')->findOrFail($id);
+        $pdf = PDF::loadView('rekam.printPatientCard', compact('patientCard'));
+        return $pdf->stream();
     }
 }

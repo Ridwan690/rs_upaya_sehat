@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Antrian;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class AntrianController extends Controller
 {
@@ -12,7 +13,8 @@ class AntrianController extends Controller
      */
     public function index()
     {
-        //
+        $antrian = Antrian::orderBy('id')->paginate(10);
+        return view('antrian.index', compact('antrian'));
     }
 
     /**
@@ -61,5 +63,12 @@ class AntrianController extends Controller
     public function destroy(Antrian $antrian)
     {
         //
+    }
+
+    public function print($id)
+    {
+        $queue = Antrian::find($id);
+        $pdf = PDF::loadView('antrian.print', compact('queue'));
+        return $pdf->stream('antrian.pdf');
     }
 }
