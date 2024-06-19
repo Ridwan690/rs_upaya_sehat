@@ -26,25 +26,25 @@ use App\Http\Controllers\AntrianController;
 
 // Landing Page
 Route::get('/', function () {
-    return view('index');
+    return view('landingPage.index');
 });
 Route::get('about', function () {
-    return view('about');
+    return view('landingPage.about');
 });
 Route::get('layanan', function () {
-    return view('layanan');
+    return view('landingPage.layanan');
 });
 Route::get('kamar', function () {
-    return view('kamar');
+    return view('landingPage.kamar');
 });
 Route::get('contact', function () {
-    return view('contact');
+    return view('landingPage.contact');
 });
-Route::get('rawat-inap', function () {
-    return view('rawat-inap');
+Route::get('rawatinap', function () {
+    return view('landingPage.rawat-inap');
 });
-Route::get('rawat-jalan', function () {
-    return view('rawat-jalan');
+Route::get('rawatjalan', function () {
+    return view('landingPage.rawat-jalan');
 });
 
 

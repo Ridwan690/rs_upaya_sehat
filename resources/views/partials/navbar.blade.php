@@ -17,8 +17,8 @@
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
                         <div class="dropdown-menu m-0">
-                            <a href="/rawat-inap" class="dropdown-item">Informasi Rawat Inap</a>
-                            <a href="/rawat-jalan" class="dropdown-item">Informasi Rawat Jalan</a>
+                            <a href="/rawatinap" class="dropdown-item">Informasi Rawat Inap</a>
+                            <a href="/rawatjalan" class="dropdown-item">Informasi Rawat Jalan</a>
                         </div>
                     </div>
                     <a href="/contact" class="nav-item nav-link">Contact</a>
