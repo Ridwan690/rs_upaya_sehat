@@ -7,7 +7,6 @@ use App\Models\Pasien;
 use App\Models\Kamar;
 use App\Models\Obat;
 use App\Models\Tarif;
-use App\Models\TotalHarga;
 use Illuminate\Http\Request;
 
 class RawatInapController extends Controller

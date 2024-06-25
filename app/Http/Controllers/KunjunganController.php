@@ -8,7 +8,6 @@ use App\Models\Dokter;
 use App\Models\Poli;
 use App\Models\Obat;
 use App\Models\Tarif;
-use App\Models\TotalHarga;
 use App\Models\RekamMedik;
 
 

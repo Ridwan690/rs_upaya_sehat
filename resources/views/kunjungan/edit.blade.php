@@ -61,9 +61,9 @@
 
                 <div class="form-group mb-4">
                             <label for="obat_id" class="form-label">Obat</label>
-                            <select name="obat_id[]" id="obat_id" class="form-select @error('obat_id') is-invalid @enderror" multiple>
+                            <select class="custom-multiple form-select @error('tarif_id') is-invalid @enderror" name="obat_id[]" multiple="multiple">
                                 @foreach ($obats as $obat)
-                                    <option value="{{ $obat->id }}" {{ in_array($obat->id, $kunjungan->obat->pluck('id')->toArray()) ? 'selected' : '' }}>{{ $obat->nama_obat }}</option>
+                                <option value="{{ $obat->id }}" {{ in_array($obat->id, $kunjungan->obat->pluck('id')->toArray()) ? 'selected' : '' }}>{{ $obat->nama_obat }}</option>
                                 @endforeach
                             </select>
                             @error('obat_id')
@@ -71,10 +71,10 @@
                             @enderror
                         </div>
                         <div class="form-group mb-4">
-                            <label for="tarif_id" class="form-label">Tarif</label>
-                            <select name="tarif_id[]" id="tarif_id" class="form-select @error('tarif_id') is-invalid @enderror" multiple>
+                            <label for="tarif_id" class="form-label">Obat</label>
+                            <select class="custom-multiple form-select @error('tarif_id') is-invalid @enderror" name="tarif_id[]" multiple="multiple">
                                 @foreach ($tarifs as $tarif)
-                                    <option value="{{ $tarif->id }}" {{ in_array($tarif->id, $kunjungan->tarif->pluck('id')->toArray()) ? 'selected' : '' }}>{{ $tarif->nama_layanan }} - {{ $tarif->jenis_layanan }}</option>
+                                <option value="{{ $tarif->id }}" {{ in_array($tarif->id, $kunjungan->tarif->pluck('id')->toArray()) ? 'selected' : '' }}>{{ $tarif->nama_layanan }} - {{ $tarif->jenis_layanan }}</option>
                                 @endforeach
                             </select>
                             @error('tarif_id')

@@ -12,7 +12,6 @@ use App\Models\Kunjungan;
 use App\Models\Antrian;
 use App\Models\Obat;
 use App\Models\Tarif;
-use App\Models\TotalHarga;
 
 class RawatJalanController extends Controller
 {

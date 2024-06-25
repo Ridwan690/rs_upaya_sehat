@@ -185,13 +185,6 @@
                                     <span class="invalid-feedback">{{ $message }}</span>
                                 @enderror
                              </div>
-                            <!-- <div class="form-group mb-4">
-                                <label for="nik_simple" class="form-label">NIK</label>
-                                <input type="tel" class="form-control @error('nik') is-invalid @enderror" id="nik_simple" name="nik" value="{{ old('nik') }}">
-                                @error('nik')
-                                    <span class="invalid-feedback">{{ $message }}</span>
-                                @enderror
-                            </div> -->
                             <div class="form-group mb-4">
                                 <label for="poli_id_simple" class="form-label">Poli</label>
                                 <select name="poli_id_simple" id="poli_id_simple" class="form-select @error('poli_id') is-invalid @enderror">

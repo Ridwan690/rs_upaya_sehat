@@ -8,7 +8,7 @@
         <style>
             body {
                 font-family: Arial, sans-serif;
-                margin: 5px;
+                margin: 0px;
             }
             .container {
                 max-width: 800px;
@@ -16,7 +16,7 @@
             }
             .header {
                 text-align: center;
-                margin-bottom: 20px;
+                margin-bottom: 10px;
             }
             .hospital-name {
                 font-size: 24px;
@@ -24,14 +24,12 @@
                 margin-bottom: 5px;
             }
             .address {
-                margin-bottom: 10px;
+                font-size: 11px;
+                margin-bottom: 0;
             }
             .contact-info {
-                margin-bottom: 20px;
-            }
-            .separator {
-                border-top: 1px solid black;
-                margin: 20px 0;
+                font-size: 11px;
+                margin-bottom: 0;
             }
             .patient-details {
                 margin-top: 30px;
@@ -41,10 +39,13 @@
             }
             .queue-number {
                 text-align: center;
-                padding-top: 5px;
+                padding-top: 3px;
+            }
+            .tanggal {
+                margin: 5px 0;
+                font-size: 13px;
             }
             .footer {
-                margin-top: 30px;
                 text-align: center;
                 font-style: italic;
             }
@@ -66,16 +67,18 @@
         <div class="container">
             <div class="header">
                 <div class="hospital-name">Rumah Sakit Upaya Sehat</div>
-                {{-- <div class="address">Kabupaten Sorong Papua</div>
-                <div class="contact-info">Telp: 123-456-789 | Email: kontak-kami@rsus.com</div> --}}
+                <div class="address">Kabupaten Sorong Papua</div>
+                <div class="contact-info">Telp: 123-456-789 | Email: kontak-kami@rsus.com</div>
             </div>
-            <div class="separator"></div>
+            <hr>
             <div class="queue-number">
-                <h3>Nomor Antrian</h3>
+                <div class="tanggal">{{ $queue->created_at }}</div>
+                <div style="font-size: 20px; padding-bottom: 10px"><b>Nomor Antrian</b></div>
                 <div style="font-size: 36px; font-weight: bold;">{{ $queue->kode_antrian }}</div>
             </div>
+            <br>
             <div class="footer">
-                Terima kasih atas kunjungan Anda.
+                Mohon menunggu nomor anda dipangggil.
             </div>
         </div>
     </body>

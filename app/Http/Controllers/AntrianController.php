@@ -11,10 +11,16 @@ class AntrianController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $antrian = Antrian::orderBy('id')->paginate(10);
-        return view('antrian.index', compact('antrian'));
+        $sortColumn = $request->input('sort', 'kode_antrian'); // Default sort by 'nama'
+        $sortOrder = $request->input('order', 'asc'); // Default sort order 'asc'
+
+        $antrian = Antrian::with(['kunjungan.rekamMedikUtama.pasien', 'poli', 'dokter'])
+                        ->orderBy($sortColumn, $sortOrder)
+                        ->paginate(10);
+
+        return view('antrian.index', compact('antrian', 'sortColumn', 'sortOrder'));
     }
 
     /**
