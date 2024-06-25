@@ -10,6 +10,9 @@ use App\Models\Poli;
 use App\Models\RekamMedik;
 use App\Models\Kunjungan;
 use App\Models\Antrian;
+use App\Models\Obat;
+use App\Models\Tarif;
+use App\Models\TotalHarga;
 
 class RawatJalanController extends Controller
 {
@@ -89,7 +92,9 @@ class RawatJalanController extends Controller
      */
     public function edit(RawatJalan $rawatJalan)
     {
-        return view('rawat-jalan.edit', compact('rawatJalan'));
+        $obats = Obat::all();
+        $tarifs = Tarif::all();
+        return view('rawat-jalan.edit', compact('rawatJalan', 'obats', 'tarifs'));
     }
 
     /**
@@ -99,12 +104,18 @@ class RawatJalanController extends Controller
     {
         $request->validate([
             'catatan' => 'nullable|string',
+            'obat_id' => 'nullable|exists:obat,id',
+            'tarif_id' => 'nullable|exists:tarif,id',
         ]);
 
         $rawatJalan->update([
             'catatan' => $request->input('catatan'),
         ]);
+        $total_harga = 0;
 
+        $rawatJalan->obat()->sync($request->obat_id);  
+        $rawatJalan->tarif()->sync($request->tarif_id);
+        
         return redirect()->route('rawat-jalan.show', $rawatJalan->id)->with('success', 'Catatan Rawat Jalan berhasil diupdate.');
     }
 

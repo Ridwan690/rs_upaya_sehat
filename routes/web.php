@@ -13,6 +13,7 @@ use App\Http\Controllers\JadwalController;
 use App\Http\Controllers\RawatJalanController;
 use App\Http\Controllers\RawatInapController;
 use App\Http\Controllers\AntrianController;
+use App\Http\Controllers\KunjunganController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -90,6 +91,7 @@ Route::middleware(['auth'])->group(function () {
         Route::resource('rawat-jalan', RawatJalanController::class);
         Route::resource('rawat-inap', RawatInapController::class);
         Route::resource('antrian', AntrianController::class);
+        Route::resource('kunjungan', KunjunganController::class);
         Route::get('antrian/{id}/print', [AntrianController::class, 'print'])->name('antrian.print');
         Route::get('rekam-medik/{id}/print', [RekamMedikController::class, 'printPatientCard'])->name('rekam.printPatientCard');
     });
@@ -97,6 +99,7 @@ Route::middleware(['auth'])->group(function () {
     Route::middleware(['role:superadmin,manajemen'])->group(function () {
         // Routes for superadmin, manajemen
         Route::resource('tarif', TarifController::class);
+        Route::get('/total-harga/{jenis}/{id}', [TarifController::class, 'totalHarga'])->name('totalHarga');
         // Route::resource('dokter', DokterController::class);
         Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register');
         Route::post('/register', [AuthController::class, 'register']);

@@ -11,13 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('rawat_jalan_obat', function (Blueprint $table) {
+        Schema::create('tarif_rawat_jalan', function (Blueprint $table) {
             $table->id();
             $table->foreignId('rawat_jalan_id')->constrained('rawat_jalan')->onDelete('cascade');
-            $table->foreignId('obat_id')->constrained('obat')->onDelete('cascade');
+            $table->foreignId('tarif_id')->constrained('tarif')->onDelete('cascade');
             $table->timestamps();
         });
-        
     }
 
     /**
@@ -25,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('rawat_jalan_obat');
+        Schema::dropIfExists('tarif_rawat_jalan');
     }
 };

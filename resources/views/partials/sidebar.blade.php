@@ -33,10 +33,10 @@
                                 <a href="/pasien" class="sidebar-link">Pasien</a>
                             </li>
                             <li class="sidebar-item">
-                                <a href="/tarif" class="sidebar-link">Tarif</a>
+                                <a href="/rekam-medik" class="sidebar-link">Rekam Medik</a>
                             </li>
                             <li class="sidebar-item">
-                                <a href="/rekam-medik" class="sidebar-link">Rekam Medik</a>
+                                <a href="/kunjungan" class="sidebar-link">Kunjungan</a>
                             </li>
                             <li class="sidebar-item">
                                 <a href="/rawat-jalan" class="sidebar-link">Rawat Jalan</a>
@@ -46,6 +46,9 @@
                             </li>
                             <li class="sidebar-item">
                                 <a href="/antrian" class="sidebar-link">Antrian</a>
+                            </li>
+                            <li class="sidebar-item">
+                                <a href="/tarif" class="sidebar-link">Tarif</a>
                             </li>
                         </ul>
                     </li>

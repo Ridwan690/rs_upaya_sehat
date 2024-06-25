@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Tarif;
+use App\Models\RawatJalan;
+use App\Models\RawatInap;
+use App\Models\Kunjungan;
 use Illuminate\Http\Request;
 
 class TarifController extends Controller
@@ -84,4 +87,38 @@ class TarifController extends Controller
         return redirect()->route('tarif.index')
             ->with('success', 'Tarif berhasil dihapus');
     }
+        public function totalHarga(string $jenis, string $id)
+    {
+        $totalHargaTarif = 0;
+        $totalHargaObat = 0;
+        $totalHarga = 0;
+
+        switch ($jenis) {
+            case 'rawat_inap':
+                $entity = RawatInap::with(['tarif', 'obat'])->findOrFail($id);
+                $totalHargaTarif = $entity->tarif->sum('biaya');
+                $totalHargaObat = $entity->obat->sum('harga');
+                break;
+            
+            case 'rawat_jalan':
+                $entity = RawatJalan::with(['tarif', 'obat'])->findOrFail($id);
+                $totalHargaTarif = $entity->tarif->sum('biaya');
+                $totalHargaObat = $entity->obat->sum('harga');
+                break;
+            
+            case 'kunjungan':
+                $entity = Kunjungan::with(['tarif', 'obat'])->findOrFail($id);
+                $totalHargaTarif = $entity->tarif->sum('biaya');
+                $totalHargaObat = $entity->obat->sum('harga');
+                break;
+            
+            default:
+                abort(404, 'Jenis tidak ditemukan');
+        }
+
+        $totalHarga = $totalHargaTarif + $totalHargaObat;
+
+        return view('tarif.total_harga', compact('entity', 'totalHargaTarif', 'totalHargaObat', 'totalHarga', 'jenis'));
+    }
+
 }

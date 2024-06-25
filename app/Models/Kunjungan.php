@@ -36,4 +36,16 @@ class Kunjungan extends Model
     {
         return $this->hasOne(Antrian::class, 'id_kunjungan');
     }
+    public function obat()
+    {
+        return $this->belongsToMany(Obat::class, 'kunjungan_obat')->withTimestamps();
+    }
+    public function tarif()
+    {
+        return $this->belongsToMany(Tarif::class, 'tarif_kunjungan')->withTimestamps();
+    }
+    public function totalHarga()
+    {
+        return $this->hasOne(TotalHarga::class, 'kunjungan_id');
+    }
 }

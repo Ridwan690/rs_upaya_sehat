@@ -28,8 +28,14 @@ class RawatJalan extends Model
     }
     public function obat()
     {
-        return $this->belongsToMany(Obat::class, 'rawat_jalan_obat')
-                    ->withPivot('jumlah', 'harga_total')
-                    ->withTimestamps();
+        return $this->belongsToMany(Obat::class, 'rawat_jalan_obat')->withTimestamps();
+    }
+    public function tarif()
+    {
+        return $this->belongsToMany(Tarif::class, 'tarif_rawat_jalan')->withTimestamps();
+    }
+    public function totalHarga()
+    {
+        return $this->hasOne(TotalHarga::class, 'rawat_jalan_id');
     }
 }

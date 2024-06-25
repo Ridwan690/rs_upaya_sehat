@@ -45,11 +45,10 @@
                         <a href="{{ route('rawat-inap.edit', $rawatInap->id) }}" class="btn btn-warning me-2">
                             Update
                         </a>
-                        <form action="{{ route('rawat-inap.destroy', $rawatInap->id) }}" method="POST" style="display:inline-block;">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure?')">Delete</button>
-                        </form>
+                        <a href="{{ route('totalHarga', ['jenis' => 'rawat_inap', 'id' => $rawatInap->id]) }}" class="btn btn-info">
+                            Rincian Biaya
+                        </a>
+
                     </div>
                 </div>
             </div>

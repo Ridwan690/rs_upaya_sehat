@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\RawatInap;
 use App\Models\Pasien;
 use App\Models\Kamar;
+use App\Models\Obat;
+use App\Models\Tarif;
+use App\Models\TotalHarga;
 use Illuminate\Http\Request;
 
 class RawatInapController extends Controller
@@ -70,7 +73,9 @@ class RawatInapController extends Controller
     public function edit(string $id)
     {
         $rawatInap = RawatInap::findOrFail($id);
-        return view('rawat-inap.edit', compact('rawatInap'));
+        $obats = Obat::all();
+        $tarifs = Tarif::all();
+        return view('rawat-inap.edit', compact('rawatInap', 'obats', 'tarifs'));
     }
 
     /**
@@ -82,13 +87,20 @@ class RawatInapController extends Controller
             'tanggal_keluar' => 'nullable|date',
             'status' => 'required|in:Ditangani,Belum Ditangani',
             'catatan' => 'nullable|string',
+            'obat_id' => 'nullable|exists:obat,id',
+            'tarif_id' => 'nullable|exists:tarif,id',
         ]);
-    
+
+        $total_harga = 0;
         $rawatInap = RawatInap::findOrFail($id);
         $rawatInap->update($request->only(['tanggal_keluar', 'status', 'catatan']));
-    
+
+        $rawatInap->obat()->sync($request->obat_id);
+        $rawatInap->tarif()->sync($request->tarif_id);
+        
         return redirect()->route('rawat-inap.show', $id)->with('success', 'Data Rawat Inap berhasil diupdate.');
     }
+
 
     /**
      * Remove the specified resource from storage.
@@ -96,8 +108,8 @@ class RawatInapController extends Controller
     public function destroy(string $id)
     {
         $rawatInap = RawatInap::findOrFail($id);
-    $rawatInap->delete();
+        $rawatInap->delete();
 
-    return redirect()->route('rawat-inap.index')->with('success', 'Data Rawat Inap berhasil dihapus.');
+        return redirect()->route('rawat-inap.index')->with('success', 'Data Rawat Inap berhasil dihapus.');
     }
 }

@@ -80,10 +80,6 @@
                                         <p class="form-control-plaintext">{{ $kunjungan->tindakan ?? 'Belum ada tindakan'}}</p>
                                     </div>
                                 </div>
-                                <div class="d-flex justify-content-end">
-                                    <a href="{{ route('rekam.edit', $kunjungan->id) }}" class="btn btn-primary btn-sm mx-1"><i class="fas fa-pencil-alt"></i></a>
-
-                                </div>
                                 <hr>
                             @endforeach
                         </div>

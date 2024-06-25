@@ -27,4 +27,16 @@ class RawatInap extends Model
     {
         return $this->belongsTo(Kamar::class , 'id_kamar');
     }
+    public function obat()
+    {
+        return $this->belongsToMany(Obat::class, 'rawat_inap_obat')->withTimestamps();
+    }
+    public function tarif()
+    {
+        return $this->belongsToMany(Tarif::class, 'tarif_rawat_inap')->withTimestamps();
+    }
+    public function totalHarga()
+    {
+        return $this->hasOne(TotalHarga::class, 'kunjungan_id');
+    }
 }
