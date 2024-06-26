@@ -3,27 +3,19 @@
 namespace App\Http\Controllers;
 
 use App\Models\Dokter;
+use App\Models\Poli;
 use Illuminate\Http\Request;
 
 class DokterController extends Controller
 {
-
-    public function getDokterByPoli($poli_id)
-    {
-        $dokters = Dokter::where('id_poli', $poli_id)->get();
-        return response()->json($dokters);
-    }
-
-
-
-
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
         $dokter = Dokter::orderBy('id')->paginate(10);
-        return view('dokter.index', compact('dokter'));
+        $poli = Poli::all();
+        return view('dokter.index', compact('dokter', 'poli'));
     }
 
     /**
@@ -31,7 +23,8 @@ class DokterController extends Controller
      */
     public function create()
     {
-        return view('dokter.create');
+        $poli = Poli::all();
+        return view('dokter.create', compact('poli'));
     }
 
     /**
@@ -42,6 +35,7 @@ class DokterController extends Controller
         $request->validate([
             'nama' => 'required',
             'spesialis' => 'required',
+            'id_poli' => 'required|exists:poli,id',
         ]);
 
         Dokter::create($request->all());
@@ -63,7 +57,8 @@ class DokterController extends Controller
      */
     public function edit(Dokter $dokter)
     {
-        return view('dokter.edit', compact('dokter'));
+        $poli = Poli::all();
+        return view('dokter.edit', compact('dokter', 'poli'));
     }
 
     /**
@@ -74,6 +69,7 @@ class DokterController extends Controller
         $request->validate([
             'nama' => 'required',
             'spesialis' => 'required',
+            'id_poli' => 'required|exists:poli,id',
         ]);
 
         $dokter->update($request->all());
@@ -91,5 +87,11 @@ class DokterController extends Controller
 
         return redirect()->route('dokter.index')
             ->with('success', 'Dokter berhasil dihapus');
+    }
+
+    public function getDokterByPoli($poli_id)
+    {
+        $dokters = Dokter::where('id_poli', $poli_id)->get();
+        return response()->json($dokters);
     }
 }

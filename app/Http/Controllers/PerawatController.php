@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Perawat;
+use App\Models\Poli;
 use Illuminate\Http\Request;
 
 class PerawatController extends Controller
@@ -13,7 +14,8 @@ class PerawatController extends Controller
     public function index()
     {
         $perawat = Perawat::orderBy('id')->paginate(10);
-        return view('perawat.index', compact('perawat'));
+        $poli = Poli::all();
+        return view('perawat.index', compact('perawat', 'poli'));
     }
 
     /**
@@ -21,6 +23,7 @@ class PerawatController extends Controller
      */
     public function create()
     {
+        $poli = Poli::all();
         return view('perawat.create');
     }
 
@@ -32,6 +35,7 @@ class PerawatController extends Controller
         $request->validate([
             'nama' => 'required',
             'jabatan' => 'required',
+            'id_poli' => 'required|exists:poli,id',
         ]);
 
         Perawat::create($request->all());
@@ -53,7 +57,8 @@ class PerawatController extends Controller
      */
     public function edit(Perawat $perawat)
     {
-        return view('perawat.edit', compact('perawat'));
+        $poli = Poli::all();
+        return view('perawat.edit', compact('perawat', 'poli'));
     }
 
     /**
@@ -64,6 +69,7 @@ class PerawatController extends Controller
         $request->validate([
             'nama' => 'required',
             'jabatan' => 'required',
+            'id_poli' => 'required|exists:poli,id',
         ]);
 
         $perawat->update($request->all());

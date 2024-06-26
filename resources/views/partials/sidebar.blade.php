@@ -39,13 +39,19 @@
                                 <a href="/kunjungan" class="sidebar-link">Kunjungan</a>
                             </li>
                             <li class="sidebar-item">
+                                <a href="/antrian" class="sidebar-link">Antrian</a>
+                            </li>
+                            <li class="sidebar-item">
                                 <a href="/rawat-jalan" class="sidebar-link">Rawat Jalan</a>
                             </li>
                             <li class="sidebar-item">
                                 <a href="/rawat-inap" class="sidebar-link">Rawat Inap</a>
                             </li>
                             <li class="sidebar-item">
-                                <a href="/antrian" class="sidebar-link">Antrian</a>
+                                <a href="/dokter" class="sidebar-link">Dokter</a>
+                            </li>
+                            <li class="sidebar-item">
+                                <a href="/perawat" class="sidebar-link">Perawat</a>
                             </li>
                             <li class="sidebar-item">
                                 <a href="/tarif" class="sidebar-link">Tarif</a>

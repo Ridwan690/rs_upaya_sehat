@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PerawatController;
 use App\Models\Antrian;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PasienController;
@@ -80,7 +81,7 @@ Route::middleware(['auth'])->group(function () {
     })->name('dashboard');
 
     // Define routes with role middleware
-    Route::middleware(['role:superadmin,manajemen,perawat_pendaftaran'])->group(function () {
+    Route::middleware(['role:superadmin,administrator,perawat'])->group(function () {
         // Routes for superadmin,manajemen,perawat_pendaftaran
         Route::resource('pasien', PasienController::class);
         Route::post('daftar-ulang', [PasienController::class, 'daftarUlang'])->name('daftarUlang');
@@ -96,11 +97,12 @@ Route::middleware(['auth'])->group(function () {
         Route::get('rekam-medik/{id}/print', [RekamMedikController::class, 'printPatientCard'])->name('rekam.printPatientCard');
     });
 
-    Route::middleware(['role:superadmin,manajemen'])->group(function () {
+    Route::middleware(['role:superadmin,administrator'])->group(function () {
         // Routes for superadmin, manajemen
         Route::resource('tarif', TarifController::class);
         Route::get('/total-harga/{jenis}/{id}', [TarifController::class, 'totalHarga'])->name('totalHarga');
-        // Route::resource('dokter', DokterController::class);
+        Route::resource('dokter', DokterController::class);
+        Route::resource('perawat', PerawatController::class);
         Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register');
         Route::post('/register', [AuthController::class, 'register']);
         Route::resource('jadwal', JadwalController::class);

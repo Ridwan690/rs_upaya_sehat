@@ -21,13 +21,16 @@ class DatabaseSeeder extends Seeder
 
         // Panggil semua seeder yang diperlukan
         $this->call([
-            PoliSeeder::class,
+            UserSeeder::class,
             TarifSeeder::class,
+            PasienSeeder::class,
+            PoliSeeder::class,
+            RekamMedikSeeder::class,
             DokterSeeder::class,
             PerawatSeeder::class,
             KamarSeeder::class,
             ObatSeeder::class,
-            SuperAdminSeeder::class,
+            // SuperAdminSeeder::class,
         ]);
     }
 }
