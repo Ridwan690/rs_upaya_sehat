@@ -5,7 +5,7 @@ use App\Models\Antrian;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PasienController;
 use App\Http\Controllers\TarifController;
-// use App\Http\Controllers\AdminController; // tidak terpakai
+use App\Http\Controllers\AdminController;
 // use App\Http\Controllers\RegistrationController; // tidak terpakai
 use App\Http\Controllers\RekamMedikController;
 use App\Http\Controllers\AuthController;
@@ -76,9 +76,7 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 // Define routes with auth middleware
 Route::middleware(['auth'])->group(function () {
-    Route::get('admin/dashboard', function () {
-        return view('admin.dashboard');
-    })->name('dashboard');
+    Route::get('admin/dashboard', [AdminController::class, 'index'])->name('dashboard');
 
     // Define routes with role middleware
     Route::middleware(['role:superadmin,administrator,perawat'])->group(function () {
