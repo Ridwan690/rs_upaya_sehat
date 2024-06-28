@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('rawat_jalan_id')->constrained('rawat_jalan')->onDelete('cascade');
             $table->foreignId('obat_id')->constrained('obat')->onDelete('cascade');
+            $table->string('takaran')->nullable();
             $table->timestamps();
         });
         

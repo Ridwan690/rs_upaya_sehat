@@ -103,17 +103,17 @@ class RawatJalanController extends Controller
     {
         $request->validate([
             'catatan' => 'nullable|string',
-            'obat_id' => 'nullable|exists:obat,id',
-            'tarif_id' => 'nullable|exists:tarif,id',
         ]);
 
         $rawatJalan->update([
             'catatan' => $request->input('catatan'),
         ]);
-        $total_harga = 0;
 
-        $rawatJalan->obat()->sync($request->obat_id);  
+        $takarans = collect($request->input('takaran', []))->map(function ($takaran) {
+            return ['takaran' => $takaran];
+        });
         $rawatJalan->tarif()->sync($request->tarif_id);
+        $rawatJalan->obat()->sync($takarans);
         
         return redirect()->route('rawat-jalan.show', $rawatJalan->id)->with('success', 'Catatan Rawat Jalan berhasil diupdate.');
     }

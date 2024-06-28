@@ -7,6 +7,8 @@ use App\Models\RawatJalan;
 use App\Models\RawatInap;
 use App\Models\Kunjungan;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
+use Carbon\Carbon;
 
 class TarifController extends Controller
 {
@@ -92,11 +94,22 @@ class TarifController extends Controller
         $totalHargaTarif = 0;
         $totalHargaObat = 0;
         $totalHarga = 0;
+        $harga_kamar = 0;
+        $lama_inap = 0;
 
         switch ($jenis) {
             case 'rawat_inap':
                 $entity = RawatInap::with(['tarif', 'obat'])->findOrFail($id);
-                $totalHargaTarif = $entity->tarif->sum('biaya');
+                $kamar = $entity->kamar->harga;
+                $tanggal_masuk = Carbon::parse($entity->tanggal_masuk);
+                if ($tanggal_masuk->isToday()) {
+                    $lama_inap = 1;
+                } else {
+                    $tanggal_keluar = Carbon::parse($entity->tanggal_keluar);
+                    $lama_inap = $tanggal_keluar->diffInDays($tanggal_masuk);
+                }
+                $harga_kamar = $kamar * $lama_inap;
+                $totalHargaTarif = $entity->tarif->sum('biaya') + $harga_kamar;
                 $totalHargaObat = $entity->obat->sum('harga');
                 break;
             
@@ -117,8 +130,8 @@ class TarifController extends Controller
         }
 
         $totalHarga = $totalHargaTarif + $totalHargaObat;
-
-        return view('tarif.total_harga', compact('entity', 'totalHargaTarif', 'totalHargaObat', 'totalHarga', 'jenis'));
+        $pdf = PDF::loadView('tarif.total_harga', compact('entity', 'totalHargaTarif', 'totalHargaObat', 'totalHarga', 'lama_inap', 'jenis'));
+        return $pdf->stream('TotalHarga-'.$jenis.$entity->id.'-'.date('d-m-Y').'.pdf');
     }
 
 }

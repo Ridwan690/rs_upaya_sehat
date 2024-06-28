@@ -8,6 +8,7 @@ use App\Http\Controllers\TarifController;
 use App\Http\Controllers\AdminController;
 // use App\Http\Controllers\RegistrationController; // tidak terpakai
 use App\Http\Controllers\RekamMedikController;
+use App\Http\Controllers\ObatController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DokterController;
 use App\Http\Controllers\JadwalController;
@@ -99,6 +100,7 @@ Route::middleware(['auth'])->group(function () {
         // Routes for superadmin, manajemen
         Route::resource('tarif', TarifController::class);
         Route::get('/total-harga/{jenis}/{id}', [TarifController::class, 'totalHarga'])->name('totalHarga');
+        Route::get('/{jenis}/{id}/print', [ObatController::class, 'print'])->name('obat.print');
         Route::resource('dokter', DokterController::class);
         Route::resource('perawat', PerawatController::class);
         Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register');

@@ -28,7 +28,9 @@ class RawatJalan extends Model
     }
     public function obat()
     {
-        return $this->belongsToMany(Obat::class, 'rawat_jalan_obat')->withTimestamps();
+        return $this->belongsToMany(Obat::class, 'rawat_jalan_obat')
+                    ->withPivot(['takaran'])
+                    ->withTimestamps();
     }
     public function tarif()
     {

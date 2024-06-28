@@ -29,7 +29,9 @@ class RawatInap extends Model
     }
     public function obat()
     {
-        return $this->belongsToMany(Obat::class, 'rawat_inap_obat')->withTimestamps();
+        return $this->belongsToMany(Obat::class, 'rawat_inap_obat')
+                    ->withPivot(['takaran'])
+                    ->withTimestamps();
     }
     public function tarif()
     {

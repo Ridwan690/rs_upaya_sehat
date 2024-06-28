@@ -35,27 +35,26 @@ class KunjunganController extends Controller
 
     public function update(Request $request, string $id)
     {
-        // Validasi input dari form
         $request->validate([
             'rekam_medik_id' => 'required|exists:rekammedik,id',
             'dokter_id' => 'required|exists:dokter,id',
             'poli_id' => 'required|exists:poli,id',
         ]);
 
-        // Temukan entri Kunjungan berdasarkan ID
+
         $kunjungan = Kunjungan::findOrFail($id);
 
-        // Update field-field yang diperlukan
+
         $kunjungan->diagnosa = $request->input('diagnosa');
         $kunjungan->tindakan = $request->input('tindakan');
-
-        // Simpan perubahan ke database
         $kunjungan->save();
 
-        //insert tabel pivot
-        $kunjungan->obat()->sync($request->obat_id);
+        $takarans = collect($request->input('takaran', []))->map(function ($takaran) {
+            return ['takaran' => $takaran];
+        });
+        $kunjungan->obat()->sync($takarans);
         $kunjungan->tarif()->sync($request->tarif_id);
-        // Redirect ke halaman yang sesuai dengan pesan sukses
+
         return redirect()->route('kunjungan.show', $id)->with('success', 'Data kunjungan berhasil diperbarui.');
     }
 }

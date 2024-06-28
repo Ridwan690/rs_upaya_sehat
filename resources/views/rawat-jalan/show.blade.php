@@ -52,6 +52,7 @@
                 </div>
                 <div class="card-footer d-flex justify-content-end">
                     <a href="{{ route('rawat-jalan.edit', $rawatJalan->id) }}" class="btn btn-warning mx-2">Edit</a>
+                    <a href="{{ route('obat.print', ['jenis' => 'rawat_jalan', 'id' => $rawatJalan->id]) }}" class="btn btn-primary mx-2">Lihat Resep</a>
                     <a href="{{ route('totalHarga', ['jenis' => 'rawat_jalan', 'id' => $rawatJalan->id]) }}" class="btn btn-info">Rincian Biaya</a>
                 </div>
             </div>

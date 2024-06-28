@@ -38,7 +38,9 @@ class Kunjungan extends Model
     }
     public function obat()
     {
-        return $this->belongsToMany(Obat::class, 'kunjungan_obat')->withTimestamps();
+        return $this->belongsToMany(Obat::class, 'kunjungan_obat')
+                    ->withPivot(['takaran'])
+                    ->withTimestamps();
     }
     public function tarif()
     {

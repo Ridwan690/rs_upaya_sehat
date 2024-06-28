@@ -86,15 +86,14 @@ class RawatInapController extends Controller
             'tanggal_keluar' => 'nullable|date',
             'status' => 'required|in:Ditangani,Belum Ditangani',
             'catatan' => 'nullable|string',
-            'obat_id' => 'nullable|exists:obat,id',
-            'tarif_id' => 'nullable|exists:tarif,id',
         ]);
 
-        $total_harga = 0;
         $rawatInap = RawatInap::findOrFail($id);
         $rawatInap->update($request->only(['tanggal_keluar', 'status', 'catatan']));
-
-        $rawatInap->obat()->sync($request->obat_id);
+        $takarans = collect($request->input('takaran', []))->map(function ($takaran) {
+            return ['takaran' => $takaran];
+        });
+        $rawatInap->obat()->sync($takarans);
         $rawatInap->tarif()->sync($request->tarif_id);
         
         return redirect()->route('rawat-inap.show', $id)->with('success', 'Data Rawat Inap berhasil diupdate.');

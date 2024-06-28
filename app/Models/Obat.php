@@ -19,14 +19,20 @@ class Obat extends Model
 
    public function kunjungan()
    {
-       return $this->belongsToMany(Kunjungan::class, 'kunjungan_obat')->withTimestamps();
+        return $this->belongsToMany(kunjungan::class, 'kunjungan_obat')
+            ->withPivot('takaran')
+            ->withTimestamps();
    }
    public function rawatJalan()
    {
-       return $this->belongsToMany(RawatJalan::class, 'rawat_jalan_obat')->withTimestamps();
+       return $this->belongsToMany(RawatJalan::class, 'rawat_jalan_obat')
+                    ->withPivot('takaran')
+                    ->withTimestamps();
    }
    public function rawatInap()
    {
-       return $this->belongsToMany(RawatInap::class, 'rawat_inap_obat')->withTimestamps();
+        return $this->belongsToMany(RawatInap::class, 'rawat_inap_obat')
+            ->withPivot('takaran')
+            ->withTimestamps();
    }
 }

@@ -45,6 +45,7 @@
                         <a href="{{ route('rawat-inap.edit', $rawatInap->id) }}" class="btn btn-warning me-2">
                             Update
                         </a>
+                        <a href="{{ route('obat.print', ['jenis' => 'rawat_inap', 'id' => $rawatInap->id]) }}" class="btn btn-primary mx-2">Lihat Resep</a>
                         <a href="{{ route('totalHarga', ['jenis' => 'rawat_inap', 'id' => $rawatInap->id]) }}" class="btn btn-info">
                             Rincian Biaya
                         </a>

@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Obat;
+use App\Models\RawatInap;
+use App\Models\RawatJalan;
+use App\Models\Kunjungan;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class ObatController extends Controller
 {
@@ -83,5 +87,32 @@ class ObatController extends Controller
 
         return redirect()->route('obat.index')
             ->with('success', 'Obat berhasil dihapus');
+    }
+    public function print(string $jenis, string $id)
+    {
+        $validJenis = ['rawat_inap', 'rawat_jalan', 'kunjungan'];
+        if (!in_array($jenis, $validJenis)) {
+            return view('errors.404');
+        }
+
+        switch ($jenis) {
+            case 'rawat_inap':
+                $entity = RawatInap::with('obat')->findOrFail($id);
+                $nama = $entity->rekammedik->pasien->nama;
+                break;
+            
+            case 'rawat_jalan':
+                $entity = RawatJalan::with('obat')->findOrFail($id);
+                $nama = $entity->rekammedik->pasien->nama;
+                break;
+            
+            case 'kunjungan':
+                $entity = Kunjungan::with('obat')->findOrFail($id);
+                $nama = $entity->rekamMedikUtama->pasien->nama;
+                break;
+        }
+        $pdf = PDF::loadView('obat.print', compact('entity'))
+              ->setPaper('A7', 'portrait');
+        return $pdf->stream('Resep-obat-'.$nama.'-'.date('d-m-Y').'.pdf');
     }
 }
