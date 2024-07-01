@@ -64,16 +64,26 @@
                     @csrf
                     <div class="mb-3 position-relative">
                         <label for="email" class="form-label">Email address</label>
-                        <input type="email" class="form-control" id="email" name="email" required>
+                        <input type="email" class="form-control @error('email') is-invalid @enderror" id="email" name="email" value="{{ old('email') }}" required>
+                        @error('email')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                        @enderror
                     </div>
                     <div class="mb-3 position-relative">
                         <label for="password" class="form-label">Password</label>
                         <div class="input-group">
-                            <input type="password" class="form-control" id="password" name="password" required>
+                            <input type="password" class="form-control @error('password') is-invalid @enderror" id="password" name="password" required>
                             <button class="btn btn-outline-secondary" type="button" id="togglePassword">
                                 <i class="far fa-eye"></i>
                             </button>
                         </div>
+                        @error('password')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                        @enderror
                     </div>
                     <button type="submit" class="btn btn-primary w-100">Login</button>
                 </form>

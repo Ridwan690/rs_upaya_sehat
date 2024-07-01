@@ -23,7 +23,7 @@ class AuthController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8|confirmed',
-            'role' => 'required|string|in:superadmin,manajemen,pendaftaran,rawat_jalan,rawat_inap,perawat, dokter'
+            'role' => 'required|string|in:superadmin,manajemen,pendaftaran,rawat_jalan,rawat_inap,perawat,dokter'
         ]);
 
         $user = User::create([
@@ -49,7 +49,7 @@ class AuthController extends Controller
     {
         $credentials = $request->validate([
             'email' => 'required|string|email',
-            'password' => 'required|string',
+            'password' => 'required|string|min:8',
         ]);
 
         if (Auth::attempt($credentials)) {
