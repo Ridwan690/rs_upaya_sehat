@@ -8,6 +8,8 @@ use App\Models\Kamar;
 use App\Models\Obat;
 use App\Models\Tarif;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
+use Carbon\Carbon;
 
 class RawatInapController extends Controller
 {
@@ -27,15 +29,17 @@ class RawatInapController extends Controller
     {
         $rawatInap = RawatInap::all();
         $pasiens = Pasien::all();
-        $kamars = Kamar::withCount(['rawatInap as current_occupancy' => function($query) {
-            $query->whereNull('tanggal_keluar');
-        }])->get();
-    
-        $availableKamars = $kamars->filter(function($kamar) {
+        $kamars = Kamar::withCount([
+            'rawatInap as current_occupancy' => function ($query) {
+                $query->whereNull('tanggal_keluar');
+            }
+        ])->get();
+
+        $availableKamars = $kamars->filter(function ($kamar) {
             return $kamar->current_occupancy < $kamar->kapasitas;
         });
         $uniqueTipeKamars = $availableKamars->groupBy('tipe_kamar')->keys()->sort();
-    
+
         return view('rawat-inap.create', compact('rawatInap', 'pasiens', 'availableKamars', 'uniqueTipeKamars'));
     }
 
@@ -95,7 +99,7 @@ class RawatInapController extends Controller
         });
         $rawatInap->obat()->sync($takarans);
         $rawatInap->tarif()->sync($request->tarif_id);
-        
+
         return redirect()->route('rawat-inap.show', $id)->with('success', 'Data Rawat Inap berhasil diupdate.');
     }
 
@@ -110,4 +114,19 @@ class RawatInapController extends Controller
 
         return redirect()->route('rawat-inap.index')->with('success', 'Data Rawat Inap berhasil dihapus.');
     }
+
+    public function printBracelet($id)
+    {
+        $printBraceletInPatient = RawatInap::findOrFail($id);
+        $pdf = PDF::loadView('rawat-inap.printBracelet', compact('printBraceletInPatient'))->setPaper([0, 0, 130, 288], 'landscape');
+        return $pdf->stream('cetak-gelang.pdf');
+    }
+
+
+
+    // public function countAge() {
+    //     $pasien = Pasien::all();
+    //     $tanggLahir = $pasien->tanggal_lahir;
+    //     $umur = Carbon::parse($tanggLahir)->diffForHumans();
+    // }
 }

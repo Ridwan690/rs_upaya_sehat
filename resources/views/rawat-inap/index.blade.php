@@ -37,6 +37,8 @@
                                     @method('DELETE')
                                     <a href="{{ route('rawat-inap.show', $rawat->id) }}" class="btn btn-warning text-black mx-1 my-1"><i class="fas fa-eye"></i></a>
                                     <a href="{{ route('rawat-inap.edit', $rawat->id) }}" class="btn btn-primary text-white mx-1 my-1"><i class="fas fa-pencil-alt"></i></a>
+                                    <a href="{{ route('rawat-inap.printBracelet', $rawat->id) }}" target="_blank" class="btn btn-info text-white mx-1 my-1"><i
+                                            class="fas fa-print"></i></a>
                                     <button type="submit" class="btn btn-danger text-white mx-1 my-1" onclick="return confirm('Do you want to delete this rawat-inap?');"><i class="fas fa-trash-alt"></i></button>
                                 </form>
                             </td>

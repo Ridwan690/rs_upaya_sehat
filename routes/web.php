@@ -80,7 +80,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('admin/dashboard', [AdminController::class, 'index'])->name('dashboard');
 
     // Define routes with role middleware
-    Route::middleware(['role:superadmin,administrator,perawat'])->group(function () {
+    Route::middleware(['role:superadmin,manajemen,perawat,dokter,pendaftaran,rawat_jalan,rawat_inap'])->group(function () {
         // Routes for superadmin,manajemen,perawat_pendaftaran
         Route::resource('pasien', PasienController::class);
         Route::post('daftar-ulang', [PasienController::class, 'daftarUlang'])->name('daftarUlang');
@@ -94,9 +94,10 @@ Route::middleware(['auth'])->group(function () {
         Route::resource('kunjungan', KunjunganController::class);
         Route::get('antrian/{id}/print', [AntrianController::class, 'print'])->name('antrian.print');
         Route::get('rekam-medik/{id}/print', [RekamMedikController::class, 'printPatientCard'])->name('rekam.printPatientCard');
+        Route::get('rawat-inap/{id}/print', [RawatInapController::class, 'printBracelet'])->name('rawat-inap.printBracelet');
     });
 
-    Route::middleware(['role:superadmin,administrator'])->group(function () {
+    Route::middleware(['role:superadmin,manajemen'])->group(function () {
         // Routes for superadmin, manajemen
         Route::resource('tarif', TarifController::class);
         Route::get('/total-harga/{jenis}/{id}', [TarifController::class, 'totalHarga'])->name('totalHarga');

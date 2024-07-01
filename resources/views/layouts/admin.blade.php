@@ -10,14 +10,14 @@
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <script src="https://kit.fontawesome.com/ae360af17e.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="{{ asset('css/dashboard.css') }}">
-    
+
     @yield('custom-css')
 </head>
 
 <body>
     <div class="wrapper">
         @include('partials.sidebar')
-        
+
         <div class="main">
             <nav class="navbar navbar-expand px-3 border-bottom">
                 <button class="btn" id="sidebar-toggle" type="button">
@@ -30,9 +30,9 @@
                                 <img src="{{ asset('img/default.png') }}" class="avatar img-fluid rounded" alt="">
                             </a>
                             <div class="dropdown-menu dropdown-menu-end">
-                                <a href="#" class="dropdown-item">Profile</a>
-                                <a href="#" class="dropdown-item">Setting</a>
-                                <a class="dropdown-item" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
+                                <a href="#" class="dropdown-item">{{ Auth::user()->name }} ({{ Auth::user()->role }})</a>
+                                <a class="dropdown-item" href="#"
+                                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
                                 <form action="{{ route('logout') }}" id="logout-form" method="post">@csrf</form>
                             </div>
                         </li>
@@ -40,7 +40,7 @@
                 </div>
             </nav>
             @yield('content')
-            
+
         </div>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

@@ -22,7 +22,7 @@
                         </div>
                     </div>
                     <a href="/contact" class="nav-item nav-link">Contact</a>
-                    <button class="btn btn-primary ms-3" onclick="window.location='{{ route('login') }}'">Sign In</button>
+                    {{-- <button class="btn btn-primary ms-3" onclick="window.location='{{ route('login') }}'">Sign In</button> --}}
                 </div>
             </div>
         </nav>

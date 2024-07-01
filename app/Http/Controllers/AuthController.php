@@ -23,7 +23,7 @@ class AuthController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8|confirmed',
-            'role' => 'required|string|in:superadmin,manajemen,perawat_pendaftaran,perawat_rawat_jalan,perawat_rawat_inap,perawat'
+            'role' => 'required|string|in:superadmin,manajemen,pendaftaran,rawat_jalan,rawat_inap,perawat, dokter'
         ]);
 
         $user = User::create([
