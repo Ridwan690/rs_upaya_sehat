@@ -21,18 +21,7 @@
                             <th scope="col">Pasien</th>
                             <th scope="col">Poli</th>
                             <th scope="col">Dokter</th>
-                            <th scope="col">
-                                <a href="{{ route('antrian.index', ['sort' => 'kode_antrian', 'order' => $sortOrder === 'asc' ? 'desc' : 'asc']) }}">
-                                    Kode Antrian
-                                    @if ($sortColumn === 'kode_antrian')
-                                        @if ($sortOrder === 'asc')
-                                            <i class="fas fa-sort-up"></i>
-                                        @else
-                                            <i class="fas fa-sort-down"></i>
-                                        @endif
-                                    @endif
-                                </a>
-                            </th>
+                            <th scope="col">Kode Antrian</th>
                             <th scope="col">Action</th>
                         </tr>
                     </thead>
@@ -45,6 +34,13 @@
                             <td>{{ $queue->dokter->nama }}</td>
                             <td>{{ $queue->kode_antrian }}</td>
                             <td>
+                                <form action="{{ route('antrian.update', $queue->id) }}" method="POST" class="d-inline">
+                                    @csrf
+                                    @method('PUT')
+                                    <button type="submit" class="btn btn-success text-white mx-1 my-1">
+                                        <i class="fa-solid fa-check"></i>
+                                    </button>
+                                </form>
                                 {{-- <a href="{{ route('antrian.show', $queue->id) }}" class="btn btn-warning text-black mx-1 my-1"><i class="fas fa-eye"></i></a> --}}
                                 {{-- <a href="{{ route('antrian.edit', $queue->id) }}" class="btn btn-primary text-white mx-1 my-1"><i class="fas fa-pencil-alt"></i></a> --}}
                                 <a href="{{ route('antrian.print', $queue->id) }}" target="_blank" class="btn btn-info text-white mx-1 my-1"><i class="fas fa-print"></i></a>

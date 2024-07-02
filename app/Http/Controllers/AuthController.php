@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Poli;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -13,7 +14,8 @@ class AuthController extends Controller
     // Show the registration form
     public function showRegisterForm()
     {
-        return view('auth.register');
+        $polis = Poli::all();
+        return view('auth.register', compact('polis'));
     }
 
     // Handle registration
@@ -23,7 +25,8 @@ class AuthController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8|confirmed',
-            'role' => 'required|string|in:superadmin,manajemen,pendaftaran,rawat_jalan,rawat_inap,perawat,dokter'
+            'role' => 'required|string|in:superadmin,manajemen,pendaftaran,rawat_jalan,rawat_inap,perawat,dokter',
+            'poli_id' => 'required|exists:App\Models\Poli,id',
         ]);
 
         $user = User::create([
@@ -31,6 +34,7 @@ class AuthController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'role' => $request->role,
+            'poli_id' => $request->poli_id,
         ]);
 
         Auth::login($user);

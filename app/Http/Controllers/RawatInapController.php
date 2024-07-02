@@ -7,6 +7,7 @@ use App\Models\Pasien;
 use App\Models\Kamar;
 use App\Models\Obat;
 use App\Models\Tarif;
+use App\Models\PercetakanGelang;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
@@ -52,12 +53,19 @@ class RawatInapController extends Controller
             'id_rekammedik' => 'required',
             'id_kamar' => 'required',
             'tanggal_masuk' => 'required',
+            'warna_gelang' => 'required | in:Biru Muda,Merah Muda,Kuning,Merah,Ungu',
         ]);
         $rawatInap = new RawatInap();
         $rawatInap->id_rekammedik = $request->id_rekammedik;
         $rawatInap->id_kamar = $request->id_kamar;
         $rawatInap->tanggal_masuk = $request->tanggal_masuk;
         $rawatInap->save();
+
+        PercetakanGelang::create([
+            'rawat_inap_id' => $rawatInap->id,
+            'warna_gelang' => $request->warna_gelang,
+        ]);
+    
         return redirect()->route('rawat-inap.index');
     }
 
@@ -117,10 +125,11 @@ class RawatInapController extends Controller
 
     public function printBracelet($id)
     {
-        $printBraceletInPatient = RawatInap::findOrFail($id);
-        $pdf = PDF::loadView('rawat-inap.printBracelet', compact('printBraceletInPatient'))->setPaper([0, 0, 130, 288], 'landscape');
+        $printBraceletInPatient = RawatInap::with('rekammedik.pasien', 'gelang')->findOrFail($id);
+        $pdf = PDF::loadView('rawat-inap.printBracelet', compact('printBraceletInPatient'))->setPaper([0, 0, 200, 40], 'landscape');
         return $pdf->stream('cetak-gelang.pdf');
     }
+
 
 
 

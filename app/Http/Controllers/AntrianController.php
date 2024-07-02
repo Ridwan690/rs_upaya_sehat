@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Antrian;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
 
@@ -11,16 +12,24 @@ class AntrianController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request)
+    public function index()
     {
-        $sortColumn = $request->input('sort', 'kode_antrian'); // Default sort by 'nama'
-        $sortOrder = $request->input('order', 'asc'); // Default sort order 'asc'
+        if (Auth::user()->poli_id) {
+            $poliId = Auth::user()->poli_id;
 
-        $antrian = Antrian::with(['kunjungan.rekamMedikUtama.pasien', 'poli', 'dokter'])
-                        ->orderBy($sortColumn, $sortOrder)
-                        ->paginate(10);
+            // Ambil antrian yang sesuai dengan poli_id tersebut dan status belum ditangani
+            $antrian = Antrian::where('id_poli', $poliId)
+                              ->where('status', '!=', 'ditangani')
+                              ->oldest()
+                              ->paginate(10);
+        } else {
+            // Ambil semua antrian dengan status belum ditangani
+            $antrian = Antrian::where('status', '!=', 'ditangani')
+                              ->orderBy('kode_antrian', 'desc')
+                              ->paginate(10);
+        }
 
-        return view('antrian.index', compact('antrian', 'sortColumn', 'sortOrder'));
+        return view('antrian.index', compact('antrian'));
     }
 
     /**
@@ -60,7 +69,12 @@ class AntrianController extends Controller
      */
     public function update(Request $request, Antrian $antrian)
     {
-        //
+        // Update kolom status menjadi 'ditangani'
+        $antrian->status = 'ditangani';
+        $antrian->save();
+
+        // Redirect ke halaman antrian.index dengan pesan sukses
+        return redirect()->route('antrian.index')->with('success', 'Antrian telah ditangani.');
     }
 
     /**

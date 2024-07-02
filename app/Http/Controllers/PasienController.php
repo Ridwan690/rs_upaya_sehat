@@ -101,7 +101,7 @@ class PasienController extends Controller
             'nomor_antrian' => $nomorAntrian,
             'kode_antrian' => $nomorAntrianFormatted,
         ]);
-        return redirect()->route('pasien.index')
+        return redirect()->route('antrian.index')
             ->with('success', 'Pasien berhasil ditambahkan');
     }
 
@@ -202,7 +202,7 @@ class PasienController extends Controller
             'nomor_antrian' => $nomorAntrian,
             'kode_antrian' => $nomorAntrianFormatted,
         ]);
-        return redirect()->route('pasien.index')
+        return redirect()->route('antrian.index')
                         ->with('success', 'Pendaftaran berhasil.');
     }
 }

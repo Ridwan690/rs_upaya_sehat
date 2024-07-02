@@ -113,6 +113,24 @@ a.sidebar-link {
     transform: rotate(45deg);
     transition: all .2s ease-out;
 }
+/* CSS untuk menambahkan left indent pada submenu di dalam collapse */
+/* .sidebar-dropdown {
+    padding-left: 20px; 
+} */
+
+/* CSS tambahan untuk submenu agar lebih jelas */
+.sidebar-dropdown .sidebar-item {
+    padding-left: 25px;
+}
+
+.sidebar-dropdown .sidebar-link {
+    padding: 10px 15px; 
+}
+
+/* Tambahkan hover efek untuk submenu */
+.sidebar-dropdown .sidebar-link:hover {
+    background-color: #0056b3; 
+}
 
 .avatar {
     height: 40px;

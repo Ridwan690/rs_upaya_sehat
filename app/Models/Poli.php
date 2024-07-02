@@ -34,4 +34,8 @@ class Poli extends Model
     {
         return $this->hasOne(Antrian::class, 'id_poli');
     }
+    public function users()
+    {
+        return $this->hasMany(User::class, 'poli_id');
+    }
 }

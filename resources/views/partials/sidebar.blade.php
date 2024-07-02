@@ -15,20 +15,31 @@
                 </a>
             </li>
             <li class="sidebar-item">
-                <a href="#" class="sidebar-link collapsed" data-bs-target="#pages" data-bs-toggle="collapse"
-                    aria-expanded="false"><i class="fa-solid fa-file-lines pe-2"></i>
+                <a href="/antrian" class="sidebar-link"><i class="fa-solid fa-users-between-lines pe-2"></i>Antrian</a>
+            </li>
+            <li class="sidebar-item">
+                <a href="#" class="sidebar-link collapsed" data-bs-target="#pendaftaran" data-bs-toggle="collapse"
+                   aria-expanded="false"><i class="fa-solid fa-file-lines pe-2"></i>
+                    Pendaftaran
+                </a>
+                <ul id="pendaftaran" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+                    <li class="sidebar-item">
+                        <a href="/pasien/create" class="sidebar-link"><i class="fa-solid fa-clinic-medical pe-2"></i>Poliklinik</a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a href="/rawat-jalan/create" class="sidebar-link"><i class="fa-solid fa-person-walking pe-2"></i>Rawat Jalan</a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a href="/rawat-inap/create" class="sidebar-link"><i class="fa-solid fa-bed-pulse pe-2"></i>Rawat Inap</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="sidebar-item">
+                <a href="#" class="sidebar-link collapsed" data-bs-target="#kelola-data" data-bs-toggle="collapse"
+                   aria-expanded="false"><i class="fa-regular fa-id-card"></i>
                     Kelola Data
                 </a>
-                <ul id="pages" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
-                    {{-- @php
-                    $user = Auth::user();
-                    $allowedRoles = ['superadmin', 'manajemen', 'perawat_pendaftaran'];
-                    @endphp
-                    @if(Auth::check() && in_array($user->role, $allowedRoles))
-                    <li class="sidebar-item">
-                        <a href="/pasien" class="sidebar-link">Pasien</a>
-                    </li>
-                    @endif --}}
+                <ul id="kelola-data" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
                     <li class="sidebar-item">
                         <a href="/pasien" class="sidebar-link"><i class="fa-solid fa-hospital-user pe-2"></i>Pasien</a>
                     </li>
@@ -37,9 +48,6 @@
                     </li>
                     <li class="sidebar-item">
                         <a href="/kunjungan" class="sidebar-link"><i class="fa-solid fa-clipboard pe-2"></i>Kunjungan</a>
-                    </li>
-                    <li class="sidebar-item">
-                        <a href="/antrian" class="sidebar-link"><i class="fa-solid fa-users-between-lines pe-2"></i>Antrian</a>
                     </li>
                     <li class="sidebar-item">
                         <a href="/rawat-jalan" class="sidebar-link"><i class="fa-solid fa-person-walking pe-2"></i>Rawat Jalan</a>
@@ -61,12 +69,14 @@
             <li class="sidebar-item">
                 <a href="/" class="sidebar-link">
                     <i class="fa-solid fa-house pe-2"></i>
-                    Home</a>
+                    Home
+                </a>
             </li>
             <li class="sidebar-item">
                 <a href="/register" class="sidebar-link">
                     <i class="fa-solid fa-plus pe-2"></i>
-                    Buat User</a>
+                    Buat User
+                </a>
             </li>
         </ul>
     </div>

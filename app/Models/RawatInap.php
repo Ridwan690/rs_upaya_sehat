@@ -41,4 +41,8 @@ class RawatInap extends Model
     {
         return $this->hasOne(TotalHarga::class, 'kunjungan_id');
     }
+    public function gelang()
+    {
+        return $this->hasOne(PercetakanGelang::class, 'rawat_inap_id');
+    }
 }

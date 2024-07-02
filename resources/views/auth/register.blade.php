@@ -109,6 +109,20 @@
                         </div>
                     @enderror
                 </div>
+                <div class="mb-3">
+                    <label for="poli_id" class="form-label">Poli</label>
+                    <select class="form-select @error('poli_id') is-invalid @enderror" id="poli_id" name="poli_id" required>
+                        <option value="">-- Select Poli --</option>
+                        @foreach ($polis as $poli)
+                            <option value="{{ $poli->id }}">{{ $poli->nama_poli }}</option>
+                        @endforeach
+                    </select>
+                    @error('poli_id')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                    @enderror
+                </div>
                 <button type="submit" class="btn btn-primary w-100">Register</button>
             </form>
         </div>

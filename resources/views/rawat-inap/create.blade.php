@@ -57,7 +57,17 @@
                                 <span class="invalid-feedback">{{ $message }}</span>
                             @enderror
                         </div>
-
+                        
+                        <div class="form-group mb-4">
+                            <label for="warna_gelang">Warna Gelang</label>
+                            <select name="warna_gelang" id="warna_gelang" class="form-control">
+                                <option value="Biru Muda" {{ old('warna_gelang') == 'Biru Muda' ? 'selected' : '' }}>Biru Muda</option>
+                                <option value="Merah Muda" {{ old('warna_gelang') == 'Merah Muda' ? 'selected' : '' }}>Merah Muda</option>
+                                <option value="Kuning" {{ old('warna_gelang') == 'Kuning' ? 'selected' : '' }}>Kuning</option>
+                                <option value="Merah" {{ old('warna_gelang') == 'Merah' ? 'selected' : '' }}>Merah</option>
+                                <option value="Ungu" {{ old('warna_gelang') == 'Ungu' ? 'selected' : '' }}>Ungu</option>
+                            </select>
+                        </div>
                         <div class="form-group mb-3">
                             <button type="submit" class="btn btn-success w-100">Add Pasien</button>
                         </div>
