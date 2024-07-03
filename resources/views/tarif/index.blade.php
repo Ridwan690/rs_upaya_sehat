@@ -8,6 +8,11 @@
                 {{ $message }}
             </div>
         @endif
+        @if ($message = Session::get('warning'))
+            <div class="alert alert-warning mb-3">
+                {{ $message }}
+            </div>
+        @endif
         <div class="mb-3 d-flex align-items-center justify-content-between">
             <h5>Tarif List</h5>
             <a href="{{ route('tarif.create') }}" class="btn btn-primary">Tambah Tarif</a>

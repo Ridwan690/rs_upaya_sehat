@@ -72,8 +72,25 @@ class DokterController extends Controller
             'id_poli' => 'required|exists:poli,id',
         ]);
 
+        // Simpan nilai sebelum update
+        $oldValues = $dokter->getAttributes();
+
+        // Lakukan update
         $dokter->update($request->all());
 
+        // Simpan nilai setelah update
+        $newValues = $dokter->fresh()->getAttributes();
+
+        // Bandingkan nilai
+        $changed = array_diff_assoc($newValues, $oldValues);
+
+        // Jika tidak ada perubahan
+        if (empty($changed)) {
+            return redirect()->route('dokter.index')
+                ->with('warning', 'Tidak ada perubahan data');
+        }
+
+        // Jika ada perubahan
         return redirect()->route('dokter.index')
             ->with('success', 'Dokter berhasil diperbarui');
     }

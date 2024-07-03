@@ -105,17 +105,35 @@ class RawatJalanController extends Controller
             'catatan' => 'nullable|string',
         ]);
 
+        // Simpan nilai sebelum update
+        $oldValues = $rawatJalan->getAttributes();
+
+        // Lakukan update
         $rawatJalan->update([
             'catatan' => $request->input('catatan'),
         ]);
 
+        // Simpan nilai setelah update
+        $newValues = $rawatJalan->fresh()->getAttributes();
+
+        // Bandingkan nilai
+        $changed = array_diff_assoc($newValues, $oldValues);
+
+        // Jika tidak ada perubahan
+        if (empty($changed)) {
+            return redirect()->route('rawat-jalan.show', $rawatJalan->id)
+                ->with('warning', 'Tidak ada perubahan data');
+        }
+
+        // Jika ada perubahan
         $takarans = collect($request->input('takaran', []))->map(function ($takaran) {
             return ['takaran' => $takaran];
         });
         $rawatJalan->tarif()->sync($request->tarif_id);
         $rawatJalan->obat()->sync($takarans);
-        
-        return redirect()->route('rawat-jalan.show', $rawatJalan->id)->with('success', 'Catatan Rawat Jalan berhasil diupdate.');
+
+        return redirect()->route('rawat-jalan.show', $rawatJalan->id)
+            ->with('success', 'Catatan Rawat Jalan berhasil diupdate.');
     }
 
 

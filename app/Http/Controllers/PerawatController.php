@@ -72,8 +72,25 @@ class PerawatController extends Controller
             'id_poli' => 'required|exists:poli,id',
         ]);
 
+        // Simpan nilai sebelum update
+        $oldValues = $perawat->getAttributes();
+
+        // Lakukan update
         $perawat->update($request->all());
 
+        // Simpan nilai setelah update
+        $newValues = $perawat->fresh()->getAttributes();
+
+        // Bandingkan nilai
+        $changed = array_diff_assoc($newValues, $oldValues);
+
+        // Jika tidak ada perubahan
+        if (empty($changed)) {
+            return redirect()->route('perawat.index')
+                ->with('warning', 'Tidak ada perubahan data');
+        }
+
+        // Jika ada perubahan
         return redirect()->route('perawat.index')
             ->with('success', 'Perawat berhasil diperbarui');
     }

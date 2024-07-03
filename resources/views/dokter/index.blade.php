@@ -8,6 +8,11 @@
                 {{ $message }}
             </div>
         @endif
+        @if ($message = Session::get('warning'))
+            <div class="alert alert-warning mb-3">
+                {{ $message }}
+            </div>
+        @endif
         <div class="mb-3 d-flex align-items-center justify-content-between">
             <h5>Dokter List</h5>
             <a href="{{ route('dokter.create') }}" class="btn btn-success"><i class="fas fa-plus-circle"></i> Tambah Dokter</a>
@@ -15,42 +20,42 @@
         <div class="card">
             <div class="card-body">
                 <div class="table-responsive">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th scope="col">S#</th>
-                            <th scope="col">Nama Dokter</th>
-                            <th scope="col">Spesialis</th>
-                            <th scope="col">Nama Poli</th>
-                            <th scope="col">Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @forelse ($dokter as $doctor)
-                        <tr>
-                            <th scope="row">{{ $doctor->id }}</th>
-                            <td>{{ $doctor->nama }}</td>
-                            <td>{{ $doctor->spesialis }}</td>
-                            <td>{{ $doctor->poli->nama_poli }}</td>
-                            <td>
-                                <form action="{{ route('dokter.destroy', $doctor->id) }}" method="post" class="d-inline">
-                                    @csrf
-                                    @method('DELETE')
-                                    <a href="{{ route('dokter.show', $doctor->id) }}" class="btn btn-warning text-black mx-1 my-1"><i class="fas fa-eye"></i></a>
-                                    <a href="{{ route('dokter.edit', $doctor->id) }}" class="btn btn-primary text-white mx-1 my-1"><i class="fas fa-pencil-alt"></i></a>
-                                    <button type="submit" class="btn btn-danger text-white mx-1 my-1" onclick="return confirm('Do you want to delete this dokter?');"><i class="fas fa-trash-alt"></i></button>
-                                </form>
-                            </td>
-                        </tr>
-                        @empty
-                        <tr>
-                            <td colspan="6" class="text-center text-danger">
-                                <strong>No Dokter Found!</strong>
-                            </td>
-                        </tr>
-                        @endforelse
-                    </tbody>
-                </table>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">S#</th>
+                                <th scope="col">Nama Dokter</th>
+                                <th scope="col">Spesialis</th>
+                                <th scope="col">Nama Poli</th>
+                                <th scope="col">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @forelse ($dokter as $doctor)
+                            <tr>
+                                <th scope="row">{{ $doctor->id }}</th>
+                                <td>{{ $doctor->nama }}</td>
+                                <td>{{ $doctor->spesialis }}</td>
+                                <td>{{ $doctor->poli->nama_poli }}</td>
+                                <td>
+                                    <form action="{{ route('dokter.destroy', $doctor->id) }}" method="post" class="d-inline">
+                                        @csrf
+                                        @method('DELETE')
+                                        <a href="{{ route('dokter.show', $doctor->id) }}" class="btn btn-warning text-black mx-1 my-1"><i class="fas fa-eye"></i></a>
+                                        <a href="{{ route('dokter.edit', $doctor->id) }}" class="btn btn-primary text-white mx-1 my-1"><i class="fas fa-pencil-alt"></i></a>
+                                        <button type="submit" class="btn btn-danger text-white mx-1 my-1" onclick="return confirm('Do you want to delete this dokter?');"><i class="fas fa-trash-alt"></i></button>
+                                    </form>
+                                </td>
+                            </tr>
+                            @empty
+                            <tr>
+                                <td colspan="6" class="text-center text-danger">
+                                    <strong>No Dokter Found!</strong>
+                                </td>
+                            </tr>
+                            @endforelse
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>

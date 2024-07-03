@@ -140,8 +140,25 @@ class PasienController extends Controller
             'no_telepon' => 'required|numeric|digits_between:10,13',
         ]);
 
+        // Simpan nilai sebelum update
+        $oldValues = $pasien->getAttributes();
+
+        // Lakukan update
         $pasien->update($request->all());
 
+        // Simpan nilai setelah update
+        $newValues = $pasien->fresh()->getAttributes();
+
+        // Bandingkan nilai
+        $changed = array_diff_assoc($newValues, $oldValues);
+
+        // Jika tidak ada perubahan
+        if (empty($changed)) {
+            return redirect()->route('pasien.index')
+                ->with('warning', 'Tidak ada perubahan data');
+        }
+
+        // Jika ada perubahan
         return redirect()->route('pasien.index')
             ->with('success', 'Pasien berhasil diupdate');
     }

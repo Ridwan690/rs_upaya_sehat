@@ -3,6 +3,16 @@
 @section('content')
     <div class="d-flex justify-content-center mt-3">
         <div class="col-md-8">
+            @if ($message = Session::get('success'))
+                <div class="alert alert-success mb-3">
+                    {{ $message }}
+                </div>
+            @endif
+            @if ($message = Session::get('warning'))
+                <div class="alert alert-warning mb-3">
+                    {{ $message }}
+                </div>
+            @endif
             <div class="card shadow-sm">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
@@ -53,8 +63,8 @@
                 </div>
                 <div class="card-footer d-flex justify-content-end">
                     <a href="{{ route('rawat-jalan.edit', $rawatJalan->id) }}" class="btn btn-warning mx-2">Edit</a>
-                    <a href="{{ route('obat.print', ['jenis' => 'rawat_jalan', 'id' => $rawatJalan->id]) }}" class="btn btn-primary mx-2">Lihat Resep</a>
-                    <a href="{{ route('totalHarga', ['jenis' => 'rawat_jalan', 'id' => $rawatJalan->id]) }}" class="btn btn-info">Rincian Biaya</a>
+                    <a href="{{ route('obat.print', ['jenis' => 'rawat_jalan', 'id' => $rawatJalan->id]) }}" class="btn btn-primary mx-2" target="blank_">Lihat Resep</a>
+                    <a href="{{ route('totalHarga', ['jenis' => 'rawat_jalan', 'id' => $rawatJalan->id]) }}" class="btn btn-info" target="blank_">Rincian Biaya</a>
                 </div>
             </div>
         </div>

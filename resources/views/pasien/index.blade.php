@@ -8,7 +8,11 @@
                     {{ $message }}
                 </div>
             @endif
-
+            @if ($message = Session::get('warning'))
+                <div class="alert alert-warning mb-3">
+                    {{ $message }}
+                </div>
+            @endif
             <div class="card shadow-sm">
                 <div class="card-header">
                     <h5 class="mb-0">Pasien List</h5>

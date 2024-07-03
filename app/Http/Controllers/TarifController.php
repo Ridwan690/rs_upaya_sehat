@@ -73,8 +73,25 @@ class TarifController extends Controller
             'biaya' => 'required|numeric',
         ]);
 
+        // Simpan nilai sebelum update
+        $oldValues = $tarif->getAttributes();
+
+        // Lakukan update
         $tarif->update($request->all());
 
+        // Simpan nilai setelah update
+        $newValues = $tarif->fresh()->getAttributes();
+
+        // Bandingkan nilai
+        $changed = array_diff($newValues, $oldValues);
+
+        // Jika tidak ada perubahan
+        if (empty($changed)) {
+            return redirect()->route('tarif.index')
+                ->with('warning', 'Tidak ada perubahan data');
+        }
+
+        // Jika ada perubahan
         return redirect()->route('tarif.index')
             ->with('success', 'Tarif berhasil diupdate');
     }

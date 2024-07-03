@@ -100,15 +100,33 @@ class RawatInapController extends Controller
             'catatan' => 'nullable|string',
         ]);
 
-        $rawatInap = RawatInap::findOrFail($id);
+        $rawatInap = RawatInap::findOrFail($id);// Simpan nilai sebelum update
+        $oldValues = $rawatInap->getAttributes();
+    
+        // Lakukan update
         $rawatInap->update($request->only(['tanggal_keluar', 'status', 'catatan']));
+    
+        // Simpan nilai setelah update
+        $newValues = $rawatInap->fresh()->getAttributes();
+    
+        // Bandingkan nilai
+        $changed = array_diff_assoc($newValues, $oldValues);
+    
+        // Jika tidak ada perubahan
+        if (empty($changed)) {
+            return redirect()->route('rawat-inap.show', $id)
+                ->with('warning', 'Tidak ada perubahan data');
+        }
+    
+        // Jika ada perubahan
         $takarans = collect($request->input('takaran', []))->map(function ($takaran) {
             return ['takaran' => $takaran];
         });
         $rawatInap->obat()->sync($takarans);
         $rawatInap->tarif()->sync($request->tarif_id);
-
-        return redirect()->route('rawat-inap.show', $id)->with('success', 'Data Rawat Inap berhasil diupdate.');
+    
+        return redirect()->route('rawat-inap.show', $id)
+            ->with('success', 'Data Rawat Inap berhasil diupdate.');
     }
 
 

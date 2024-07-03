@@ -3,6 +3,16 @@
 @section('content')
     <div class="d-flex justify-content-center mt-3">
         <div class="w-75">
+            @if ($message = Session::get('success'))
+                <div class="alert alert-success mb-3">
+                    {{ $message }}
+                </div>
+            @endif
+            @if ($message = Session::get('warning'))
+                <div class="alert alert-warning mb-3">
+                    {{ $message }}
+                </div>
+            @endif
             <div class="card">
                 <div class="card-header d-flex justify-content-between align-items-center">
                     <h5 class="mb-0">Detail Rawat Inap</h5>
@@ -47,8 +57,8 @@
                         <a href="{{ route('rawat-inap.edit', $rawatInap->id) }}" class="btn btn-warning me-2">
                             Update
                         </a>
-                        <a href="{{ route('obat.print', ['jenis' => 'rawat_inap', 'id' => $rawatInap->id]) }}" class="btn btn-primary mx-2">Lihat Resep</a>
-                        <a href="{{ route('totalHarga', ['jenis' => 'rawat_inap', 'id' => $rawatInap->id]) }}" class="btn btn-info">
+                        <a href="{{ route('obat.print', ['jenis' => 'rawat_inap', 'id' => $rawatInap->id]) }}" class="btn btn-primary mx-2" target="blank_">Lihat Resep</a>
+                        <a href="{{ route('totalHarga', ['jenis' => 'rawat_inap', 'id' => $rawatInap->id]) }}" class="btn btn-info" target="blank_">
                             Rincian Biaya
                         </a>
 

@@ -13,47 +13,47 @@
             <a href="{{ route('rawat-inap.create') }}" class="btn btn-success"><i class="fas fa-plus-circle"></i> Daftar Rawat Inap</a>
         </div>
         <div class="card">
-            <div class="table-responsive"
             <div class="card-body">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th scope="col">S#</th>
-                            <th scope="col">Nama Pasien</th>
-                            <th scope="col">Kamar</th>
-                            <th scope="col">Tanggal Inap</th>
-                            <th scope="col">Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @forelse ($rawatInap as $rawat)
-                        <tr>
-                            <th scope="row">{{ $loop->iteration }}</th>
-                            <td>{{ $rawat->rekammedik->pasien->nama }}</td>
-                            <td>{{ $rawat->kamar->kode_kamar }}</td>
-                            <td>{{ $rawat->tanggal_masuk }}</td>
-                            <td>
-                                <form action="{{ route('rawat-inap.destroy', $rawat->id) }}" method="post" class="d-inline">
-                                    @csrf
-                                    @method('DELETE')
-                                    <a href="{{ route('rawat-inap.show', $rawat->id) }}" class="btn btn-warning text-black mx-1 my-1"><i class="fas fa-eye"></i></a>
-                                    <a href="{{ route('rawat-inap.edit', $rawat->id) }}" class="btn btn-primary text-white mx-1 my-1"><i class="fas fa-pencil-alt"></i></a>
-                                    <a href="{{ route('rawat-inap.printBracelet', $rawat->id) }}" target="_blank" class="btn btn-info text-white mx-1 my-1"><i
-                                            class="fas fa-print"></i></a>
-                                    <button type="submit" class="btn btn-danger text-white mx-1 my-1" onclick="return confirm('Do you want to delete this rawat-inap?');"><i class="fas fa-trash-alt"></i></button>
-                                </form>
-                            </td>
-                        </tr>
-                        @empty
-                        <tr>
-                            <td colspan="6" class="text-center text-danger">
-                                <strong>No Daftar Rawat Jalan Found!</strong>
-                            </td>
-                        </tr>
-                        @endforelse
-                    </tbody>
-                </table>
-            </div>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">S#</th>
+                                <th scope="col">Nama Pasien</th>
+                                <th scope="col">Kamar</th>
+                                <th scope="col">Tanggal Inap</th>
+                                <th scope="col">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @forelse ($rawatInap as $rawat)
+                            <tr>
+                                <th scope="row">{{ $loop->iteration }}</th>
+                                <td>{{ $rawat->rekammedik->pasien->nama }}</td>
+                                <td>{{ $rawat->kamar->kode_kamar }}</td>
+                                <td>{{ $rawat->tanggal_masuk }}</td>
+                                <td>
+                                    <form action="{{ route('rawat-inap.destroy', $rawat->id) }}" method="post" class="d-inline">
+                                        @csrf
+                                        @method('DELETE')
+                                        <a href="{{ route('rawat-inap.show', $rawat->id) }}" class="btn btn-warning text-black mx-1 my-1"><i class="fas fa-eye"></i></a>
+                                        <a href="{{ route('rawat-inap.edit', $rawat->id) }}" class="btn btn-primary text-white mx-1 my-1"><i class="fas fa-pencil-alt"></i></a>
+                                        <a href="{{ route('rawat-inap.printBracelet', $rawat->id) }}" target="_blank" class="btn btn-info text-white mx-1 my-1"><i
+                                                class="fas fa-print"></i></a>
+                                        <button type="submit" class="btn btn-danger text-white mx-1 my-1" onclick="return confirm('Do you want to delete this rawat-inap?');"><i class="fas fa-trash-alt"></i></button>
+                                    </form>
+                                </td>
+                            </tr>
+                            @empty
+                            <tr>
+                                <td colspan="6" class="text-center text-danger">
+                                    <strong>No Daftar Rawat Jalan Found!</strong>
+                                </td>
+                            </tr>
+                            @endforelse
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
 <nav aria-label="Page navigation example" class="d-flex justify-content-center mt-3">
