@@ -78,7 +78,7 @@
                         <div class="mb-3 row">
                             <label for="tarif_id" class="col-sm-3 col-form-label">Layanan</label>
                             <div class="col-sm-9">
-                                <select class="js-example-basic-multiple form-select @error('tarif_id') is-invalid @enderror" name="tarif_id[]" multiple="multiple">
+                                <select class="js-example-basic-multiple form-select @error('tarif_id') is-invalid @enderror" name="tarif_id[]" multiple="multiple" style="width: 100%">
                                     @foreach ($tarifs as $tarif)
                                     <option value="{{ $tarif->id }}" {{ in_array($tarif->id, $rawatJalan->tarif->pluck('id')->toArray()) ? 'selected' : '' }}>{{ $tarif->nama_layanan }} - {{ $tarif->jenis_layanan }}</option>
                                     @endforeach
@@ -91,7 +91,7 @@
                         <div class="mb-3 row">
                             <label for="obat_id" class="col-sm-3 col-form-label">Obat</label>
                             <div class="col-sm-9">
-                                <select class="js-example-basic-multiple form-select @error('obat_id') is-invalid @enderror" name="obat_id[]" multiple="multiple">
+                                <select class="js-example-basic-multiple form-select @error('obat_id') is-invalid @enderror" name="obat_id[]" multiple="multiple" style="width: 100%">
                                     @foreach ($obats as $obat)
                                     <option value="{{ $obat->id }}" data-obat-name="{{ $obat->nama_obat }}" {{ in_array($obat->id, $rawatJalan->obat->pluck('id')->toArray()) ? 'selected' : '' }}>{{ $obat->nama_obat }}</option>
                                     @endforeach

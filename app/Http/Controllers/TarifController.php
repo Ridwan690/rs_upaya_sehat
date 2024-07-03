@@ -15,9 +15,13 @@ class TarifController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $tarif = Tarif::orderBy('id')->paginate(10);
+        $search = $request->get('search');
+        $tarif = Tarif::where(function ($query) use ($search) {
+            $query->where('nama_layanan', 'like', '%' . $search . '%')
+                  ->orWhere('jenis_layanan', 'like', '%' . $search . '%');
+        })->paginate(10);
         return view('tarif.index', compact('tarif'));
     }
 

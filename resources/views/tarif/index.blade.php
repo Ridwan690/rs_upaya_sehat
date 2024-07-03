@@ -15,6 +15,21 @@
         @endif
         <div class="mb-3 d-flex align-items-center justify-content-between">
             <h5>Tarif List</h5>
+            <form action="{{ route('tarif.index') }}" method="GET" class="form-inline">
+                <div class="input-group px-1">
+                    <input class="form-control" type="search" placeholder="Search" aria-label="Search" name="search" value="{{ request()->query('search') }}">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-success" type="submit">
+                            <i class="fas fa-search"></i>
+                        </button>
+                        @if (request()->has('search'))
+                            <a href="{{ route('tarif.index') }}" class="btn btn-secondary ml-2">
+                                <i class="fas fa-times"></i> <!-- Font Awesome icon for "times" or "close" -->
+                            </a>
+                        @endif
+                    </div>
+                </div>
+            </form>
             <a href="{{ route('tarif.create') }}" class="btn btn-primary">Tambah Tarif</a>
         </div>
         <div class="card">

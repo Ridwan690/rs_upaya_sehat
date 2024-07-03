@@ -64,7 +64,7 @@
                 <br><h5>Layanan dan Obat</h5><hr>
                 <div class="form-group mb-4">
                     <label for="tarif_id" class="form-label">Layanan</label>
-                    <select class="js-example-basic-multiple form-select @error('tarif_id') is-invalid @enderror" name="tarif_id[]" multiple="multiple">
+                    <select class="js-example-basic-multiple form-select @error('tarif_id') is-invalid @enderror" name="tarif_id[]" multiple="multiple" style="width: 100%">
                         @foreach ($tarifs as $tarif)
                         <option value="{{ $tarif->id }}" {{ in_array($tarif->id, $kunjungan->tarif->pluck('id')->toArray()) ? 'selected' : '' }}>{{ $tarif->nama_layanan }} - {{ $tarif->jenis_layanan }}</option>
                         @endforeach
@@ -75,7 +75,7 @@
                 </div>
                 <div class="form-group mb-4">
                     <label for="obat_id" class="form-label">Obat</label>
-                    <select class="js-example-basic-multiple form-select @error('tarif_id') is-invalid @enderror" name="obat_id[]" multiple="multiple">
+                    <select class="js-example-basic-multiple form-select @error('tarif_id') is-invalid @enderror" name="obat_id[]" multiple="multiple" style="width: 100%">
                         @foreach ($obats as $obat)
                             <option value="{{ $obat->id }}" {{ in_array($obat->id, $kunjungan->obat->pluck('id')->toArray()) ? 'selected' : '' }}>{{ $obat->nama_obat }}</option>
                         @endforeach
