@@ -24,7 +24,7 @@ class PerawatController extends Controller
     public function create()
     {
         $poli = Poli::all();
-        return view('perawat.create');
+        return view('perawat.create', compact('poli'));
     }
 
     /**

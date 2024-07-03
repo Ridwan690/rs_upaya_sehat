@@ -54,7 +54,7 @@
                                             @csrf
                                             @method('DELETE')
                                             <a href="{{ route('pasien.show', $patient->id) }}" class="btn btn-warning btn-sm mx-1"><i class="fas fa-eye"></i></a>
-                                            <a href="{{ route('pasien.edit', $patient->id) }}" class="btn btn-primary btn-sm mx-1"><i class="fas fa-pencil-alt"></i></a> 
+                                            <a href="{{ route('pasien.edit', $patient->id) }}" class="btn btn-primary btn-sm mx-1"><i class="fas fa-pencil-alt"></i></a>
                                             <button type="submit" class="btn btn-danger btn-sm mx-1" onclick="return confirm('Do you want to delete this pasien?');"><i class="fas fa-trash"></i></button>
                                         </form>
                                     </td>
@@ -72,38 +72,61 @@
                     {{ $pasien->links() }}
                 </div>
             </div>
-            <nav aria-label="Page navigation example" class="d-flex justify-content-center mt-3">
-                <ul class="pagination">
-                    <!-- Tombol "Previous" -->
-                    @if ($pasien->onFirstPage())
-                        <li class="page-item disabled">
-                            <span class="page-link">Previous</span>
-                        </li>
-                    @else
-                        <li class="page-item">
-                            <a class="page-link" href="{{ $pasien->previousPageUrl() }}" rel="prev">Previous</a>
-                        </li>
-                    @endif
+<nav aria-label="Page navigation example" class="d-flex justify-content-center mt-3">
+    <ul class="pagination">
+        <!-- Tombol "Previous" -->
+        @if ($pasien->onFirstPage())
+        <li class="page-item disabled">
+            <span class="page-link">Previous</span>
+        </li>
+        @else
+        <li class="page-item">
+            <a class="page-link" href="{{ $pasien->previousPageUrl() }}" rel="prev">Previous</a>
+        </li>
+        @endif
 
-                    <!-- Tampilkan navigasi nomor untuk halaman-halaman spesifik -->
-                    @foreach ($pasien->getUrlRange(1, $pasien->lastPage()) as $page => $url)
-                        <li class="page-item {{ $page == $pasien->currentPage() ? 'active' : '' }}">
-                            <a class="page-link" href="{{ $url }}">{{ $page }}</a>
-                        </li>
-                    @endforeach
+        <!-- Tampilkan navigasi nomor untuk halaman-halaman spesifik -->
+        @php
+        $current = $pasien->currentPage();
+        $last = $pasien->lastPage();
+        $start = $current > 2 ? $current - 2 : 1;
+        $end = $current < $last - 2 ? $current + 2 : $last; @endphp @if ($start> 1)
+            <li class="page-item">
+                <a class="page-link" href="{{ $pasien->url(1) }}">1</a>
+            </li>
+            @if ($start > 2)
+            <li class="page-item disabled">
+                <span class="page-link">...</span>
+            </li>
+            @endif
+            @endif
+
+            @for ($page = $start; $page <= $end; $page++) <li class="page-item {{ $page == $current ? 'active' : '' }}">
+                <a class="page-link" href="{{ $pasien->url($page) }}">{{ $page }}</a>
+                </li>
+                @endfor
+
+                @if ($end < $last) @if ($end < $last - 1) <li class="page-item disabled">
+                    <span class="page-link">...</span>
+                    </li>
+                    @endif
+                    <li class="page-item">
+                        <a class="page-link" href="{{ $pasien->url($last) }}">{{ $last }}</a>
+                    </li>
+                    @endif
 
                     <!-- Tombol "Next" -->
                     @if ($pasien->hasMorePages())
-                        <li class="page-item">
-                            <a class="page-link" href="{{ $pasien->nextPageUrl() }}" rel="next">Next</a>
-                        </li>
+                    <li class="page-item">
+                        <a class="page-link" href="{{ $pasien->nextPageUrl() }}" rel="next">Next</a>
+                    </li>
                     @else
-                        <li class="page-item disabled">
-                            <span class="page-link">Next</span>
-                        </li>
+                    <li class="page-item disabled">
+                        <span class="page-link">Next</span>
+                    </li>
                     @endif
-                </ul>
-            </nav>
+    </ul>
+</nav>
 
         </div>
     </div>

@@ -49,32 +49,55 @@
                 <ul class="pagination">
                     <!-- Tombol "Previous" -->
                     @if ($rekamMedik->onFirstPage())
-                        <li class="page-item disabled">
-                            <span class="page-link">Previous</span>
-                        </li>
+                    <li class="page-item disabled">
+                        <span class="page-link">Previous</span>
+                    </li>
                     @else
-                        <li class="page-item">
-                            <a class="page-link" href="{{ $rekamMedik->previousPageUrl() }}" rel="prev">Previous</a>
-                        </li>
+                    <li class="page-item">
+                        <a class="page-link" href="{{ $rekamMedik->previousPageUrl() }}" rel="prev">Previous</a>
+                    </li>
                     @endif
 
                     <!-- Tampilkan navigasi nomor untuk halaman-halaman spesifik -->
-                    @foreach ($rekamMedik->getUrlRange(1, $rekamMedik->lastPage()) as $page => $url)
-                        <li class="page-item {{ $page == $rekamMedik->currentPage() ? 'active' : '' }}">
-                            <a class="page-link" href="{{ $url }}">{{ $page }}</a>
-                        </li>
-                    @endforeach
-
-                    <!-- Tombol "Next" -->
-                    @if ($rekamMedik->hasMorePages())
+                    @php
+                    $current = $rekamMedik->currentPage();
+                    $last = $rekamMedik->lastPage();
+                    $start = $current > 2 ? $current - 2 : 1;
+                    $end = $current < $last - 2 ? $current + 2 : $last; @endphp @if ($start> 1)
                         <li class="page-item">
-                            <a class="page-link" href="{{ $rekamMedik->nextPageUrl() }}" rel="next">Next</a>
+                            <a class="page-link" href="{{ $rekamMedik->url(1) }}">1</a>
                         </li>
-                    @else
+                        @if ($start > 2)
                         <li class="page-item disabled">
-                            <span class="page-link">Next</span>
+                            <span class="page-link">...</span>
                         </li>
-                    @endif
+                        @endif
+                        @endif
+
+                        @for ($page = $start; $page <= $end; $page++) <li class="page-item {{ $page == $current ? 'active' : '' }}">
+                            <a class="page-link" href="{{ $rekamMedik->url($page) }}">{{ $page }}</a>
+                            </li>
+                            @endfor
+
+                            @if ($end < $last) @if ($end < $last - 1) <li class="page-item disabled">
+                                <span class="page-link">...</span>
+                                </li>
+                                @endif
+                                <li class="page-item">
+                                    <a class="page-link" href="{{ $rekamMedik->url($last) }}">{{ $last }}</a>
+                                </li>
+                                @endif
+
+                                <!-- Tombol "Next" -->
+                                @if ($rekamMedik->hasMorePages())
+                                <li class="page-item">
+                                    <a class="page-link" href="{{ $rekamMedik->nextPageUrl() }}" rel="next">Next</a>
+                                </li>
+                                @else
+                                <li class="page-item disabled">
+                                    <span class="page-link">Next</span>
+                                </li>
+                                @endif
                 </ul>
             </nav>
 

@@ -11,6 +11,7 @@
                     </a>
                 </div>
                 <div class="card-body">
+                    <div class="table-responsive">
                     <table class="table table-striped">
                         <tr>
                             <th>NIK</th>
@@ -41,6 +42,7 @@
                             <td>{{ $rawatInap->catatan ?? 'Tidak Ada Catatan' }}</td>
                         </tr>
                     </table>
+                    </div>
                     <div class="d-flex justify-content-end mt-4">
                         <a href="{{ route('rawat-inap.edit', $rawatInap->id) }}" class="btn btn-warning me-2">
                             Update

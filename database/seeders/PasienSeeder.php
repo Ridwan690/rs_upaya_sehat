@@ -28,7 +28,7 @@ class PasienSeeder extends Seeder
         ]);
         Pasien::create([
             'nik' => '3204110209970002',
-            'nama' => 'Ridwan Nur Hakim',
+            'nama' => 'Ridwan Nurhakim',
             'tempat_lahir' => 'Bandung',
             'tanggal_lahir' => '1997-09-02',
             'jenis_kelamin' => 'Laki-laki',

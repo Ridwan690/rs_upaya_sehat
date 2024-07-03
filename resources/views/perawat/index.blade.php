@@ -14,6 +14,7 @@
         </div>
         <div class="card">
             <div class="card-body">
+                <div class="table-responsive">
                 <table class="table">
                     <thead>
                         <tr>
@@ -50,40 +51,64 @@
                         @endforelse
                     </tbody>
                 </table>
+                </div>
             </div>
         </div>
-        <nav aria-label="Page navigation example" class="d-flex justify-content-center mt-3">
-            <ul class="pagination">
-                <!-- Tombol "Previous" -->
-                @if ($perawat->onFirstPage())
-                    <li class="page-item disabled">
-                        <span class="page-link">Previous</span>
+<nav aria-label="Page navigation example" class="d-flex justify-content-center mt-3">
+    <ul class="pagination">
+        <!-- Tombol "Previous" -->
+        @if ($perawat->onFirstPage())
+        <li class="page-item disabled">
+            <span class="page-link">Previous</span>
+        </li>
+        @else
+        <li class="page-item">
+            <a class="page-link" href="{{ $perawat->previousPageUrl() }}" rel="prev">Previous</a>
+        </li>
+        @endif
+
+        <!-- Tampilkan navigasi nomor untuk halaman-halaman spesifik -->
+        @php
+        $current = $perawat->currentPage();
+        $last = $perawat->lastPage();
+        $start = $current > 2 ? $current - 2 : 1;
+        $end = $current < $last - 2 ? $current + 2 : $last; @endphp @if ($start> 1)
+            <li class="page-item">
+                <a class="page-link" href="{{ $perawat->url(1) }}">1</a>
+            </li>
+            @if ($start > 2)
+            <li class="page-item disabled">
+                <span class="page-link">...</span>
+            </li>
+            @endif
+            @endif
+
+            @for ($page = $start; $page <= $end; $page++) <li class="page-item {{ $page == $current ? 'active' : '' }}">
+                <a class="page-link" href="{{ $perawat->url($page) }}">{{ $page }}</a>
+                </li>
+                @endfor
+
+                @if ($end < $last) @if ($end < $last - 1) <li class="page-item disabled">
+                    <span class="page-link">...</span>
                     </li>
-                @else
+                    @endif
                     <li class="page-item">
-                        <a class="page-link" href="{{ $perawat->previousPageUrl() }}" rel="prev">Previous</a>
+                        <a class="page-link" href="{{ $perawat->url($last) }}">{{ $last }}</a>
                     </li>
-                @endif
+                    @endif
 
-                <!-- Tampilkan navigasi nomor untuk halaman-halaman spesifik -->
-                @foreach ($perawat->getUrlRange(1, $perawat->lastPage()) as $page => $url)
-                    <li class="page-item {{ $page == $perawat->currentPage() ? 'active' : '' }}">
-                        <a class="page-link" href="{{ $url }}">{{ $page }}</a>
-                    </li>
-                @endforeach
-
-                <!-- Tombol "Next" -->
-                @if ($perawat->hasMorePages())
+                    <!-- Tombol "Next" -->
+                    @if ($perawat->hasMorePages())
                     <li class="page-item">
                         <a class="page-link" href="{{ $perawat->nextPageUrl() }}" rel="next">Next</a>
                     </li>
-                @else
+                    @else
                     <li class="page-item disabled">
                         <span class="page-link">Next</span>
                     </li>
-                @endif
-            </ul>
-        </nav>
+                    @endif
+    </ul>
+</nav>
     </div>
 </main>
 @endsection

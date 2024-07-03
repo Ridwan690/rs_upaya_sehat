@@ -111,7 +111,7 @@
                 </div>
                 <div class="mb-3">
                     <label for="poli_id" class="form-label">Poli</label>
-                    <select class="form-select @error('poli_id') is-invalid @enderror" id="poli_id" name="poli_id" required>
+                    <select class="form-select @error('poli_id') is-invalid @enderror" id="poli_id" name="poli_id">
                         <option value="">-- Select Poli --</option>
                         @foreach ($polis as $poli)
                             <option value="{{ $poli->id }}">{{ $poli->nama_poli }}</option>
