@@ -119,6 +119,13 @@ class RawatJalanController extends Controller
         // Bandingkan nilai
         $changed = array_diff_assoc($newValues, $oldValues);
 
+        // Simpan takaran obat
+        $takarans = collect($request->input('takaran', []))->map(function ($takaran) {
+            return ['takaran' => $takaran];
+        });
+        $rawatJalan->tarif()->sync($request->tarif_id);
+        $rawatJalan->obat()->sync($takarans);
+
         // Jika tidak ada perubahan
         if (empty($changed)) {
             return redirect()->route('rawat-jalan.show', $rawatJalan->id)
@@ -126,12 +133,6 @@ class RawatJalanController extends Controller
         }
 
         // Jika ada perubahan
-        $takarans = collect($request->input('takaran', []))->map(function ($takaran) {
-            return ['takaran' => $takaran];
-        });
-        $rawatJalan->tarif()->sync($request->tarif_id);
-        $rawatJalan->obat()->sync($takarans);
-
         return redirect()->route('rawat-jalan.show', $rawatJalan->id)
             ->with('success', 'Catatan Rawat Jalan berhasil diupdate.');
     }

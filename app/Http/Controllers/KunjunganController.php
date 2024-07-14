@@ -62,6 +62,13 @@ class KunjunganController extends Controller
         unset($changed['diagnosa']); // Hapus diagnosa dari perubahan karena akan di-set ulang
         unset($changed['tindakan']); // Hapus tindakan dari perubahan karena akan di-set ulang
 
+        // Simpan takaran obat
+        $takarans = collect($request->input('takaran', []))->map(function ($takaran) {
+            return ['takaran' => $takaran];
+        });
+        $kunjungan->obat()->sync($takarans);
+        $kunjungan->tarif()->sync($request->tarif_id);
+
         // Jika tidak ada perubahan
         if (empty($changed)) {
             return redirect()->route('kunjungan.show', $id)
@@ -69,12 +76,6 @@ class KunjunganController extends Controller
         }
 
         // Jika ada perubahan
-        $takarans = collect($request->input('takaran', []))->map(function ($takaran) {
-            return ['takaran' => $takaran];
-        });
-        $kunjungan->obat()->sync($takarans);
-        $kunjungan->tarif()->sync($request->tarif_id);
-
         return redirect()->route('kunjungan.show', $id)
             ->with('success', 'Data kunjungan berhasil diperbarui.');
     }

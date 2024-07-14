@@ -26,7 +26,7 @@ class AuthController extends Controller
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8|confirmed',
             'role' => 'required|string|in:superadmin,manajemen,pendaftaran,rawat_jalan,rawat_inap,perawat,dokter',
-            'poli_id' => 'required|exists:App\Models\Poli,id',
+            'poli_id' => 'nullable|exists:App\Models\Poli,id',
         ]);
 
         $user = User::create([

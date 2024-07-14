@@ -11,7 +11,7 @@ use App\Http\Controllers\RekamMedikController;
 use App\Http\Controllers\ObatController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DokterController;
-use App\Http\Controllers\JadwalController;
+use App\Http\Controllers\JadwalController; // tidak terpakai
 use App\Http\Controllers\RawatJalanController;
 use App\Http\Controllers\RawatInapController;
 use App\Http\Controllers\AntrianController;
@@ -105,6 +105,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/{jenis}/{id}/print', [ObatController::class, 'print'])->name('obat.print');
         Route::resource('dokter', DokterController::class);
         Route::resource('perawat', PerawatController::class);
+        Route::resource('obat', ObatController::class);
         Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register');
         Route::post('/register', [AuthController::class, 'register']);
         // Route::resource('jadwal', JadwalController::class);

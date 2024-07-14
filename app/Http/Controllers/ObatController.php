@@ -72,8 +72,25 @@ class ObatController extends Controller
             'harga' => 'required|numeric',
         ]);
 
+        // Simpan nilai sebelum update
+        $oldValues = $obat->getAttributes();
+
+        // Lakukan update
         $obat->update($request->all());
 
+        // Simpan nilai setelah update
+        $newValues = $obat->fresh()->getAttributes();
+
+        // Bandingkan nilai
+        $changed = array_diff_assoc($newValues, $oldValues);
+
+        // Jika tidak ada perubahan
+        if (empty($changed)) {
+            return redirect()->route('obat.index')
+                ->with('warning', 'Tidak ada perubahan data');
+        }
+
+        // Jika ada perubahan
         return redirect()->route('obat.index')
             ->with('success', 'Obat berhasil diperbarui');
     }

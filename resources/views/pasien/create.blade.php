@@ -175,7 +175,7 @@
                             <!-- Form Sederhana -->
                              <div class="form-group mb-4">
                                 <label for="pasien_id" class="form-label">Data Pasien</label>
-                                    <select class="js-example-basic-single form-select @error('pasien_id') is-invalid @enderror" style="width: 100%" name="pasien_id">
+                                    <select class="js-example-basic-single form-select @error('pasien_id') is-invalid @enderror" style="width: 100%" name="pasien_id" required>
                                         <option value="">Masukkan Data Pasien</option>
                                         @foreach($pasiens as $pasien)
                                             <option value="{{ $pasien->id }}">{{ $pasien->rekammedik->no_rekam_medik }} - {{ $pasien->nik }} - {{ $pasien->nama }}</option>
@@ -187,7 +187,7 @@
                              </div>
                             <div class="form-group mb-4">
                                 <label for="poli_id_simple" class="form-label">Poli</label>
-                                <select name="poli_id_simple" id="poli_id_simple" class="form-select @error('poli_id') is-invalid @enderror">
+                                <select name="poli_id_simple" id="poli_id_simple" class="form-select @error('poli_id') is-invalid @enderror" required>
                                     <option value="">Pilih Poli</option>
                                     @foreach($polis as $poli)
                                         <option value="{{ $poli->id }}">{{ $poli->nama_poli }}</option>
@@ -199,7 +199,7 @@
                             </div>
                             <div class="form-group mb-4">
                                 <label for="dokter_id_simple" class="form-label">Dokter</label>
-                                <select name="dokter_id_simple" id="dokter_id_simple" class="form-select @error('dokter_id') is-invalid @enderror">
+                                <select name="dokter_id_simple" id="dokter_id_simple" class="form-select @error('dokter_id') is-invalid @enderror" required>
                                     <option value="">Pilih Dokter</option>
                                     <!-- Dokter options will be populated here based on selected poli -->
                                 </select>

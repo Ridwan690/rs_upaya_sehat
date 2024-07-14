@@ -62,6 +62,9 @@
                         <a href="/perawat" class="sidebar-link"><i class="fa-solid fa-user-nurse pe-2"></i>Perawat</a>
                     </li>
                     <li class="sidebar-item">
+                        <a href="/obat" class="sidebar-link"><i class="fa-solid fa-pills pe-2"></i>Obat</a>
+                    </li>
+                    <li class="sidebar-item">
                         <a href="/tarif" class="sidebar-link"><i class="fa-solid fa-coins pe-2"></i>Tarif</a>
                     </li>
                 </ul>
