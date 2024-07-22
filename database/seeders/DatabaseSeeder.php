@@ -27,8 +27,8 @@ class DatabaseSeeder extends Seeder
             PoliSeeder::class,
             RekamMedikSeeder::class,
             DokterSeeder::class,
-            PerawatSeeder::class,
             KamarSeeder::class,
+            PerawatSeeder::class,
             ObatSeeder::class,
             // SuperAdminSeeder::class,
         ]);
