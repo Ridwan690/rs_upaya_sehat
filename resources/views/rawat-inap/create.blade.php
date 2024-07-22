@@ -26,6 +26,18 @@
                             @enderror
                         </div>
                         <div class="form-group mb-4">
+                            <label for="dokter_id" class="form-label">Dokter</label>
+                            <select name="dokter_id" id="dokter_id" class="form-select @error('dokter_id') is-invalid @enderror">
+                                <option value="">Pilih Dokter</option>
+                                @foreach($dokters as $dokter)
+                                    <option value="{{ $dokter->id }}">{{ $dokter->nama }}</option>
+                                @endforeach
+                            </select>
+                            @error('dokter_id')
+                                <span class="invalid-feedback">{{ $message }}</span>
+                            @enderror
+                        </div>
+                        <div class="form-group mb-4">
                             <label for="tanggal_masuk" class="form-label">Tanggal Masuk</label>
                             <input type="date" class="form-control @error('tanggal_masuk') is-invalid @enderror" id="tanggal_masuk" name="tanggal_masuk" value="{{ old('tanggal_masuk') }}">
                             @error('tanggal_masuk')

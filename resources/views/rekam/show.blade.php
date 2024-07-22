@@ -138,6 +138,12 @@
                                     </div>
                                 </div>
                                 <div class="mb-3 row">
+                                    <label for="dokter" class="col-sm-3 col-form-label"><strong>Dokter:</strong></label>
+                                    <div class="col-sm-9">
+                                        <p class="form-control-plaintext">{{ $rawatInap->dokter->nama ?? '-' }}</p>
+                                    </div>
+                                </div>
+                                <div class="mb-3 row">
                                     <label for="status_rawat_inap" class="col-sm-3 col-form-label"><strong>Status:</strong></label>
                                     <div class="col-sm-9">
                                         <p class="form-control-plaintext">{{ $rawatInap->status }}</p>

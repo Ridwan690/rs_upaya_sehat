@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Perawat;
 use App\Models\Poli;
+use App\Models\Kamar;
 use Illuminate\Http\Request;
 
 class PerawatController extends Controller
@@ -24,7 +25,8 @@ class PerawatController extends Controller
     public function create()
     {
         $poli = Poli::all();
-        return view('perawat.create', compact('poli'));
+        $kamars = Kamar::all();
+        return view('perawat.create', compact('poli', 'kamars'));
     }
 
     /**
@@ -36,6 +38,7 @@ class PerawatController extends Controller
             'nama' => 'required',
             'jabatan' => 'required',
             'id_poli' => 'required|exists:poli,id',
+            'kamar_id' => 'required|exists:kamar,id',
         ]);
 
         Perawat::create($request->all());
@@ -58,7 +61,8 @@ class PerawatController extends Controller
     public function edit(Perawat $perawat)
     {
         $poli = Poli::all();
-        return view('perawat.edit', compact('perawat', 'poli'));
+        $kamars = Kamar::all();
+        return view('perawat.edit', compact('perawat', 'poli', 'kamars'));
     }
 
     /**
@@ -70,6 +74,7 @@ class PerawatController extends Controller
             'nama' => 'required',
             'jabatan' => 'required',
             'id_poli' => 'required|exists:poli,id',
+            'kamar_id' => 'required|exists:kamar,id',
         ]);
 
         // Simpan nilai sebelum update

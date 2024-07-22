@@ -7,6 +7,7 @@ use App\Models\Pasien;
 use App\Models\Kamar;
 use App\Models\Obat;
 use App\Models\Tarif;
+use App\Models\Dokter;
 use App\Models\PercetakanGelang;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
@@ -35,13 +36,14 @@ class RawatInapController extends Controller
                 $query->whereNull('tanggal_keluar');
             }
         ])->get();
+        $dokters = Dokter::all();
 
         $availableKamars = $kamars->filter(function ($kamar) {
             return $kamar->current_occupancy < $kamar->kapasitas;
         });
         $uniqueTipeKamars = $availableKamars->groupBy('tipe_kamar')->keys()->sort();
 
-        return view('rawat-inap.create', compact('rawatInap', 'pasiens', 'availableKamars', 'uniqueTipeKamars'));
+        return view('rawat-inap.create', compact('rawatInap', 'pasiens', 'availableKamars', 'uniqueTipeKamars', 'dokters'));
     }
 
     /**
@@ -54,11 +56,13 @@ class RawatInapController extends Controller
             'id_kamar' => 'required',
             'tanggal_masuk' => 'required',
             'warna_gelang' => 'required | in:Biru Muda,Merah Muda,Kuning,Merah,Ungu',
+            'dokter_id' => 'required',
         ]);
         $rawatInap = new RawatInap();
         $rawatInap->id_rekammedik = $request->id_rekammedik;
         $rawatInap->id_kamar = $request->id_kamar;
         $rawatInap->tanggal_masuk = $request->tanggal_masuk;
+        $rawatInap->dokter_id = $request->dokter_id;
         $rawatInap->save();
 
         PercetakanGelang::create([
@@ -87,7 +91,8 @@ class RawatInapController extends Controller
         $rawatInap = RawatInap::findOrFail($id);
         $obats = Obat::all();
         $tarifs = Tarif::all();
-        return view('rawat-inap.edit', compact('rawatInap', 'obats', 'tarifs'));
+        $dokters = Dokter::all();
+        return view('rawat-inap.edit', compact('rawatInap', 'obats', 'tarifs', 'dokters'));
     }
 
     /**
@@ -99,6 +104,7 @@ class RawatInapController extends Controller
             'tanggal_keluar' => 'nullable|date',
             'status' => 'required|in:Ditangani,Belum Ditangani',
             'catatan' => 'nullable|string',
+            'dokter_id' => 'required',
         ]);
 
         $rawatInap = RawatInap::findOrFail($id);// Simpan nilai sebelum update

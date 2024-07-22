@@ -13,6 +13,7 @@ class RawatInap extends Model
     protected $fillable = [
         'id_rekammedik',
         'id_kamar',
+        'dokter_id',
         'tanggal_masuk',
         'tanggal_keluar',
         'status',
@@ -44,5 +45,9 @@ class RawatInap extends Model
     public function gelang()
     {
         return $this->hasOne(PercetakanGelang::class, 'rawat_inap_id');
+    }
+    public function dokter()
+    {
+        return $this->belongsTo(Dokter::class, 'dokter_id');
     }
 }

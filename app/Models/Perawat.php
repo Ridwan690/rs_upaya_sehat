@@ -15,9 +15,14 @@ class Perawat extends Model
         'nama',
         'jabatan',
         'id_poli',
+        'kamar_id',
     ];
     public function poli()
     {
         return $this->belongsTo(Poli::class, 'id_poli');
+    }
+    public function kamar()
+    {
+        return $this->belongsTo(Kamar::class, 'kamar_id');
     }
 }

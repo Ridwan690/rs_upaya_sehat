@@ -16,6 +16,7 @@ use App\Http\Controllers\RawatJalanController;
 use App\Http\Controllers\RawatInapController;
 use App\Http\Controllers\AntrianController;
 use App\Http\Controllers\KunjunganController;
+use App\Http\Controllers\KamarController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -96,6 +97,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('rekam-medik/{id}/print', [RekamMedikController::class, 'printPatientCard'])->name('rekam.printPatientCard');
         Route::get('rawat-inap/{id}/print', [RawatInapController::class, 'printBracelet'])->name('rawat-inap.printBracelet');
         Route::get('/get-dokter/{poli_id}', [DokterController::class, 'getDokterByPoli'])->name('getDokterByPoli');
+        Route::resource('kamar', KamarController::class);
     });
 
     Route::middleware(['role:superadmin,manajemen'])->group(function () {

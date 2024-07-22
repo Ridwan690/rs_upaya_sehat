@@ -45,6 +45,20 @@
                                 </div>
                             @enderror
                         </div>
+                        <div class="mb-3">
+                            <label for="kamar_id" class="form-label">Perawat Kamar</label>
+                            <select class="form-select @error('kamar_id') is-invalid @enderror" id="kamar_id" name="kamar_id">
+                                <option value="">-- Pilih Kamar --</option>
+                                @foreach ($kamars as $kamar)
+                                    <option value="{{ $kamar->id }}">{{ $kamar->kode_kamar }}</option>
+                                @endforeach
+                            </select>
+                            @error('kamar_id')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
                         <div class="d-flex justify-content-end">
                             <button type="submit" class="btn btn-success">Add Perawat</button>
                         </div>

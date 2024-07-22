@@ -27,6 +27,14 @@
                             <p class="form-control-plaintext">{{ $perawat->poli->nama_poli }}</p>
                         </div>
                     </div>
+                    @if($perawat->kamar_id != null)
+                    <div class="mb-3 row">
+                        <label for="kamar_id" class="col-sm-4 col-form-label text-end"><strong>Perawat Kamar:</strong></label>
+                        <div class="col-sm-6">
+                            <p class="form-control-plaintext">{{ $perawat->kamar->kode_kamar }}</p>
+                        </div>
+                    </div>
+                    @endif
                 </div>
             </div>
         </div>

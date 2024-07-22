@@ -181,13 +181,13 @@
                 <h6 class="m-0 font-weight-bold text-primary">Pembayaran</h6>
             </div>
             <div class="card-body">
-                <h4 class="small font-weight-bold">BPJS <span
+                <h4 class="small font-weight-bold">Tunai <span
                         class="float-right">80%</span></h4>
                 <div class="progress mb-4">
                     <div class="progress-bar bg-success" role="progressbar" style="width: 80%"
                         aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
                 </div>
-                <h4 class="small font-weight-bold">Umum <span
+                <h4 class="small font-weight-bold">Transfer <span
                         class="float-right">20%</span></h4>
                 <div class="progress mb-4">
                     <div class="progress-bar" role="progressbar" style="width: 20%"

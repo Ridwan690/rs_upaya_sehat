@@ -22,4 +22,8 @@ class Kamar extends Model
     {
         return $this->hasOne(RawatInap::class, 'id_kamar');
     }
+    public function perawat()
+    {
+        return $this->hasMany(Perawat::class, 'kamar_id');
+    }
 }

@@ -31,6 +31,12 @@
                             <th>Nama Pasien</th>
                             <td>{{ $rawatInap->rekammedik->pasien->nama }}</td>
                         </tr>
+                        @if($rawatInap->dokter_id != null)
+                        <tr>
+                            <th>Dokter</th>
+                            <td>{{ $rawatInap->dokter->nama }}</td>
+                        </tr>
+                        @endif
                         <tr>
                             <th>Tanggal Masuk</th>
                             <td>{{ $rawatInap->tanggal_masuk }}</td>
