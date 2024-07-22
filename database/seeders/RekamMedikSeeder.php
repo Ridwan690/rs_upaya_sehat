@@ -25,5 +25,45 @@ class RekamMedikSeeder extends Seeder
             'pasien_id' => '3',
             'no_rekam_medik' => 'RM-000003',
         ]);
+        RekamMedik::create([
+            'pasien_id' => '4',
+            'no_rekam_medik' => 'RM-000004',
+        ]);
+        RekamMedik::create([
+            'pasien_id' => '5',
+            'no_rekam_medik' => 'RM-000005',
+        ]);
+        RekamMedik::create([
+            'pasien_id' => '6',
+            'no_rekam_medik' => 'RM-000006',
+        ]);
+        RekamMedik::create([
+            'pasien_id' => '7',
+            'no_rekam_medik' => 'RM-000007',
+        ]);
+        RekamMedik::create([
+            'pasien_id' => '8',
+            'no_rekam_medik' => 'RM-000008',
+        ]);
+        RekamMedik::create([
+            'pasien_id' => '9',
+            'no_rekam_medik' => 'RM-000009',
+        ]);
+        RekamMedik::create([
+            'pasien_id' => '10',
+            'no_rekam_medik' => 'RM-000010',
+        ]);
+        RekamMedik::create([
+            'pasien_id' => '11',
+            'no_rekam_medik' => 'RM-000011',
+        ]);
+        RekamMedik::create([
+            'pasien_id' => '12',
+            'no_rekam_medik' => 'RM-000012',
+        ]);
+        RekamMedik::create([
+            'pasien_id' => '13',
+            'no_rekam_medik' => 'RM-000013',
+        ]); 
     }
 }
