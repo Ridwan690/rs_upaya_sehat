@@ -80,7 +80,7 @@ class RawatInapController extends Controller
             'rawat_inap_id' => $rawatInap->id,
             'warna_gelang' => $request->warna_gelang,
         ]);
-    
+
         return redirect()->route('rawat-inap.index')
             ->with('success', 'Data Rawat Inap berhasil ditambahkan.');
     }
@@ -119,16 +119,16 @@ class RawatInapController extends Controller
 
         $rawatInap = RawatInap::findOrFail($id);// Simpan nilai sebelum update
         $oldValues = $rawatInap->getAttributes();
-    
+
         // Lakukan update
         $rawatInap->update($request->only(['tanggal_keluar', 'status', 'catatan']));
-    
+
         // Simpan nilai setelah update
         $newValues = $rawatInap->fresh()->getAttributes();
-    
+
         // Bandingkan nilai
         $changed = array_diff_assoc($newValues, $oldValues);
-        
+
         // Simpan takaran obat
         $takarans = collect($request->input('takaran', []))->map(function ($takaran) {
             return ['takaran' => $takaran];
@@ -141,7 +141,7 @@ class RawatInapController extends Controller
             return redirect()->route('rawat-inap.show', $id)
                 ->with('warning', 'Tidak ada perubahan data');
         }
-    
+
         // Jika ada perubahan
         return redirect()->route('rawat-inap.show', $id)
             ->with('success', 'Data Rawat Inap berhasil diupdate.');
