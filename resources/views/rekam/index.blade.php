@@ -42,7 +42,7 @@
                             </tbody>
                         </table>
                     </div>
-                    {{ $rekamMedik->links() }}
+                    
                 </div>
             </div>
             <nav aria-label="Page navigation example" class="d-flex justify-content-center mt-3">

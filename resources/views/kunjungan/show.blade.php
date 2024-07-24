@@ -17,7 +17,7 @@
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
                         <h5 class="mb-0">Detail Kunjungan</h5>
-                        <a href="{{ route('kunjungan.index') }}" class="btn btn-primary">Back</a>
+                        <a href="{{ url()->previous() }}" class="btn btn-primary">Back</a>
                     </div>
                 </div>
                 <div class="card-body">

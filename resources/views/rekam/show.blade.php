@@ -80,6 +80,10 @@
                                         <p class="form-control-plaintext">{{ $kunjungan->tindakan ?? 'Belum ada tindakan'}}</p>
                                     </div>
                                 </div>
+                                <div class="d-flex justify-content-end">
+
+                                    <a href="{{ route('kunjungan.show', $kunjungan->id) }}" class="btn btn-warning text-white mx-1 my-1"><i class="fas fa-eye"></i></a>
+                                </div>
                                 <hr>
                             @endforeach
                         </div>
@@ -116,6 +120,10 @@
                                     <div class="col-sm-9">
                                         <p class="form-control-plaintext">{{ $rawat->catatan ?? 'Belum ada catatan' }}</p>
                                     </div>
+                                </div>
+                                <div class="d-flex justify-content-end">
+
+                                    <a href="{{ route('rawat-jalan.show', $rawat->id) }}" class="btn btn-warning text-white mx-1 my-1"><i class="fas fa-eye"></i></a>
                                 </div>
                                 <hr>
                             @endforeach
@@ -155,6 +163,11 @@
                                         <p class="form-control-plaintext">{{ $rawatInap->catatan ?? 'Belum ada catatan' }}</p>
                                     </div>
                                 </div>
+                                <div class="d-flex justify-content-end">
+
+                                    <a href="{{ route('rawat-inap.show', $rawatInap->id) }}" class="btn btn-warning text-white mx-1 my-1"><i class="fas fa-eye"></i></a>
+                                </div>
+                                
                                 <hr>
                             @endforeach
                         </div>

@@ -46,6 +46,16 @@ class RawatJalanController extends Controller
             'dokter_id' => 'required|exists:dokter,id',
             'poli_id' => 'required|exists:poli,id',
         ]);
+         // Cek apakah sudah ada rawat jalan untuk id_rekammedik yang sama pada hari ini
+            $existingRecord = RawatJalan::where('id_rekammedik', $request->id_rekammedik)
+            ->whereDate('created_at', now()->toDateString())
+            ->first();
+
+        if ($existingRecord) {
+            return redirect()->route('rawat-jalan.index')
+                ->with('error', 'Pasien sudah terdaftar untuk Rawat Jalan hari ini.');
+        }
+
         $count = RawatJalan::whereHas('antrian', function ($query) use ($request) {
             $query->where('id_poli', $request->poli_id);
         })

@@ -52,7 +52,7 @@
                         </div>
                         <div class="form-group mb-4">
                             <label for="obat_id" class="form-label">Obat</label>
-                            <select class="js-example-basic-multiple form-select @error('tarif_id') is-invalid @enderror" name="obat_id[]" multiple="multiple" style="width: 100%">
+                            <select class="js-example-basic-multiple form-select @error('obat_id') is-invalid @enderror" name="obat_id[]" multiple="multiple" style="width: 100%">
                                 @foreach ($obats as $obat)
                                 <option value="{{ $obat->id }}" {{ in_array($obat->id, $rawatInap->obat->pluck('id')->toArray()) ? 'selected' : '' }}>{{ $obat->nama_obat }}</option>
                                 @endforeach

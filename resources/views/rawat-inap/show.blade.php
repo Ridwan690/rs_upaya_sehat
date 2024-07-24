@@ -16,7 +16,7 @@
             <div class="card">
                 <div class="card-header d-flex justify-content-between align-items-center">
                     <h5 class="mb-0">Detail Rawat Inap</h5>
-                    <a href="{{ route('rawat-inap.index') }}" class="btn btn-primary">
+                    <a href="{{ url()->previous() }}" class="btn btn-primary">
                         &larr; Back
                     </a>
                 </div>

@@ -8,6 +8,11 @@
                 {{ $message }}
             </div>
         @endif
+        @if ($message = Session::get('error'))
+                <div class="alert alert-danger mb-3">
+                    {{ $message }}
+                </div>
+            @endif
         <div class="mb-3 d-flex align-items-center justify-content-between">
             <h5>List Pasien Rawat Inap</h5>
             <a href="{{ route('rawat-inap.create') }}" class="btn btn-success"><i class="fas fa-plus-circle"></i> Daftar Rawat Inap</a>

@@ -20,7 +20,8 @@ class RawatInapController extends Controller
      */
     public function index()
     {
-        $rawatInap = RawatInap::latest()->paginate(5);
+        // Ambil hanya data yang memiliki tanggal_keluar = null
+        $rawatInap = RawatInap::whereNull('tanggal_keluar')->latest()->paginate(5);
         return view('rawat-inap.index', compact('rawatInap'));
     }
 
@@ -58,6 +59,16 @@ class RawatInapController extends Controller
             'warna_gelang' => 'required | in:Biru Muda,Merah Muda,Kuning,Merah,Ungu',
             'dokter_id' => 'required',
         ]);
+
+        // Cek apakah sudah ada data dengan id_rekammedik yang sama
+        $existingData = RawatInap::where('id_rekammedik', $request->id_rekammedik)->first();
+
+        if ($existingData && !$existingData->tanggal_keluar) {
+            // Jika data ditemukan dan tanggal_keluar belum diisi, tolak permintaan
+            return redirect()->route('rawat-inap.index')
+                ->with('error', 'Data dengan ID Rekammedik ini masih aktif.');
+        }
+        
         $rawatInap = new RawatInap();
         $rawatInap->id_rekammedik = $request->id_rekammedik;
         $rawatInap->id_kamar = $request->id_kamar;
@@ -104,7 +115,6 @@ class RawatInapController extends Controller
             'tanggal_keluar' => 'nullable|date',
             'status' => 'required|in:Ditangani,Belum Ditangani',
             'catatan' => 'nullable|string',
-            'dokter_id' => 'required',
         ]);
 
         $rawatInap = RawatInap::findOrFail($id);// Simpan nilai sebelum update

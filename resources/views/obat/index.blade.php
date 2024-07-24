@@ -33,7 +33,7 @@
                     <tbody>
                         @forelse ($obat as $medicine)
                         <tr>
-                            <th scope="row">{{ $medicine->id }}</th>
+                            <th scope="row">{{ $loop->index + 1 }}</th>
                             <td>{{ $medicine->kode_obat }}</td>
                             <td>{{ $medicine->nama_obat }}</td>
                             <td>Rp {{ number_format($medicine->harga, 0, ',', '.') }}</td>
